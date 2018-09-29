@@ -1,4 +1,5 @@
 var bip39 = require('bip39')
+var hdwext = require('./hdwext')
 
 class HdWallet {
    constructor() {}
@@ -11,13 +12,40 @@ class HdWallet {
       };
    }
 
+   isEmpty(value) {
+      return value == undefined || value == '';
+   }
+
    generateMnemonic(numWords) {
       numWords = (numWords || 15);
       if (numWords < 12)
          return this.result(false, null, 2000);
-      //throw "numWords should >= 12 length";
       var strength = numWords / 3 * 32;
       return this.result(true, bip39.generateMnemonic(strength), 0);
+   }
+
+   validateMnemonic(mnemonic) {
+      if (this.isEmpty(mnemonic))
+         return this.result(false, false, 2001);
+      var data = bip39.validateMnemonic(mnemonic);
+      return this.result(data, data, null);
+   }
+
+   generateAddresses(mnemonic, passphrase, purpose, currency, account,change, start, end) {
+      if (this.isEmpty(mnemonic))
+         return this.result(false, null, 2001);
+      if (this.isEmpty(currency))
+         return this.result(false, null, 2002);
+      if (start < 0)
+         return this.result(false, null, 2003);
+      if (end < start)
+         return this.result(false, null, 2004);
+      var validate = this.validateMnemonic(mnemonic);
+      if (!validate.status)
+         return this.result(false, null, validate.code);
+      var seedHex = bip39.mnemonicToSeedHex(mnemonic, passphrase);
+      var addresses = hdwext.generateAddresses(seedHex, purpose, currency, account, change, start, end)
+      return this.result(true, addresses, null);
    }
 }
 

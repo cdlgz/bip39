@@ -24,6 +24,7 @@
    "homepage": "https://github.com/eosaction/bip39#readme",
    "dependencies": {
       "bip39": "^2.5.0",
+      "bitcoinjs-lib": "^4.0.2",
       "express": "^4.16.3"
    },
    "devDependencies": {

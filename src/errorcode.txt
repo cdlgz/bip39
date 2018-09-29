@@ -1,0 +1,5 @@
+2000=>numWords should >= 12 length
+2001=>mnemonic is required
+2002=>currency is required
+2003=>start should be >= 0
+2004=>end shoud be >= start
