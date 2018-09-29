@@ -31,33 +31,33 @@ Press F12, in the console, type "window.hdWallet", it's the instance you could u
 
 1 generateMnemonic
 
-`javascript
+```javascript
 var mnemonic = window.hdWallet.generateMnemonic(15);
 console.log(mnemonic);
-`
+```
 
-`
+```json
 {
   status: true,
   data: 'blush easily upgrade hedgehog valve sugar library favorite clutch vintage stereo series',
   code: 0 
 }
-`
+```
 
 2 validateMnemonic
 
-`javascript
+```javascript
 var mnemonic = HDWJS.hdWallet.validateMnemonic("doctor inmate pretty ostrich enroll");
 console.log(mnemonic);
-`
+```
 
-`json
+```json
 { status: false, data: false, code: null }
-`
+```
 
 3 generateAddresses
 
-`
+```javascript
 var monic = "total bubble almost soft alter throw wrap foil soap water exist mountain fossil hybrid young";
 var passphrase = "123456";
 var purpose = 44;
@@ -68,9 +68,9 @@ var start = 0;
 var end = 0;
 var addresses = HDWJS.hdWallet.generateAddresses(monic, passphrase, purpose, currency, account, change, start, end);
 console.log(addresses);
-`
+```
 
-`json
+```json
 { 
   status: true,
   data:[
@@ -83,7 +83,7 @@ console.log(addresses);
   ],
   code: null 
 }
-`
+```
 
 # License
 
