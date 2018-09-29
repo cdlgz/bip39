@@ -36,7 +36,7 @@ var mnemonic = window.hdWallet.generateMnemonic(15);
 console.log(mnemonic);
 ```
 
-```json
+```
 {
   status: true,
   data: 'blush easily upgrade hedgehog valve sugar library favorite clutch vintage stereo series',
@@ -51,7 +51,7 @@ var mnemonic = HDWJS.hdWallet.validateMnemonic("doctor inmate pretty ostrich enr
 console.log(mnemonic);
 ```
 
-```json
+```
 { status: false, data: false, code: null }
 ```
 
@@ -70,12 +70,12 @@ var addresses = HDWJS.hdWallet.generateAddresses(monic, passphrase, purpose, cur
 console.log(addresses);
 ```
 
-```json
+```
 { 
   status: true,
   data:[
      {
-       path: 'm/44\'/0\'/0\'/0/0',
+       path: 'm/44'/0'/0'/0/0',
        address: '1pKuHs52FygYAFLuf5X3wREp6YKSjrGuV',
        pubkey: '02ba7d8066bce9a34e1263a1deb8af98993928f85784f45ee75fd1b8eca2929cb4',
        privkey: 'KxLd81HhAAMzFTPtrYQKXfhBXZWkhenTK8JxkAMnsGZKgqmWDk2z' 
