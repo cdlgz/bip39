@@ -15,6 +15,7 @@ describe('Address', function () {
          var start = 0;
          var end = 0;
          var addresses = HDWJS.hdWallet.generateAddresses(monic, passphrase, purpose, currency, account, change, start, end);
+         console.log(addresses);
          assert.equal(addresses.status, true);
          var address = addresses.data[0];
          assert.equal(address.path, "m/44'/0'/0'/0/0");
