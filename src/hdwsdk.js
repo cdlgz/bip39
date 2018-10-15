@@ -21,13 +21,13 @@ class HdWallet {
       if (numWords < 12)
          return this.result(false, null, 2000);
       var strength = numWords / 3 * 32;
-      return this.result(true, bip39.generateMnemonic(strength), 0);
+      return this.result(true, bip39.generateMnemonic(strength).split(' ').join(','), 0);
    }
 
    validateMnemonic(mnemonic) {
       if (this.isEmpty(mnemonic))
          return this.result(false, false, 2001);
-      var data = bip39.validateMnemonic(mnemonic);
+      var data = bip39.validateMnemonic(mnemonic.split(',').join(' '));
       return this.result(data, data, null);
    }
 
@@ -40,7 +40,7 @@ class HdWallet {
          return this.result(false, null, 2003);
       if (end < start)
          return this.result(false, null, 2004);
-      var validate = this.validateMnemonic(mnemonic);
+      var validate = this.validateMnemonic(mnemonic.split(',').join(' '));
       if (!validate.status)
          return this.result(false, null, validate.code);
       var seedHex = bip39.mnemonicToSeedHex(mnemonic, passphrase);
