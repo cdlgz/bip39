@@ -39,7 +39,7 @@ console.log(mnemonic);
 ```
 {
   status: true,
-  data: 'blush easily upgrade hedgehog valve sugar library favorite clutch vintage stereo series',
+  data: 'blush,easily,upgrade,hedgehog,valve,sugar,library,favorite,clutch,vintage,stereo,series',
   code: 0 
 }
 ```
@@ -47,7 +47,7 @@ console.log(mnemonic);
 2 validateMnemonic
 
 ```javascript
-var mnemonic = hdWallet.validateMnemonic("doctor inmate pretty ostrich enroll");
+var mnemonic = hdWallet.validateMnemonic("doctor,inmate,pretty,ostrich,enroll");
 console.log(mnemonic);
 ```
 
@@ -58,7 +58,7 @@ console.log(mnemonic);
 3 generateAddresses
 
 ```javascript
-var monic = "total bubble almost soft alter throw wrap foil soap water exist mountain fossil hybrid young";
+var monic = "total,bubble,almost,soft,alter,throw,wrap,foil,soap,water,exist,mountain,fossil,hybrid,young";
 var passphrase = "123456";
 var purpose = 44;
 var currency = "btc";
