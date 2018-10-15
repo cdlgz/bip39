@@ -33,7 +33,9 @@ Press F12, in the console, type "window.hdWallet", it's the instance you could u
 
 ```javascript
 var mnemonic = hdWallet.generateMnemonic(15);
-console.log(mnemonic);
+console.log({
+  mnemonic: mnemonic
+});
 ```
 
 ```
@@ -48,7 +50,9 @@ console.log(mnemonic);
 
 ```javascript
 var mnemonic = hdWallet.validateMnemonic("doctor,inmate,pretty,ostrich,enroll");
-console.log(mnemonic);
+console.log({
+  mnemonic: mnemonic
+});
 ```
 
 ```
@@ -58,15 +62,17 @@ console.log(mnemonic);
 3 generateAddresses
 
 ```javascript
-var monic = "total,bubble,almost,soft,alter,throw,wrap,foil,soap,water,exist,mountain,fossil,hybrid,young";
-var passphrase = "123456";
-var purpose = 44;
-var currency = "btc";
-var account = 0;
-var change = 0;
-var start = 0;
-var end = 0;
-var addresses = hdWallet.generateAddresses(monic, passphrase, purpose, currency, account, change, start, end);
+var addressData = {
+  mnemonic: "total,bubble,almost,soft,alter,throw,wrap,foil,soap,water,exist,mountain,fossil,hybrid,young",
+  passphrase: "123456",
+  currency: "btc",
+  purpose: 44,
+  account: 0,
+  change: 0,
+  start: 0,
+  end: 0
+};
+var addresses = hdWallet.generateAddresses(addressData);
 console.log(addresses);
 ```
 
