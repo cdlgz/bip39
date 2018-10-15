@@ -7,6 +7,7 @@ describe('Mnemonic', function () {
 
     it('should generate mnemonic with 15 words default', function () {
       var mnemonic = HDWJS.hdWallet.generateMnemonic();
+      console.log(mnemonic);
       var words = mnemonic.data.split(',');
       assert.equal(words.length, 15);
     });
@@ -15,6 +16,7 @@ describe('Mnemonic', function () {
       var mnemonic = HDWJS.hdWallet.generateMnemonic({
         numWords: 12
       });
+      console.log(mnemonic);
       var words = mnemonic.data.split(',');
       assert.equal(words.length, 12);
     });
