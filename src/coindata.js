@@ -38,7 +38,6 @@ const CoinData = {
       coinType: 0,
       network: Networks.btc
    },
-   BCH: 145,
    btg: {
       coinType: 156,
       network: Networks.btg
@@ -47,8 +46,6 @@ const CoinData = {
       coinType: 1,
       network: Networks.btctestnet
    },
-   LTC: 2,
-   LTCTestnet: -2,
    eth: {
       coinType: 60,
       network: Networks.btc
@@ -61,22 +58,6 @@ const CoinData = {
       coinType: 144,
       network: Networks.btc
    },
-   NEO: 888,
-   VHKD: 999991,
-   VEUR: 999992,
-   VUSD: 999993,
-   BTL: 999994,
-   BOC: 999995,
-   ITF: 999996,
-   ITF2: 999997,
-   LNT: 999998,
-   USL: 999999,
-   OBL: 1000000,
-   NPW: 253,
-   SOOM: 250,
-   RVN: 175,
-   EOSIO: 194,
-   NEM: 43
 }
 
 Object.freeze(CoinData);
