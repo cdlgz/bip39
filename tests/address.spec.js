@@ -154,4 +154,32 @@ describe('Address', function () {
 
   });
 
+  describe('#getWalletIdByMnemonic() ok', function () {
+    it('walletId should use first mnemonic', function () {
+      var data = {
+        mnemonic: "total,bubble,almost,soft,alter,throw,wrap,foil,soap,water,exist,mountain,fossil,hybrid,young",
+      };
+      var walletIdObj = HDWJS.hdWallet.getWalletIdByMnemonic(data);
+      assert.equal(walletIdObj.status, true);
+      console.log(walletIdObj);
+
+      var addressData = {
+        mnemonic: data.mnemonic,
+        passphrase: "WalletId",
+        currency: "btc",
+        purpose: 44,
+        account: 0,
+        change: 0,
+        start: 0,
+        end: 0
+      };
+      var addresses = HDWJS.hdWallet.generateAddresses(addressData);
+      assert.equal(addresses.status, true);
+      var address = addresses.data[0];
+      assert.equal(address.path, "m/44'/0'/0'/0/0");
+
+      assert.equal(address.address, walletIdObj.data);
+    });  
+  });
+
 });

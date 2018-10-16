@@ -2,7 +2,7 @@ var bip39 = require('bip39')
 var hdwext = require('./hdwext')
 
 class HdWallet {
-  constructor() {}
+  constructor() { }
 
   result(status, data, code) {
     return {
@@ -38,25 +38,6 @@ class HdWallet {
     return this.result(data, data, null);
   }
 
-  /*
-  generateAddresses(mnemonic, passphrase, purpose, currency, account, change, start, end) {
-    if (this.isEmpty(mnemonic))
-      return this.result(false, null, 2001);
-    if (this.isEmpty(currency))
-      return this.result(false, null, 2002);
-    if (start < 0)
-      return this.result(false, null, 2003);
-    if (end < start)
-      return this.result(false, null, 2004);
-    var validate = this.validateMnemonic(mnemonic.split(',').join(' '));
-    if (!validate.status)
-      return this.result(false, null, validate.code);
-    var seedHex = bip39.mnemonicToSeedHex(mnemonic, passphrase);
-    var addresses = hdwext.generateAddresses(seedHex, purpose, currency, account, change, start, end)
-    return this.result(true, addresses, null);
-  }
-  */
-
   generateAddresses(addressesData) {
     var defaultData = {
       mnemonic: '',
@@ -86,6 +67,28 @@ class HdWallet {
     var seedHex = bip39.mnemonicToSeedHex(mnemonic, addressesData.passphrase);
     var addresses = hdwext.generateAddresses(seedHex, addressesData.purpose, addressesData.currency, addressesData.account, addressesData.change, addressesData.start, addressesData.end);
     return this.result(true, addresses, null);
+  }
+
+  getWalletIdByMnemonic(mnemonicData) {
+    var defaultData = {
+      mnemonic: ''
+    };
+    mnemonicData = Object.assign(defaultData, mnemonicData || {});
+    var addressesData = {
+      mnemonic: mnemonicData.mnemonic,
+      passphrase: 'WalletId',
+      currency: 'btc',
+      purpose: 44,
+      account: 0,
+      change: 0,
+      start: 0,
+      end: 0
+    };
+    var addressData = this.generateAddresses(addressesData);
+    if (!addressData.status)
+      return addressData;
+
+    return this.result(true, addressData.data[0].address, null);
   }
 }
 

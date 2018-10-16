@@ -146,6 +146,32 @@ console.log(addresses);
     
     privkey: 地址对应的私钥。
 
+4 getWalletIdByMnemonic
+
+```javascript
+var mnemonicData = {
+  mnemonic: "total,bubble,almost,soft,alter,throw,wrap,foil,soap,water,exist,mountain,fossil,hybrid,young",
+};
+var walletId = hdWallet.getWalletIdByMnemonic(mnemonicData);
+console.log(walletId);
+```
+
+参数说明：
+
+  mnemonic: 按逗号隔开的助记词字符串。
+  
+```
+{ 
+  status: true,
+  data:'1pKuHs52FygYAFLuf5X3wREp6YKSjrGuV',
+  code: null 
+}
+```
+
+返回结果：
+
+  data: WalletId，wif格式
+
 # License
 
 This BIP39 tool is released under the terms of the MIT license. See LICENSE for
