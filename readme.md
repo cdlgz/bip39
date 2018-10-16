@@ -29,14 +29,26 @@ Press F12, in the console, type "window.hdWallet", it's the instance you could u
 
 ## API ##
 
+请求参数说明：参数只接受一个object对象，请求字段都放在object对象中。
+
+返回结果说明：
+
+  status: 布尔型，true成功，false失败。
+  data: object类型/字符串/数值型，执行结果数据。
+  code: 整型，错误代码，参照src/errorcode.txt
+
 1 generateMnemonic
 
 ```javascript
-var mnemonic = hdWallet.generateMnemonic(15);
-console.log({
-  mnemonic: mnemonic
+var mnemonic = hdWallet.generateMnemonic({
+  numWords: 12
 });
+console.log(mnemonic);
 ```
+
+请求参数：
+
+  numWords: 指定要生成助记词的个数，默认15个。
 
 ```
 {
@@ -46,18 +58,31 @@ console.log({
 }
 ```
 
+返回结果：
+
+  按逗号隔开的助记词字符串。
+
+
 2 validateMnemonic
 
 ```javascript
-var mnemonic = hdWallet.validateMnemonic("doctor,inmate,pretty,ostrich,enroll");
-console.log({
-  mnemonic: mnemonic
+var mnemonic = hdWallet.validateMnemonic({
+  mnemonic: "total,bubble,almost,soft,alter,throw,wrap,foil,soap,water,exist,mountain,fossil,hybrid,young",
 });
+console.log(mnemonic);
 ```
+
+请求参数：
+
+  mnemonic: 按逗号隔开的助记词字符串。
 
 ```
 { status: false, data: false, code: null }
 ```
+
+返回结果：
+
+  布尔值，true，有效；false，无效。
 
 3 generateAddresses
 
@@ -76,6 +101,24 @@ var addresses = hdWallet.generateAddresses(addressData);
 console.log(addresses);
 ```
 
+参数说明：
+
+  mnemonic: 按逗号隔开的助记词字符串。
+  
+  passphrase: 助记词密语，默认为""。
+
+  currency: 币种，btc 比特币，eth 以太币，xrp 瑞波币，eos 柚子币。具体将src/currencies.txt
+
+  purpose: bip44或者bip49，默认值为44。
+
+  account: 账号，默认值为0。
+
+  change: 找零地址，1为找零地址，0为普通地址，默认值为0。
+
+  start: 开始序号，起始值为0；
+
+  end: 结束序号，起始值为0；start为0，end为1，表示获取0和1对应的两个地址；以此类推。
+
 ```
 { 
   status: true,
@@ -90,6 +133,18 @@ console.log(addresses);
   code: null 
 }
 ```
+
+返回结果：
+
+  返回多个地址，每个地址参数说明：
+
+    path: 地址对应的路径值。
+
+    address: 地址，wif格式。
+    
+    pubkey: 地址对应的公钥。
+    
+    privkey: 地址对应的私钥。
 
 # License
 
