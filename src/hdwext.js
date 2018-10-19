@@ -16,13 +16,13 @@ function getDerivationPath(purpose, coinType, account, change) {
    coinType = parseIntNoNaN(coinType, 0);
    account = parseIntNoNaN(account, 0);
    change = parseIntNoNaN(change, 0);
-   path = "m/";
-   path += purpose + "'/";
-   path += coinType + "'/";
-   path += account + "'/";
-   path += change;
-   var derivationPath = path;
+   var derivationPath = `m/${purpose}'/${coinType}'/${account}'/${change}`;
    return derivationPath;
+}
+
+function getBIP32DerivationPath() {
+  var derivationPath = 'm';
+  return derivationPath;
 }
 
 function calcBip32RootKeyFromSeed(seedHex, network) {
@@ -71,6 +71,32 @@ function isLikeEthereum(currency) {
 
 function isSegwit(purpose) {
    return purpose == 49 || purpose == 84 || purpose == 141;
+}
+
+function getXpubKeyByMnemonic(seedHex, currency, purpose, account){
+  var coinData = CoinData[currency];
+  var extendedKey = calcBip32RootKeyFromSeed(seedHex, coinData.network);
+  let account0 = extendedKey.derivePath(`m/${purpose}'/${coinData.coinType}'/${account}'`)
+  let xpubString = account0.neutered().toBase58()
+  return xpubString;
+}
+
+function generateAddressesByXpubKey(xpubKey, currency, change, start, end){
+  var coinData = CoinData[currency];
+  let address0FromXpub = bitcoinjs.bitcoin.HDNode.fromBase58(xpubKey, coinData.network);
+  var addresses = [];
+  for (let index = start; index <= end; index++) {
+    let address = address0FromXpub.neutered().derivePath(`${change}/${index}`).keyPair.getAddress();
+    addresses.push(address);
+  }
+  return addresses;
+}
+
+function calcBip32ExtendedPublicKey(seedHex, purpose, currency, account){
+  var coinData = CoinData[currency];
+  var derivationPath = getBIP32DerivationPath(purpose, coinData.coinType, account);
+  var bip32ExtendedKey = calcBip32ExtendedKey(seedHex, coinData.network, derivationPath);
+  return bip32ExtendedKey.neutered().toBase58();
 }
 
 function generateAddresses(seedHex, purpose, currency, account, change, start, end) {
@@ -148,4 +174,7 @@ function generateAddresses(seedHex, purpose, currency, account, change, start, e
 
 module.exports = {
    generateAddresses: generateAddresses,
+   calcBip32ExtendedPublicKey: calcBip32ExtendedPublicKey,
+   getXpubKeyByMnemonic: getXpubKeyByMnemonic,
+   generateAddressesByXpubKey: generateAddressesByXpubKey,
 }

@@ -2,7 +2,7 @@ var bip39 = require('bip39')
 var hdwext = require('./hdwext')
 
 class HdWallet {
-  constructor() { }
+  constructor() {}
 
   result(status, data, code) {
     return {
@@ -90,6 +90,113 @@ class HdWallet {
 
     return this.result(true, addressData.data[0].address, null);
   }
+
+  getAddressesByWalletId(mnemonicData) {
+    var defaultData = {
+      mnemonic: ''
+    };
+    mnemonicData = Object.assign(defaultData, mnemonicData || {});
+    var addressesData = {
+      mnemonic: mnemonicData.mnemonic,
+      passphrase: 'WalletId',
+      currency: 'btc',
+      purpose: 44,
+      account: 0,
+      change: 0,
+      start: 0,
+      end: 0
+    };
+    var addressData = this.generateAddresses(addressesData);
+    if (!addressData.status)
+      return addressData;
+
+    return this.result(true, addressData.data[0].address, null);
+  }
+
+  getXpubKeyByMnemonic(mnemonicData) {
+    var defaultData = {
+      mnemonic: '',
+      passphrase: '',
+      currency: 'btc',
+      purpose: 44,
+      account: 0
+    };
+    mnemonicData = Object.assign(defaultData, mnemonicData || {});
+    if (this.isEmpty(mnemonicData.mnemonic))
+      return this.result(false, null, 2001);
+
+    var mnemonic = mnemonicData.mnemonic.split(',').join(' ');
+    var validate = this.validateMnemonic({
+      mnemonic: mnemonic
+    });
+    if (!validate.status)
+      return this.result(false, null, validate.code);
+
+    if (this.isEmpty(mnemonicData.currency))
+      return this.result(false, null, 2002);
+
+    var seedHex = bip39.mnemonicToSeedHex(mnemonic, mnemonicData.passphrase);
+    var xpubKey = hdwext.getXpubKeyByMnemonic(seedHex, mnemonicData.currency, mnemonicData.purpose, mnemonicData.account);
+    return this.result(true, xpubKey, null);
+  }
+
+  generateAddressesByXpubKey(xpubKeyData) {
+    var defaultData = {
+      xpubKey: '',
+      currency: '',
+      change: 0,
+      start: 0,
+      end: 0
+    };
+    xpubKeyData = Object.assign(defaultData, xpubKeyData || {});
+    if (this.isEmpty(xpubKeyData.xpubKey))
+      return this.result(false, null, 2006);
+    if (this.isEmpty(xpubKeyData.currency))
+      return this.result(false, null, 2002);
+    if (xpubKeyData.start < 0)
+      return this.result(false, null, 2003);
+    if (xpubKeyData.end < xpubKeyData.start)
+      return this.result(false, null, 2004);
+
+    var addresses = hdwext.generateAddressesByXpubKey(xpubKeyData.xpubKey,
+      xpubKeyData.currency,
+      xpubKeyData.change,
+      xpubKeyData.start,
+      xpubKeyData.end);
+    return this.result(true, addresses, null);
+  }
+
+  validateAddressByXpubKey(xpubKeyData) {
+    var defaultData = {
+      xpubKey: '',
+      currency: '',
+      change: 0,
+      index: 0,
+      address: ''
+    };
+    
+    xpubKeyData = Object.assign(defaultData, xpubKeyData || {});
+    if (this.isEmpty(xpubKeyData.xpubKey))
+      return this.result(false, null, 2006);
+    if (this.isEmpty(xpubKeyData.currency))
+      return this.result(false, null, 2002);
+    if (this.isEmpty(xpubKeyData.address))
+      return this.result(false, null, 2007);
+    if (xpubKeyData.change != 0 && xpubKeyData.change != 1)
+      return this.result(false, null, 2008);
+    if (xpubKeyData.index < 0)
+      return this.result(false, null, 2009);
+
+    var addresses = hdwext.generateAddressesByXpubKey(xpubKeyData.xpubKey,
+      xpubKeyData.currency,
+      xpubKeyData.change,
+      xpubKeyData.index,
+      xpubKeyData.index);
+
+    var validate = addresses.length > 0 ? addresses[0] == xpubKeyData.address : false;
+    return this.result(validate, validate, null);
+  }
+
 }
 
 class Holder {

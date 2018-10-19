@@ -161,7 +161,7 @@ describe('Address', function () {
       };
       var walletIdObj = HDWJS.hdWallet.getWalletIdByMnemonic(data);
       assert.equal(walletIdObj.status, true);
-      console.log(walletIdObj);
+      //console.log(walletIdObj);
 
       var addressData = {
         mnemonic: data.mnemonic,
@@ -179,6 +179,52 @@ describe('Address', function () {
       assert.equal(address.path, "m/44'/0'/0'/0/0");
 
       assert.equal(address.address, walletIdObj.data);
+    });  
+  });
+
+  describe('#getXpubKeyByMnemonic() ok', function () {
+    it('should generate BIP32 Extended Public Key by mnemonic', function () {
+      var data = {
+        mnemonic: "total,bubble,almost,soft,alter,throw,wrap,foil,soap,water,exist,mountain,fossil,hybrid,young",
+        currency: 'btc',
+        purpose: 44,
+        account: 0,
+      };
+      var xpubKey = HDWJS.hdWallet.getXpubKeyByMnemonic(data);
+      assert.equal(xpubKey.status, true);
+      //console.log(xpubKey);
+      assert.equal('xpub6CGK5N5r3w8i6JtFPgCtnMo9Q7NbgvgFqCF3NLULnmagtecbvxpHF7w14gW4nPJrAVbfWZuxnprz1XLSLtS9vudjEbxzMTj1GnvsQWEyLm4', xpubKey.data);
+    });  
+
+    it('BIP32 Extended Public Key could generate sub address', function () {
+      var data = {
+        xpubKey: "xpub6CGK5N5r3w8i6JtFPgCtnMo9Q7NbgvgFqCF3NLULnmagtecbvxpHF7w14gW4nPJrAVbfWZuxnprz1XLSLtS9vudjEbxzMTj1GnvsQWEyLm4",
+        currency: 'btc',
+        change: 0,
+        start: 0,
+        end: 0
+      };
+      var addresses = HDWJS.hdWallet.generateAddressesByXpubKey(data);
+      //console.log(addresses);
+      assert.equal(addresses.status, true);
+      var address = addresses.data[0];
+      assert.equal(address, "1LY3cuDYGuiEpMBELwRoJTQ6exfBu5atBo");
+    });
+  });
+
+  describe('#validateAddressByXpubKey() ok', function () {
+    it('address should be valid', function () {
+      var data = {
+        xpubKey: "xpub6CGK5N5r3w8i6JtFPgCtnMo9Q7NbgvgFqCF3NLULnmagtecbvxpHF7w14gW4nPJrAVbfWZuxnprz1XLSLtS9vudjEbxzMTj1GnvsQWEyLm4",
+        currency: 'btc',
+        change: 0,
+        index: 0,
+        address: '1LY3cuDYGuiEpMBELwRoJTQ6exfBu5atBo'
+      };
+      var validate = HDWJS.hdWallet.validateAddressByXpubKey(data);
+      console.log(validate);
+      assert.equal(validate.status, true);
+      assert.equal(validate.data, true);
     });  
   });
 

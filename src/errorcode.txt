@@ -3,3 +3,8 @@
 2002=>currency is required
 2003=>start should be >= 0
 2004=>end shoud be >= start
+2005=>walletId is required
+2006=>xpubKey is required
+2007=>address is required
+2008=>address change is invalid
+2009=>address index is invalid
