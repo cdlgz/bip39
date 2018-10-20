@@ -191,6 +191,7 @@ describe('Address', function () {
         account: 0,
       };
       var xpubKey = HDWJS.hdWallet.getXpubKeyByMnemonic(data);
+      console.log(xpubKey);
       assert.equal(xpubKey.status, true);
       //console.log(xpubKey);
       assert.equal('xpub6CGK5N5r3w8i6JtFPgCtnMo9Q7NbgvgFqCF3NLULnmagtecbvxpHF7w14gW4nPJrAVbfWZuxnprz1XLSLtS9vudjEbxzMTj1GnvsQWEyLm4', xpubKey.data);
