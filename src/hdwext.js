@@ -172,6 +172,11 @@ function generateAddresses(seedHex, purpose, currency, account, change, start, e
    return addresses;
 }
 
+function createTransaction(currency, data){
+  var coinData = CoinData[currency];
+  
+}
+
 module.exports = {
    generateAddresses: generateAddresses,
    calcBip32ExtendedPublicKey: calcBip32ExtendedPublicKey,
