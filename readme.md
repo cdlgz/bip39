@@ -172,6 +172,111 @@ console.log(walletId);
 
   data: WalletId，wif格式
 
+5 getXpubKeyByMnemonic 
+
+```javascript
+var mnemonicData = {
+  mnemonic: "total,bubble,almost,soft,alter,throw,wrap,foil,soap,water,exist,mountain,fossil,hybrid,young",
+  currency: 'btc',
+  purpose: 44,
+  account: 0,
+};
+var xpubKey = hdWallet.getXpubKeyByMnemonic(mnemonicData);
+console.log(xpubKey);
+```
+
+参数说明：
+
+  mnemonic: 按逗号隔开的助记词字符串。
+
+  currency: 币种，btc 比特币，eth 以太币，xrp 瑞波币，eos 柚子币。具体将src/currencies.txt
+
+  purpose: bip44或者bip49，默认值为44。
+
+  account: 账号，默认值为0。
+
+返回结果：
+
+```
+{ 
+  status: true,
+  data:'xpub6CGK5N5r3w8i6JtFPgCtnMo9Q7NbgvgFqCF3NLULnmagtecbvxpHF7w14gW4nPJrAVbfWZuxnprz1XLSLtS9vudjEbxzMTj1GnvsQWEyLm4',
+  code: null 
+}
+```
+
+6 generateAddressesByXpubKey
+
+```javascript
+var data = {
+  xpubKey: "xpub6CGK5N5r3w8i6JtFPgCtnMo9Q7NbgvgFqCF3NLULnmagtecbvxpHF7w14gW4nPJrAVbfWZuxnprz1XLSLtS9vudjEbxzMTj1GnvsQWEyLm4",
+  currency: 'btc',
+  change: 0,
+  start: 0,
+  end: 0
+};
+var addresses = HDWJS.hdWallet.generateAddressesByXpubKey(data);
+console.log(addresses);
+```
+
+参数说明：
+
+  xpubKey: 根公钥
+
+  currency: 币种，btc 比特币，eth 以太币，xrp 瑞波币，eos 柚子币。具体将src/currencies.txt
+
+  change: 找零地址，1为找零地址，0为普通地址，默认值为0。
+
+  start: 开始序号，起始值为0；
+
+  end: 结束序号，起始值为0；start为0，end为1，表示获取0和1对应的两个地址；以此类推。
+
+返回结果：
+
+```
+{ 
+  status: true,
+  data: ['1LY3cuDYGuiEpMBELwRoJTQ6exfBu5atBo'],
+  code: null 
+}
+```
+
+7 validateAddressByXpubKey
+
+```javascript
+var data = {
+  xpubKey: "xpub6CGK5N5r3w8i6JtFPgCtnMo9Q7NbgvgFqCF3NLULnmagtecbvxpHF7w14gW4nPJrAVbfWZuxnprz1XLSLtS9vudjEbxzMTj1GnvsQWEyLm4",
+  currency: 'btc',
+  change: 0,
+  index: 0,
+  address: '1LY3cuDYGuiEpMBELwRoJTQ6exfBu5atBo'
+};
+var validate = HDWJS.hdWallet.validateAddressByXpubKey(data);
+console.log(validate);
+```
+
+参数说明：
+
+  xpubKey: 根公钥
+
+  currency: 币种，btc 比特币，eth 以太币，xrp 瑞波币，eos 柚子币。具体将src/currencies.txt
+
+  change: 找零地址，1为找零地址，0为普通地址，默认值为0。
+
+  index: 地址序号
+
+  address: 地址值
+
+返回结果：
+
+```
+{ 
+  status: true,
+  data: true,
+  code: null 
+}
+```
+
 # License
 
 This BIP39 tool is released under the terms of the MIT license. See LICENSE for
