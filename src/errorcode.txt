@@ -8,3 +8,4 @@
 2007=>address is required
 2008=>address change is invalid
 2009=>address index is invalid
+2010=>WIF is required

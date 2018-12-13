@@ -4,7 +4,7 @@ const ethUtil = require("./js/ethereumjs-util")
 const basex = require('base-x')
 
 function parseIntNoNaN(val, defaultVal) {
-   var v = parseInt(val);
+   let v = parseInt(val);
    if (isNaN(v)) {
       return defaultVal;
    }
@@ -16,33 +16,33 @@ function getDerivationPath(purpose, coinType, account, change) {
    coinType = parseIntNoNaN(coinType, 0);
    account = parseIntNoNaN(account, 0);
    change = parseIntNoNaN(change, 0);
-   var derivationPath = `m/${purpose}'/${coinType}'/${account}'/${change}`;
+   let derivationPath = `m/${purpose}'/${coinType}'/${account}'/${change}`;
    return derivationPath;
 }
 
 function getBIP32DerivationPath() {
-  var derivationPath = 'm';
+  let derivationPath = 'm';
   return derivationPath;
 }
 
 function calcBip32RootKeyFromSeed(seedHex, network) {
-   var bip32RootKey = bitcoinjs.bitcoin.HDNode.fromSeedHex(seedHex, network);
+   let bip32RootKey = bitcoinjs.bitcoin.HDNode.fromSeedHex(seedHex, network);
    return bip32RootKey;
 }
 
 function calcBip32ExtendedKey(seedHex, network, path) {
-   var extendedKey = calcBip32RootKeyFromSeed(seedHex, network);
+   let extendedKey = calcBip32RootKeyFromSeed(seedHex, network);
    // Derive the key from the path
-   var pathBits = path.split("/");
-   for (var i = 0; i < pathBits.length; i++) {
-      var bit = pathBits[i];
-      var index = parseInt(bit);
+   let pathBits = path.split("/");
+   for (let i = 0; i < pathBits.length; i++) {
+      let bit = pathBits[i];
+      let index = parseInt(bit);
       if (isNaN(index)) {
          continue;
       }
-      var hardened = bit[bit.length - 1] == "'";
-      var isPriv = !(extendedKey.isNeutered());
-      var invalidDerivationPath = hardened && !isPriv;
+      let hardened = bit[bit.length - 1] == "'";
+      let isPriv = !(extendedKey.isNeutered());
+      let invalidDerivationPath = hardened && !isPriv;
       if (invalidDerivationPath) {
          extendedKey = null;
       } else if (hardened) {
@@ -65,7 +65,7 @@ function convertRipplePriv(priv)   {
 }   
 
 function isLikeEthereum(currency) {
-   var list = ['eth', 'etc', 'pirl', 'mix', 'music', 'poa', 'exp', 'clo'];
+   let list = ['eth', 'etc', 'pirl', 'mix', 'music', 'poa', 'exp', 'clo'];
    return list.includes(currency);
 }
 
@@ -74,17 +74,17 @@ function isSegwit(purpose) {
 }
 
 function getXpubKeyByMnemonic(seedHex, currency, purpose, account){
-  var coinData = CoinData[currency];
-  var extendedKey = calcBip32RootKeyFromSeed(seedHex, coinData.network);
+  let coinData = CoinData[currency];
+  let extendedKey = calcBip32RootKeyFromSeed(seedHex, coinData.network);
   let account0 = extendedKey.derivePath(`m/${purpose}'/${coinData.coinType}'/${account}'`)
   let xpubString = account0.neutered().toBase58()
   return xpubString;
 }
 
 function generateAddressesByXpubKey(xpubKey, currency, change, start, end){
-  var coinData = CoinData[currency];
+  let coinData = CoinData[currency];
   let address0FromXpub = bitcoinjs.bitcoin.HDNode.fromBase58(xpubKey, coinData.network);
-  var addresses = [];
+  let addresses = [];
   for (let index = start; index <= end; index++) {
     let address = address0FromXpub.neutered().derivePath(`${change}/${index}`).keyPair.getAddress();
     addresses.push(address);
@@ -93,39 +93,39 @@ function generateAddressesByXpubKey(xpubKey, currency, change, start, end){
 }
 
 function calcBip32ExtendedPublicKey(seedHex, purpose, currency, account){
-  var coinData = CoinData[currency];
-  var derivationPath = getBIP32DerivationPath(purpose, coinData.coinType, account);
-  var bip32ExtendedKey = calcBip32ExtendedKey(seedHex, coinData.network, derivationPath);
+  let coinData = CoinData[currency];
+  let derivationPath = getBIP32DerivationPath(purpose, coinData.coinType, account);
+  let bip32ExtendedKey = calcBip32ExtendedKey(seedHex, coinData.network, derivationPath);
   return bip32ExtendedKey.neutered().toBase58();
 }
 
 function generateAddresses(seedHex, purpose, currency, account, change, start, end) {
-   var coinData = CoinData[currency];
-   var derivationPath = getDerivationPath(purpose, coinData.coinType, account, change);
-   var bip32ExtendedKey = calcBip32ExtendedKey(seedHex, coinData.network, derivationPath);
-   var addresses = [];
+   let coinData = CoinData[currency];
+   let derivationPath = getDerivationPath(purpose, coinData.coinType, account, change);
+   let bip32ExtendedKey = calcBip32ExtendedKey(seedHex, coinData.network, derivationPath);
+   let addresses = [];
    for (let index = start; index <= end; index++) {
       // derive HDkey for this row of the table
-      var key = bip32ExtendedKey.derive(index);
-      var keyPair = key.keyPair;
+      let key = bip32ExtendedKey.derive(index);
+      let keyPair = key.keyPair;
       // get pubkey
-      var pubkey = keyPair.getPublicKeyBuffer().toString('hex');
+      let pubkey = keyPair.getPublicKeyBuffer().toString('hex');
       // get address
-      var address = keyPair.getAddress().toString();
+      let address = keyPair.getAddress().toString();
       // get privkey
-      var hasPrivkey = !key.isNeutered();
-      var privkey = "NA";
+      let hasPrivkey = !key.isNeutered();
+      let privkey = "NA";
       if (hasPrivkey) {
          privkey = keyPair.toWIF();
       }
-      var path = derivationPath + "/" + index;
+      let path = derivationPath + "/" + index;
       // Ethereum values are different
       if (isLikeEthereum(currency)) {
-         var privKeyBuffer = keyPair.d.toBuffer(32);
+         let privKeyBuffer = keyPair.d.toBuffer(32);
          privkey = privKeyBuffer.toString('hex');
-         var addressBuffer = ethUtil.privateToAddress(privKeyBuffer);
-         var hexAddress = addressBuffer.toString('hex');
-         var checksumAddress = ethUtil.toChecksumAddress(hexAddress);
+         let addressBuffer = ethUtil.privateToAddress(privKeyBuffer);
+         let hexAddress = addressBuffer.toString('hex');
+         let checksumAddress = ethUtil.toChecksumAddress(hexAddress);
          address = ethUtil.addHexPrefix(checksumAddress);
          privkey = ethUtil.addHexPrefix(privkey);
          pubkey = ethUtil.addHexPrefix(pubkey);
@@ -135,9 +135,9 @@ function generateAddresses(seedHex, purpose, currency, account, change, start, e
          privkey = convertRipplePriv(privkey);
          address = convertRippleAdrr(address);
       }
-      // Bitcoin Cash address format may vary
+      // Bitcoin Cash address format may lety
       if (currency == "bch") {
-         var bchAddrType = "cashaddr";
+         let bchAddrType = "cashaddr";
          if (bchAddrType == "cashaddr") {
             address = bchaddr.toCashAddress(address);
          } else if (bchAddrType == "bitpay") {
@@ -147,17 +147,17 @@ function generateAddresses(seedHex, purpose, currency, account, change, start, e
       // Segwit addresses are different
       if (isSegwit(purpose)) {
          //TODO: which kind is better?
-         var isP2wpkh = false;
-         var isP2wpkhInP2sh = true;
+         let isP2wpkh = false;
+         let isP2wpkhInP2sh = true;
          if (isP2wpkh) {
-            var keyhash = bitcoinjs.bitcoin.crypto.hash160(key.getPublicKeyBuffer());
-            var scriptpubkey = bitcoinjs.bitcoin.script.witnessPubKeyHash.output.encode(keyhash);
+            let keyhash = bitcoinjs.bitcoin.crypto.hash160(key.getPublicKeyBuffer());
+            let scriptpubkey = bitcoinjs.bitcoin.script.witnessPubKeyHash.output.encode(keyhash);
             address = bitcoinjs.bitcoin.address.fromOutputScript(scriptpubkey, coinData.network)
          } else if (isP2wpkhInP2sh) {
-            var keyhash = bitcoinjs.bitcoin.crypto.hash160(key.getPublicKeyBuffer());
-            var scriptsig = bitcoinjs.bitcoin.script.witnessPubKeyHash.output.encode(keyhash);
-            var addressbytes = bitcoinjs.bitcoin.crypto.hash160(scriptsig);
-            var scriptpubkey = bitcoinjs.bitcoin.script.scriptHash.output.encode(addressbytes);
+            let keyhash = bitcoinjs.bitcoin.crypto.hash160(key.getPublicKeyBuffer());
+            let scriptsig = bitcoinjs.bitcoin.script.witnessPubKeyHash.output.encode(keyhash);
+            let addressbytes = bitcoinjs.bitcoin.crypto.hash160(scriptsig);
+            let scriptpubkey = bitcoinjs.bitcoin.script.scriptHash.output.encode(addressbytes);
             address = bitcoinjs.bitcoin.address.fromOutputScript(scriptpubkey, coinData.network)
          }
       }
@@ -173,8 +173,16 @@ function generateAddresses(seedHex, purpose, currency, account, change, start, e
 }
 
 function createTransaction(currency, data){
-  var coinData = CoinData[currency];
+  let coinData = CoinData[currency];
   
+}
+
+function generateAddressByWIF(currency, privateKey){
+  let coinData = CoinData[currency];
+  const keyPair = new bitcoinjs.bitcoin.ECPair.fromWIF(privateKey, coinData.network);
+  let address = keyPair.getAddress().toString();
+  //const address = bitcoinjs.bitcoin.address.fromOutputScript(keyPair.publicKey, coinData.network);
+  return address;
 }
 
 module.exports = {
@@ -182,4 +190,5 @@ module.exports = {
    calcBip32ExtendedPublicKey: calcBip32ExtendedPublicKey,
    getXpubKeyByMnemonic: getXpubKeyByMnemonic,
    generateAddressesByXpubKey: generateAddressesByXpubKey,
+   generateAddressByWIF: generateAddressByWIF
 }

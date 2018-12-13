@@ -190,11 +190,18 @@ describe('Address', function () {
         purpose: 44,
         account: 0,
       };
+      data = {
+        mnemonic: "egg,sudden,advance,apple,salmon,mad,crowd,ginger,essence,fork,public,funny",
+        currency: 'btctest',
+        purpose: 44,
+        account: 0,
+        passphrase: '',
+      };
       var xpubKey = HDWJS.hdWallet.getXpubKeyByMnemonic(data);
       console.log(xpubKey);
       assert.equal(xpubKey.status, true);
       //console.log(xpubKey);
-      assert.equal('xpub6CGK5N5r3w8i6JtFPgCtnMo9Q7NbgvgFqCF3NLULnmagtecbvxpHF7w14gW4nPJrAVbfWZuxnprz1XLSLtS9vudjEbxzMTj1GnvsQWEyLm4', xpubKey.data);
+      assert.equal('xpub6CF5mth3PdQQFg4tq1ZAiudbN1WqfDB66yYc64CLLq3FhQ7eUnCLH3iyxW78HJ2n7VqL6MdfjP5rhy6uaX1MGKeeVBwY2waTvT8DdXM8mAK', xpubKey.data);
     });  
 
     it('BIP32 Extended Public Key could generate sub address', function () {
@@ -226,6 +233,19 @@ describe('Address', function () {
       console.log(validate);
       assert.equal(validate.status, true);
       assert.equal(validate.data, true);
+    });  
+  });
+
+  describe('#generateAddressByWIF() ok', function () {
+    it('can generate address', function () {
+      var data = {
+        wif: "KxLd81HhAAMzFTPtrYQKXfhBXZWkhenTK8JxkAMnsGZKgqmWDk2z",
+        currency: 'btc',
+      };
+      var address = HDWJS.hdWallet.generateAddressByWIF(data);
+      console.log(address);
+      assert.equal(address.status, true);
+      assert.equal(address.data, "1pKuHs52FygYAFLuf5X3wREp6YKSjrGuV");
     });  
   });
 
