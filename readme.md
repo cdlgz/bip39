@@ -277,6 +277,33 @@ console.log(validate);
 }
 ```
 
+8 generateAddressByWIF
+
+```javascript
+var data = {
+  wif: "KxLd81HhAAMzFTPtrYQKXfhBXZWkhenTK8JxkAMnsGZKgqmWDk2z",
+  currency: 'btc',
+};
+var address = HDWJS.hdWallet.generateAddressByWIF(data);
+console.log(address);
+```
+
+参数说明：
+
+  wif: private key
+
+  currency: 币种，btc 比特币，eth 以太币，xrp 瑞波币，eos 柚子币。具体将src/currencies.txt
+
+返回结果：
+
+```
+{ 
+  status: true,
+  data: '1pKuHs52FygYAFLuf5X3wREp6YKSjrGuV',
+  code: null 
+}
+```
+
 # License
 
 This BIP39 tool is released under the terms of the MIT license. See LICENSE for
