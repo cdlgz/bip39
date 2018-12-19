@@ -9,3 +9,7 @@
 2008=>address change is invalid
 2009=>address index is invalid
 2010=>WIF is required
+2011=>utxos is required
+2012=>targets is required
+2013=>feeRate is required
+2014=>changeAddress is required
