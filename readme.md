@@ -304,6 +304,50 @@ console.log(address);
 }
 ```
 
+9 buildTransaction
+
+```javascript
+var data = {
+  currency: 'btctest',
+  utxos: [{
+    txId: '...',
+    vout: 0,
+    value: 10000,
+    key: ''
+  }],
+  targets: [{
+    address: '1EHNa6Q4Jz2uvNExL497mE43ikXhwF6kZm',
+    value: 5000
+  }],
+  feeRate: 55,
+  changeAddress: ''
+};
+var transaction = HDWJS.bcoin.buildTransaction(data);
+console.log(transaction);
+```
+
+参数说明：
+
+  currency: 币种，btc 比特币，eth 以太币，xrp 瑞波币，eos 柚子币。具体将src/currencies.txt
+  
+  utxos: utxos list
+
+  targets: targets list
+
+  feeRate: 55
+
+  changeAddress: changeAddress
+
+返回结果：
+
+```
+{ 
+  status: true,
+  data: 'transaction hex ... ...',
+  code: null 
+}
+```
+
 # License
 
 This BIP39 tool is released under the terms of the MIT license. See LICENSE for
