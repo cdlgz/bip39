@@ -42,8 +42,8 @@ class BCoin {
 
     console.log(fee);
 
-    let coinData = CoinData[currency];
-    let txb = new bitcoinjs.bitcoin.TransactionBuilder(coinData.network);
+    let coinDataX = CoinData[currency];
+    let txb = new bitcoinjs.bitcoin.TransactionBuilder(coinDataX.network);
     inputs.forEach(input => txb.addInput(input.txId, input.vout));
     outputs.forEach(output => {
       if (!output.address) {
