@@ -5,7 +5,7 @@ describe('Address', function () {
 
   describe('#generateAddress() success', function () {
 
-    it('should generate btc mainnet BIP44 address', function () {
+    it('should generate btc mainnet BIP44 address 1', function () {
       var addressData = {
         mnemonic: "total,bubble,almost,soft,alter,throw,wrap,foil,soap,water,exist,mountain,fossil,hybrid,young",
         passphrase: "123456",
@@ -23,6 +23,27 @@ describe('Address', function () {
       assert.equal(address.address, "1pKuHs52FygYAFLuf5X3wREp6YKSjrGuV");
       assert.equal(address.pubkey, "02ba7d8066bce9a34e1263a1deb8af98993928f85784f45ee75fd1b8eca2929cb4");
       assert.equal(address.privkey, "KxLd81HhAAMzFTPtrYQKXfhBXZWkhenTK8JxkAMnsGZKgqmWDk2z");
+    });
+
+    it('should generate btc mainnet BIP44 address 2', function () {
+      var addressData = {
+        mnemonic: "egg,sudden,advance,apple,salmon,mad,crowd,ginger,essence,fork,public,funny",
+        passphrase: "",
+        currency: "btctest",
+        purpose: 44,
+        account: 0,
+        change: 0,
+        start: 0,
+        end: 0
+      };
+      var addresses = HDWJS.hdWallet.generateAddresses(addressData);
+      console.log(addresses)
+      assert.equal(addresses.status, true);
+      var address = addresses.data[0];
+      assert.equal(address.path, "m/44'/1'/0'/0/0");
+      assert.equal(address.address, "1JZup6gqVEMLn7LQwHMvzYh9XrsLtWg2TH");
+      assert.equal(address.pubkey, "03f957ce50b4bc2b7ae5313a0aa77d2cc95a9625f8dd5ae73ab869c0267a6dcb05");
+      assert.equal(address.privkey, "Kx6z56id2Josg7U2XnWd6u6dPUWtkk3W9NL2sh8sX4JP6ok8Dceo");
     });
 
     it('should generate btc mainnet BIP49 address', function () {
@@ -212,11 +233,20 @@ describe('Address', function () {
         start: 0,
         end: 0
       };
+      data = {
+        xpubKey: "xpub6CF5mth3PdQQFg4tq1ZAiudbN1WqfDB66yYc64CLLq3FhQ7eUnCLH3iyxW78HJ2n7VqL6MdfjP5rhy6uaX1MGKeeVBwY2waTvT8DdXM8mAK",
+        currency: 'btctest',
+        change: 0,
+        start: 0,
+        end: 0
+      };
       var addresses = HDWJS.hdWallet.generateAddressesByXpubKey(data);
-      //console.log(addresses);
+      console.log(addresses);
       assert.equal(addresses.status, true);
       var address = addresses.data[0];
-      assert.equal(address, "1LY3cuDYGuiEpMBELwRoJTQ6exfBu5atBo");
+      //assert.equal(address, "1LY3cuDYGuiEpMBELwRoJTQ6exfBu5atBo");
+      assert.equal(address, "1JZup6gqVEMLn7LQwHMvzYh9XrsLtWg2TH");
+      //1JZup6gqVEMLn7LQwHMvzYh9XrsLtWg2TH
     });
   });
 
