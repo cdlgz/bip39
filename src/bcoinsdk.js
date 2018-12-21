@@ -5,6 +5,14 @@ let coinSelect = require('coinselect')
 class BCoin {
   constructor() {}
 
+  result(status, data, code) {
+    return {
+      status: status, //bool
+      data: data, //any
+      code: code //int
+    };
+  }
+
   isEmpty(value) {
     return value == undefined || value == '';
   }
@@ -42,8 +50,8 @@ class BCoin {
 
     console.log(fee);
 
-    let coinData = CoinData[currency];
-    let txb = new bitcoinjs.bitcoin.TransactionBuilder(coinData.network);
+    let coinDataX = CoinData[currency];
+    let txb = new bitcoinjs.bitcoin.TransactionBuilder(coinDataX.network);
     inputs.forEach(input => txb.addInput(input.txId, input.vout));
     outputs.forEach(output => {
       if (!output.address) {
@@ -52,7 +60,8 @@ class BCoin {
       txb.addOutput(output.address, output.value)
     });
     inputs.forEach((input, index) => txb.sign(index, input.key));
-    return tx.build().toHex();
+    let txHex = tx.build().toHex();
+    return this.result(true, txHex, 0);
   }
 }
 
