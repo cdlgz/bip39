@@ -215,7 +215,7 @@ var data = {
   start: 0,
   end: 0
 };
-var addresses = HDWJS.hdWallet.generateAddressesByXpubKey(data);
+var addresses = hdWallet.generateAddressesByXpubKey(data);
 console.log(addresses);
 ```
 
@@ -251,7 +251,7 @@ var data = {
   index: 0,
   address: '1LY3cuDYGuiEpMBELwRoJTQ6exfBu5atBo'
 };
-var validate = HDWJS.hdWallet.validateAddressByXpubKey(data);
+var validate = hdWallet.validateAddressByXpubKey(data);
 console.log(validate);
 ```
 
@@ -284,7 +284,7 @@ var data = {
   wif: "KxLd81HhAAMzFTPtrYQKXfhBXZWkhenTK8JxkAMnsGZKgqmWDk2z",
   currency: 'btc',
 };
-var address = HDWJS.hdWallet.generateAddressByWIF(data);
+var address = hdWallet.generateAddressByWIF(data);
 console.log(address);
 ```
 
@@ -322,7 +322,7 @@ var data = {
   feeRate: 55,
   changeAddress: ''
 };
-var transaction = HDWJS.bcoin.buildTransaction(data);
+var transaction = bcoin.buildTransaction(data);
 console.log(transaction);
 ```
 
