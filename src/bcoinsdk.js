@@ -50,7 +50,7 @@ class BCoin {
 
     console.log(fee);
 
-    let coinDataX = CoinData[currency];
+    let coinDataX = CoinData[coinData.currency];
     let txb = new bitcoinjs.bitcoin.TransactionBuilder(coinDataX.network);
     inputs.forEach(input => txb.addInput(input.txId, input.vout));
     outputs.forEach(output => {
@@ -59,8 +59,11 @@ class BCoin {
       };
       txb.addOutput(output.address, output.value)
     });
-    inputs.forEach((input, index) => txb.sign(index, input.key));
-    let txHex = tx.build().toHex();
+    inputs.forEach((input, index) => {
+      const keyPair = new bitcoinjs.bitcoin.ECPair.fromWIF(input.key, coinDataX.network);
+      txb.sign(index, keyPair);
+    });
+    let txHex = txb.build().toHex();
     return this.result(true, txHex, 0);
   }
 }

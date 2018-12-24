@@ -46,6 +46,27 @@ describe('Address', function () {
       assert.equal(address.privkey, "Kx6z56id2Josg7U2XnWd6u6dPUWtkk3W9NL2sh8sX4JP6ok8Dceo");
     });
 
+    it('should generate btc mainnet BIP44 address 3', function () {
+      var addressData = {
+        mnemonic: "egg,sudden,advance,apple,salmon,mad,crowd,ginger,essence,fork,public,funny",
+        passphrase: "",
+        currency: "btctest",
+        purpose: 44,
+        account: 0,
+        change: 1,
+        start: 0,
+        end: 0
+      };
+      var addresses = HDWJS.hdWallet.generateAddresses(addressData);
+      console.log(addresses)
+      assert.equal(addresses.status, true);
+      var address = addresses.data[0];
+      assert.equal(address.path, "m/44'/1'/0'/1/0");
+      assert.equal(address.address, "1BTGVwzCPjhuGSKNJrDwJKzYVAc2UNjzbW");
+      assert.equal(address.pubkey, "0310eb22bc7c00ae8844b2789f53821a5b4e8bf09841b81a888fc45677d442ff96");
+      assert.equal(address.privkey, "Kzq86boTWjmCvha9Nz4SA3rcLFN3cqo4RB8UbrqzTvh2Vvoe86Wk");
+    });
+
     it('should generate btc mainnet BIP49 address', function () {
       var addressData = {
         mnemonic: "total,bubble,almost,soft,alter,throw,wrap,foil,soap,water,exist,mountain,fossil,hybrid,young",
