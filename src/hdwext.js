@@ -172,11 +172,6 @@ function generateAddresses(seedHex, purpose, currency, account, change, start, e
    return addresses;
 }
 
-function createTransaction(currency, data){
-  let coinData = CoinData[currency];
-  
-}
-
 function generateAddressByWIF(currency, privateKey){
   let coinData = CoinData[currency];
   const keyPair = new bitcoinjs.bitcoin.ECPair.fromWIF(privateKey, coinData.network);

@@ -17,6 +17,31 @@ class BCoin {
     return value == undefined || value == '';
   }
 
+  calculateFee(coinData) {
+    let defaultData = {
+      utxos: [],
+      targets: [],
+      feeRate: 0,
+    };
+
+    coinData = Object.assign(defaultData, coinData || {});
+
+    if (coinData.utxos.length == 0)
+      return this.result(false, false, 2011);
+
+    if (coinData.targets.length == 0)
+      return this.result(false, false, 2012);
+
+    if (coinData.feeRate == 0)
+      return this.result(false, false, 2013);
+
+    let {
+      fee
+    } = coinSelect(coinData.utxos, coinData.targets, coinData.feeRate);
+
+    return this.result(true, fee, 0);
+  }
+
   buildTransaction(coinData) {
     let defaultData = {
       currency: '',
@@ -47,8 +72,6 @@ class BCoin {
       outputs,
       fee
     } = coinSelect(coinData.utxos, coinData.targets, coinData.feeRate);
-
-    console.log(fee);
 
     let coinDataX = CoinData[coinData.currency];
     let txb = new bitcoinjs.bitcoin.TransactionBuilder(coinDataX.network);

@@ -348,6 +348,44 @@ console.log(transaction);
 }
 ```
 
+10 calculateFee
+
+```javascript
+var data = {
+  utxos: [{
+    txId: '...',
+    vout: 0,
+    value: 10000,
+    key: ''
+  }],
+  targets: [{
+    address: '1EHNa6Q4Jz2uvNExL497mE43ikXhwF6kZm',
+    value: 5000
+  }],
+  feeRate: 55,
+};
+var fee = bcoin.calculateFee(data);
+console.log(fee);
+```
+
+参数说明：
+ 
+  utxos: utxos list
+
+  targets: targets list
+
+  feeRate: 55
+
+返回结果：
+
+```
+{ 
+  status: true,
+  data: 900,
+  code: null 
+}
+```
+
 # License
 
 This BIP39 tool is released under the terms of the MIT license. See LICENSE for
