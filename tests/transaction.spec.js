@@ -28,10 +28,10 @@ describe('Transaction', function () {
       var coinData = {
         currency: 'btctest',
         utxos: [{
-          txId: '07ac4606d0a18e7a77b19def98c5c6f29a437d8cf7791575608cede706ad4fce',
+          txId: 'b433a0d378e3c8f417ef81504df8d8f33ed26248816668cf88cd3f3cdc754598',
           vout: 1,
-          value: 120000000,
-          key: 'Kx6z56id2Josg7U2XnWd6u6dPUWtkk3W9NL2sh8sX4JP6ok8Dceo'
+          value: 49988200,
+          key: 'Kzq86boTWjmCvha9Nz4SA3rcLFN3cqo4RB8UbrqzTvh2Vvoe86Wk'
         }],
         targets: [{
           address: '1EHNa6Q4Jz2uvNExL497mE43ikXhwF6kZm',
@@ -43,7 +43,7 @@ describe('Transaction', function () {
       var txHex = BCOINJS.bcoin.buildTransaction(coinData);
       console.log(txHex);
       assert.equal(txHex.status, true);
-      assert.equal(txHex.data, '0100000001ce4fad06e7ed8c60751579f78c7d439af2c6c598ef9db1777a8ea1d00646ac07010000006b483045022100adc341326552ec270e24ac960f2497bc43502bb5fcdf9e0e38ca6f99ade9a4ee02201c3b47b4d08ce26e7b74beeeadc69ddc5c8d7f444c0ab24591089bc5aeb62ebf012103f957ce50b4bc2b7ae5313a0aa77d2cc95a9625f8dd5ae73ab869c0267a6dcb05ffffffff0288130000000000001976a91491b24bf9f5288532960ac687abb035127b1d28a588acf4f62607000000001976a91472a902c6ba239b7353e30ab5265636daf77da9bb88ac00000000');
+      assert.equal(txHex.data, '01000000011dd55fd229a9019f0f94ee069e675781304a8753bb6ff84c7e3470f2efd2ce93010000006b483045022100fea3e645a597d65cbfd16317f9f5639d12b0d6cba8b39d9a74b1b70bfb655bba022006b67d78a4f51857e0ff96120379d4dd2939ffa1d7f3e1088a8afcbd13ad9902012103f957ce50b4bc2b7ae5313a0aa77d2cc95a9625f8dd5ae73ab869c0267a6dcb05ffffffff0288130000000000001976a91491b24bf9f5288532960ac687abb035127b1d28a588ac74d9fa02000000001976a91472a902c6ba239b7353e30ab5265636daf77da9bb88ac00000000');
     });
     
   });
