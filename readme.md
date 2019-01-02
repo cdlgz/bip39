@@ -386,6 +386,33 @@ console.log(fee);
 }
 ```
 
+11 validateAddress
+
+```javascript
+var data = {
+  currency: 'btc',
+  address: '1LY3cuDYGuiEpMBELwRoJTQ6exfBu5atBo'
+};
+var validate = hdWallet.validateAddress(data);
+console.log(validate);
+```
+
+参数说明：
+
+  currency: 币种，btc 比特币，eth 以太币，xrp 瑞波币，eos 柚子币。具体将src/currencies.txt
+
+  address: 地址值
+
+返回结果：
+
+```
+{ 
+  status: true,
+  data: true,
+  code: null 
+}
+```
+
 # License
 
 This BIP39 tool is released under the terms of the MIT license. See LICENSE for
