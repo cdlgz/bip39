@@ -24,13 +24,32 @@ describe('Transaction', function () {
       assert.equal(fee.data, 900);
     });
 
+    it('should calculate fee2', function () {
+      var coinData = {
+        utxos: [{
+          txId: '965c404cb388b11760871cb63299d7673cf651762a422ba6107412afac988fd8',
+          vout: 1,
+          value: 12000000000,
+        }],
+        targets: [{
+          address: '1EFHGs7PMGpdzLxn56o6oUV4K9z9YBZc6Y',
+          value: 100000000
+        }],
+        feeRate: 4
+      };
+      var fee = BCOINJS.bcoin.calculateFee(coinData);
+      console.log(fee);
+      assert.equal(fee.status, true);
+      assert.equal(fee.data, 900);
+    });
+
     it('should build transaction', function () {
       var coinData = {
         currency: 'btctest',
         utxos: [{
-          txId: 'b433a0d378e3c8f417ef81504df8d8f33ed26248816668cf88cd3f3cdc754598',
+          txId: 'd9389ccbfce547d497e469f01b5a0d9cfb1db1c2692437f5f22520550d16d5bf',
           vout: 1,
-          value: 49988200,
+          value: 49976400,
           key: 'Kzq86boTWjmCvha9Nz4SA3rcLFN3cqo4RB8UbrqzTvh2Vvoe86Wk'
         }],
         targets: [{
