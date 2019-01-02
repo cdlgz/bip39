@@ -211,6 +211,21 @@ class HdWallet {
     let address = hdwext.generateAddressByWIF(wifData.currency, wifData.wif);
     return this.result(true, address, null);
   }
+
+  validateAddress(addressData) {
+    let defaultData = {
+      address: '',
+      currency: '',
+    };
+    addressData = Object.assign(defaultData, addressData || {});
+    if (this.isEmpty(addressData.address))
+      return this.result(false, null, 2007);
+    if (this.isEmpty(addressData.currency))
+      return this.result(false, null, 2002);
+
+    let address = hdwext.validateAddress(addressData.currency, addressData.address);
+    return this.result(true, address, null);
+  }
 }
 
 class Holder {

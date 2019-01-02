@@ -180,10 +180,21 @@ function generateAddressByWIF(currency, privateKey){
   return address;
 }
 
+function validateAddress(currency, address){
+  try {
+    let coinData = CoinData[currency];
+    let os = bitcoinjs.bitcoin.address.toOutputScript(address, coinData.network);
+    return true;
+  } catch (error) {
+    return false;
+  };
+}
+
 module.exports = {
    generateAddresses: generateAddresses,
    calcBip32ExtendedPublicKey: calcBip32ExtendedPublicKey,
    getXpubKeyByMnemonic: getXpubKeyByMnemonic,
    generateAddressesByXpubKey: generateAddressesByXpubKey,
-   generateAddressByWIF: generateAddressByWIF
+   generateAddressByWIF: generateAddressByWIF,
+   validateAddress: validateAddress
 }

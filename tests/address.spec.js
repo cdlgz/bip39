@@ -300,4 +300,28 @@ describe('Address', function () {
     });  
   });
 
+  describe('#validateAddress() ok', function () {
+    it('address should be valid', function () {
+      var data = {
+        currency: 'btc',
+        address: '1LY3cuDYGuiEpMBELwRoJTQ6exfBu5atBo'
+      };
+      var validate = HDWJS.hdWallet.validateAddress(data);
+      console.log(validate);
+      assert.equal(validate.status, true);
+      assert.equal(validate.data, true);
+    });  
+
+    it('address should be invalid', function () {
+      var data = {
+        currency: 'btc',
+        address: 'abctest'
+      };
+      var validate = HDWJS.hdWallet.validateAddress(data);
+      console.log(validate);
+      assert.equal(validate.status, true);
+      assert.equal(validate.data, false);
+    });  
+  });
+
 });
