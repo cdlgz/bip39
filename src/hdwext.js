@@ -76,8 +76,9 @@ function isSegwit(purpose) {
 function getXpubKeyByMnemonic(seedHex, currency, purpose, account){
   let coinData = CoinData[currency];
   let extendedKey = calcBip32RootKeyFromSeed(seedHex, coinData.network);
-  let account0 = extendedKey.derivePath(`m/${purpose}'/${coinData.coinType}'/${account}'`)
-  let xpubString = account0.neutered().toBase58()
+  let path = `m/${purpose}'/${coinData.coinType}'/${account}'`;
+  let account0 = extendedKey.derivePath(path);
+  let xpubString = account0.neutered().toBase58();
   return xpubString;
 }
 
