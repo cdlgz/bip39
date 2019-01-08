@@ -72,22 +72,26 @@ class BCoin {
       outputs,
       fee
     } = coinSelect(coinData.utxos, coinData.targets, coinData.feeRate);
+    
+    if(inputs && inputs.length > 0){
+      let coinDataX = CoinData[coinData.currency];
+      let txb = new bitcoinjs.bitcoin.TransactionBuilder(coinDataX.network);
+      inputs.forEach(input => txb.addInput(input.txId, input.vout));
+      outputs.forEach(output => {
+        if (!output.address) {
+          output.address = coinData.changeAddress;
+        };
+        txb.addOutput(output.address, output.value)
+      });
+      inputs.forEach((input, index) => {
+        const keyPair = new bitcoinjs.bitcoin.ECPair.fromWIF(input.key, coinDataX.network);
+        txb.sign(index, keyPair);
+      });
+      let txHex = txb.build().toHex();
+      return this.result(true, txHex, 0);
+    };
 
-    let coinDataX = CoinData[coinData.currency];
-    let txb = new bitcoinjs.bitcoin.TransactionBuilder(coinDataX.network);
-    inputs.forEach(input => txb.addInput(input.txId, input.vout));
-    outputs.forEach(output => {
-      if (!output.address) {
-        output.address = coinData.changeAddress;
-      };
-      txb.addOutput(output.address, output.value)
-    });
-    inputs.forEach((input, index) => {
-      const keyPair = new bitcoinjs.bitcoin.ECPair.fromWIF(input.key, coinDataX.network);
-      txb.sign(index, keyPair);
-    });
-    let txHex = txb.build().toHex();
-    return this.result(true, txHex, 0);
+    return this.result(false, null, 2015);
   }
 }
 

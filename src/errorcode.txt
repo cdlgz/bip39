@@ -13,3 +13,4 @@
 2012=>targets is required
 2013=>feeRate is required
 2014=>changeAddress is required
+2015=>utxos are not enough

@@ -43,7 +43,26 @@ describe('Transaction', function () {
       assert.equal(fee.data, 900);
     });
 
-    it('should build transaction', function () {
+    it('should calculate fee3', function () {
+      var coinData = {
+        utxos: [{
+          txId: '7771733bfc837f279e4f0e0ef4440afd075d56e30814443672403248596a2209',
+          vout: 0,
+          value: 10000000000,
+        }],
+        targets: [{
+          address: '1Q4uNEvLTqxQEAbbpEDVBvF6hH7VTkxFht',
+          value: 10000000000
+        }],
+        feeRate: 10
+      };
+      var fee = BCOINJS.bcoin.calculateFee(coinData);
+      console.log(fee);
+      assert.equal(fee.status, true);
+      assert.equal(fee.data, 1910);
+    });
+
+    it('should build transaction ok', function () {
       var coinData = {
         currency: 'btctest',
         utxos: [{
@@ -63,6 +82,27 @@ describe('Transaction', function () {
       console.log(txHex);
       assert.equal(txHex.status, true);
       assert.equal(txHex.data, '0100000001bfd5160d552025f2f5372469c2b11dfb9c0d5a1bf069e497d447e5fccb9c38d9010000006a473044022018a4cb4f133ccdd1c54bc2dc48f4c993818894b9799c77c9b4289bb8e9680f220220285f07e71ffe79d177f7dd0a8417dbd67f909d6405da694e959d3981d83ca6d501210310eb22bc7c00ae8844b2789f53821a5b4e8bf09841b81a888fc45677d442ff96ffffffff0288130000000000001976a91491b24bf9f5288532960ac687abb035127b1d28a588ac447dfa02000000001976a91472a902c6ba239b7353e30ab5265636daf77da9bb88ac00000000');
+    });
+
+    it('should build transaction fail', function () {
+      var coinData = {
+        currency: 'btctest',
+        utxos: [{
+          txId: '7771733bfc837f279e4f0e0ef4440afd075d56e30814443672403248596a2209',
+          vout: 0,
+          value: 10000000000,
+          key: 'L4pCfRBpZYn3eozHsdn6NQR2Jc2bU4jVXwoLAfbTnjvZakumqgZg'
+        }],
+        targets: [{
+          address: '1Q4uNEvLTqxQEAbbpEDVBvF6hH7VTkxFht',
+          value: 10000000000
+        }],
+        feeRate: 10,
+        changeAddress: '1BTGVwzCPjhuGSKNJrDwJKzYVAc2UNjzbW'
+      };
+      var txHex = BCOINJS.bcoin.buildTransaction(coinData);
+      assert.equal(txHex.status, false);
+      assert.equal(txHex.code, 2015);
     });
     
   });
