@@ -84,6 +84,32 @@ describe('Transaction', function () {
       assert.equal(txHex.data, '0100000001bfd5160d552025f2f5372469c2b11dfb9c0d5a1bf069e497d447e5fccb9c38d9010000006a473044022018a4cb4f133ccdd1c54bc2dc48f4c993818894b9799c77c9b4289bb8e9680f220220285f07e71ffe79d177f7dd0a8417dbd67f909d6405da694e959d3981d83ca6d501210310eb22bc7c00ae8844b2789f53821a5b4e8bf09841b81a888fc45677d442ff96ffffffff0288130000000000001976a91491b24bf9f5288532960ac687abb035127b1d28a588ac447dfa02000000001976a91472a902c6ba239b7353e30ab5265636daf77da9bb88ac00000000');
     });
 
+    it('should build transaction ok with fully transfer', function () {
+      var coinData = {
+        currency: 'btctest',
+        utxos: [{
+          txId: 'aca2cea1c802892130677f1fa6a5137623dcde119f54abfb1f73563fbcf68b40',
+          vout: 0,
+          value: 10599900000,
+          key: 'Ky2RubdDcJKeoMv9gERjwwKKXv5bandtk9paDwKYhSbpJkjh3DoW'
+        }],
+        targets: [{
+          address: '1MXjrJRbSCDM6eDGp3zLeV2hyLck1VLMnA',
+          value: 10599900000
+        }],
+        feeRate: 18,
+        changeAddress: '1LtEVW3fsqTPE4TqGFDCqWy13UcS1dZgse'
+      };
+      var fee = BCOINJS.bcoin.calculateFee(coinData);
+      console.log(fee);
+      coinData.targets[0].value = coinData.targets[0].value - Math.round(fee.data * 1.1 + 0.5); 
+      console.log(coinData.targets[0]);
+      var txHex = BCOINJS.bcoin.buildTransaction(coinData);
+      console.log(txHex);
+      assert.equal(txHex.status, true);
+      //assert.equal(txHex.data, '0100000001bfd5160d552025f2f5372469c2b11dfb9c0d5a1bf069e497d447e5fccb9c38d9010000006a473044022018a4cb4f133ccdd1c54bc2dc48f4c993818894b9799c77c9b4289bb8e9680f220220285f07e71ffe79d177f7dd0a8417dbd67f909d6405da694e959d3981d83ca6d501210310eb22bc7c00ae8844b2789f53821a5b4e8bf09841b81a888fc45677d442ff96ffffffff0288130000000000001976a91491b24bf9f5288532960ac687abb035127b1d28a588ac447dfa02000000001976a91472a902c6ba239b7353e30ab5265636daf77da9bb88ac00000000');
+    });
+
     it('should build transaction fail', function () {
       var coinData = {
         currency: 'btctest',
