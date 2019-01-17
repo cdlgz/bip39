@@ -175,10 +175,17 @@ function generateAddresses(seedHex, purpose, currency, account, change, start, e
 
 function generateAddressByWIF(currency, privateKey){
   let coinData = CoinData[currency];
-  const keyPair = new bitcoinjs.bitcoin.ECPair.fromWIF(privateKey, coinData.network);
-  let address = keyPair.getAddress().toString();
-  //const address = bitcoinjs.bitcoin.address.fromOutputScript(keyPair.publicKey, coinData.network);
-  return address;
+  if (isLikeEthereum(currency)) {
+    let addressBuffer = ethUtil.privateToAddress(privateKey);
+    let hexAddress = addressBuffer.toString('hex');
+    let checksumAddress = ethUtil.toChecksumAddress(hexAddress);
+    let address = ethUtil.addHexPrefix(checksumAddress);
+    return address;
+  } else {
+    const keyPair = new bitcoinjs.bitcoin.ECPair.fromWIF(privateKey, coinData.network);
+    let address = keyPair.getAddress().toString();
+    return address;  
+  }
 }
 
 function validateAddress(currency, address){
