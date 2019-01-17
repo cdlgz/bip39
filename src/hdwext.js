@@ -66,7 +66,7 @@ function convertRipplePriv(priv)   {
 
 function isLikeEthereum(currency) {
    let list = ['eth', 'etc', 'pirl', 'mix', 'music', 'poa', 'exp', 'clo'];
-   return list.includes(currency);
+   return list.includes(currency) || list.map(x => x.concat('test')).includes(currency);
 }
 
 function isSegwit(purpose) {

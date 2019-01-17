@@ -86,6 +86,26 @@ describe('Address', function () {
       assert.equal(address.privkey, "0xe5d1e3e7236c5d158485d296df140ce69f145fb8730398cb7f739c42e7dcd4ad");
     });
 
+    it('should generate eth testnet BIP44 address', function () {
+      var addressData = {
+        mnemonic: "total,bubble,almost,soft,alter,throw,wrap,foil,soap,water,exist,mountain,fossil,hybrid,young",
+        passphrase: "123456",
+        currency: "ethtest",
+        purpose: 44,
+        account: 0,
+        change: 0,
+        start: 0,
+        end: 0
+      };
+      var addresses = HDWJS.hdWallet.generateAddresses(addressData);
+      assert.equal(addresses.status, true);
+      var address = addresses.data[0];
+      assert.equal(address.path, "m/44'/60'/0'/0/0");
+      assert.equal(address.address, "0x62d574C6970f52e83d97c06B3367b65b1650D16b");
+      assert.equal(address.pubkey, "0x020dc93dc5a8d2d781992203be4c220e220ce58967b287611728c02f363f941555");
+      assert.equal(address.privkey, "0xe5d1e3e7236c5d158485d296df140ce69f145fb8730398cb7f739c42e7dcd4ad");
+    });
+
     it('should generate xrp mainnet BIP44 address', function () {
       var addressData = {
         mnemonic: "total,bubble,almost,soft,alter,throw,wrap,foil,soap,water,exist,mountain,fossil,hybrid,young",

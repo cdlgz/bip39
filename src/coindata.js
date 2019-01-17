@@ -50,6 +50,10 @@ const CoinData = {
     coinType: 60,
     network: Networks.btc
   },
+  ethtest: {
+    coinType: 60,
+    network: Networks.btctest
+  },
   etc: {
     coinType: 61,
     network: Networks.btc
