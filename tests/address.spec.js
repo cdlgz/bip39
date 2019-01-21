@@ -417,8 +417,39 @@ describe('Address', function () {
       assert.equal(account.status, true);
       assert.equal(account.data.address, '0x2c7536E3605D9C16a7a3D7b1898e529396a65c23');
       assert.equal(account.data.privateKey, '0x4c0883a69102937d6231471b5dbb6204fe5129617082792ae468d01a3f362318');
-    });  
+    });
 
+    it('KeyStore 2 should be decrypted', function () {
+      let keyStoreJSON = {
+        "address":"97c222a1798084033ec71da0ee4d367a66d5a68c",
+        "crypto":{
+          "cipher":"aes-128-ctr",
+          "ciphertext":"95eae15076989a6cd9cff559d71a031ecb3688b3e4d32ceb6097987128104167",
+          "cipherparams":{
+            "iv":"5bc0b0cb3430b487667b838a23dd61d5"
+          },
+          "kdf":"scrypt",
+          "kdfparams":{
+            "dklen":32,
+            "n":262144,
+            "p":1,
+            "r":8,
+            "salt":"607c33335744b547ce7e43eb197d431bfe899ce0938a7519d2696c86343c0595"
+          },
+          "mac":"ffa2587baf82204f21ae96ac3adc521035ec7ac038aee52ea9af10bfe5d27102"
+        },
+        "id":"51732248-f8e7-4e6b-82fc-dd60a753cbf5",
+        "version":3
+      };
+      let password = '';
+
+      let account = ECOINJS.ecoin.decryptKeyStore(keyStoreJSON, password);
+
+      console.log(account);
+      assert.equal(account.status, true);
+      assert.equal(account.data.address, '0x97c222a1798084033EC71dA0eE4d367a66D5a68c');
+      assert.equal(account.data.privateKey, '0x80f5153f0cef08002a11eba35cc87db1fa4eac1f803fcbdaacd8b4dc77adaf16');
+    });
   });
 
 });
