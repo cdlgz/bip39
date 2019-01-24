@@ -17,3 +17,5 @@
 2016=>from is required
 2017=>to is required
 2018=>value is required
+2019=>keyStore is required
+2020=>privateKey is required

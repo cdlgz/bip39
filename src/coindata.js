@@ -48,11 +48,13 @@ const CoinData = {
   },
   eth: {
     coinType: 60,
-    network: Networks.btc
+    network: Networks.btc,
+    chainId: 1
   },
   ethtest: {
     coinType: 60,
-    network: Networks.btctest
+    network: Networks.btctest,
+    chainId: 4
   },
   etc: {
     coinType: 61,

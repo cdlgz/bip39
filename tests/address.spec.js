@@ -391,6 +391,7 @@ describe('Address', function () {
   describe('#decryptKeyStore() ok', function () {
     it('KeyStore should be decrypted', function () {
       let keyStoreData = {
+        currency: 'ethtest',
         keyStoreJSON: {
           version: 3,
           id: '04e9bcbb-96fa-497b-94d1-14df4cd20af6',
@@ -423,6 +424,7 @@ describe('Address', function () {
 
     it('KeyStore 2 should be decrypted', function () {
       let keyStoreData = {
+        currency: 'ethtest',
         keyStoreJSON: {
           "address": "97c222a1798084033ec71da0ee4d367a66d5a68c",
           "crypto": {
@@ -451,6 +453,38 @@ describe('Address', function () {
       assert.equal(account.status, true);
       assert.equal(account.data.address, '0x97c222a1798084033EC71dA0eE4d367a66D5a68c');
       assert.equal(account.data.privateKey, '0x80f5153f0cef08002a11eba35cc87db1fa4eac1f803fcbdaacd8b4dc77adaf16');
+    });
+
+  });
+
+  describe('#exportKeyStore() ok', function () {
+    it('KeyStore should be exported', function () {
+      let accountData = {
+        currency: 'ethtest',
+        privateKey: '0x80f5153f0cef08002a11eba35cc87db1fa4eac1f803fcbdaacd8b4dc77adaf16',
+        password: 'test!'
+      };
+      let keyStoreData = ECOINJS.ecoin.exportKeyStore(accountData);
+      assert.equal(keyStoreData.status, true);
+
+      let decryptAccountData = ECOINJS.ecoin.decryptKeyStore({ keyStoreJSON : keyStoreData.data, password: accountData.password, currency: accountData.currency });
+      assert.equal(decryptAccountData.status, true);
+      assert.equal(decryptAccountData.data.privateKey, accountData.privateKey);
+    });
+
+    it('KeyStore 2 should be exported', function () {
+
+      let accountData = {
+        currency: 'ethtest',
+        privateKey: '0x80f5153f0cef08002a11eba35cc87db1fa4eac1f803fcbdaacd8b4dc77adaf16',
+        password: ''
+      };
+      let keyStoreData = ECOINJS.ecoin.exportKeyStore(accountData);
+      assert.equal(keyStoreData.status, true);
+      console.log(keyStoreData);
+      let decryptAccountData = ECOINJS.ecoin.decryptKeyStore({ keyStoreJSON : keyStoreData.data, password: accountData.password, currency: accountData.currency });
+      assert.equal(decryptAccountData.status, true);
+      assert.equal(decryptAccountData.data.privateKey, accountData.privateKey);
     });
     
   });

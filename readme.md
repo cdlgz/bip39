@@ -419,6 +419,7 @@ console.log(validate);
 
 ```javascript
 let keyStoreData = {
+  currency: 'ethtest',
   keyStoreJSON : {
     version: 3,
     id: '04e9bcbb-96fa-497b-94d1-14df4cd20af6',
@@ -446,6 +447,8 @@ console.log(account);
 
 参数说明：
 
+  currency: 币种，eth/ethtest 以太币
+  
   keyStoreJSON: The encrypted private key to decrypt
 
   password: The password used for encryption.
@@ -460,6 +463,37 @@ console.log(account);
     "privateKey":"0x4c0883a69102937d6231471b5dbb6204fe5129617082792ae468d01a3f362318"
   },
   "code":0
+}
+```
+
+13 exportKeyStore
+
+```javascript
+let accountData = {
+  currency: 'ethtest',
+  privateKey: '0x80f5153f0cef08002a11eba35cc87db1fa4eac1f803fcbdaacd8b4dc77adaf16',
+  password: ''
+};
+
+let keyStoreData = ecoin.exportKeyStore(accountData);
+console.log(keyStoreData);
+```
+
+参数说明：
+
+  currency: 币种，eth/ethtest 以太币
+
+  privateKey: private key to export
+
+  password: The password used for encryption.
+
+返回结果：
+
+``` 
+{ 
+  status: true,
+  data: '{"version":3,"id":"dfadf6ef-fba8-4295-8b13-81496d340374","address":"97c222a1798084033ec71da0ee4d367a66d5a68c","crypto":{"ciphertext":"2218c03af49f0379ff7ab3b471b0699e8883665d2953eec57f7644bd74dbb2d0","cipherparams":{"iv":"f3bea6976729d224a9736ed2445cc6dd"},"cipher":"aes-128-ctr","kdf":"scrypt","kdfparams":{"dklen":32,"salt":"93321f85f30745020873626400bf3a47c6b33bce847dd9ad2401d9541841dd49","n":8192,"r":8,"p":1},"mac":"b8623dc17d886ca11b0bfe54232704e077d46b0c10d01f454201536477d5c671"}}',
+  code: 0 
 }
 ```
 
