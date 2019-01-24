@@ -14,3 +14,6 @@
 2013=>feeRate is required
 2014=>changeAddress is required
 2015=>utxos are not enough
+2016=>from is required
+2017=>to is required
+2018=>value is required

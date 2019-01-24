@@ -17,12 +17,50 @@ class ECoin {
     return value == undefined || value == '';
   }
 
-  decryptKeyStore(keystoreJsonV3, password) {
-    if(typeof(keystoreJsonV3) == 'string'){
-      keystoreJsonV3 = JSON.parse(keystoreJsonV3);
+  decryptKeyStore(keyStoreData) {
+    let defaultData = {
+      //keyStoreJSON: '',
+      password: ''
     };
-    let account = web3.eth.accounts.decrypt(keystoreJsonV3, password);
-    return this.result(true, { address : account.address, privateKey : account.privateKey }, 0);
+    keyStoreData = Object.assign(defaultData, keyStoreData || {});
+    if (typeof (keyStoreData.keyStoreJSON) == 'string') {
+      keyStoreData.keyStoreJSON = JSON.parse(keyStoreData.keyStoreJSON);
+    };
+    let account = web3.eth.accounts.decrypt(keyStoreData.keyStoreJSON, keyStoreData.password);
+    return this.result(true, {
+      address: account.address,
+      privateKey: account.privateKey
+    }, 0);
+  }
+
+  signTransaction(tranData) {
+    let defaultData = {
+      from: '',
+      to: '',
+      value: '',
+      contract: '',
+      gas: 200000,
+      chainId: 3,
+    };
+    tranData = Object.assign(defaultData, tranData || {});
+
+    if (this.isEmpty(tranData.from))
+      return this.result(false, false, 2016);
+
+    if (this.isEmpty(tranData))
+      return this.result(false, false, 2017);
+
+    if (this.isEmpty(tranData.value))
+      return this.result(false, false, 2018);
+
+    if (this.isEmpty(tranData.contract)) {
+      tranData.value = web3.utils.toHex(web3.utils.toWei(tranData.value, "ether"));
+      let account = web3.eth.accounts.privateKeyToAccount(privateKey);
+      let result = account.signTransaction(tranData);
+      return result;  
+    } else {
+      //TODO:
+    };
   }
 
 }
