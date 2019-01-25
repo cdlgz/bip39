@@ -497,6 +497,95 @@ console.log(keyStoreData);
 }
 ```
 
+14 signTransaction - ETH
+
+```javascript
+let tranData = {
+  currency: 'ethtest',
+  to: '0x958649BD0830f2F9f74dFD07b50F05160E21D8B3',
+  value: '0.1',
+  gas: 21000,
+  gasPrice: '1',
+  privateKey: '0xf18780d0e2d67cd2c6f04b0e75e643a0d5330ff2d19f51d934b4540835e760ca',
+  nonce: 1
+};
+var txHex = ecoin.signTransaction(tranData);
+console.log(txHex);
+```
+
+参数说明：
+
+  currency: 币种，eth/ethtest 以太币
+
+  privateKey: private key to export
+
+  to: The password used for encryption.
+
+  value: transfer quantity, eth
+
+  gas: gas limit, number
+
+  gasPrice: gas price in GWEI
+
+  nonce: transaction count of account
+
+返回结果：
+
+``` 
+{ status: true,
+  data:'0xf86b01843b9aca0082520894958649bd0830f2f9f74dfd07b50f05160e21d8b388016345785d8a0000802ba08e738c9376ded6eb76d0951af44932d38335aeb6ed3faf49280bc508f323cecba04fbd430d5b67f0c2b80a9872133804e67346caaa28cdada97cf0444b195d717e',
+  code: 0 
+}
+```
+
+15 signTransaction - ERC20 TOKEN
+
+```javascript
+let tranData = {
+  currency: 'ethtest',
+  to: '0x958649BD0830f2F9f74dFD07b50F05160E21D8B3',
+  value: '0.1',
+  gas: 21000,
+  gasPrice: '1',
+  privateKey: '0xf18780d0e2d67cd2c6f04b0e75e643a0d5330ff2d19f51d934b4540835e760ca',
+  tokenContract: '0xf30bd271c4bdd6b1280a8f4882752e7ea05b3d7c',
+  tokenDecimals: 18,
+  nonce: 1
+};
+var txHex = ecoin.signTransaction(tranData);
+console.log(txHex);
+```
+
+参数说明：
+
+  currency: 币种，eth/ethtest 以太币
+
+  privateKey: private key to export
+
+  to: The password used for encryption.
+
+  value: transfer token quantity
+
+  gas: gas limit, number
+
+  gasPrice: gas price in GWEI
+
+  tokenContract: erc20 token contract address
+
+  tokenDecimals: erc20 token decimals
+
+  nonce: transaction count of account
+
+返回结果：
+
+``` 
+{
+  status: true,
+  data:'0xf8a806843b9aca0082e0f294f30bd271c4bdd6b1280a8f4882752e7ea05b3d7c80b844a9059cbb000000000000000000000000958649bd0830f2f9f74dfd07b50f05160e21d8b30000000000000000000000000000000000000000000000000de0b6b3a76400002ba045bc785045ac529de97f3db5dc27a57df1cf6c1838c3371c170c3ad45189966ca04c615f33b8edb4836cafa9acc4e589c19949fd59ad820bc8a34c2a59bc6c552b',
+  code: 0 
+}
+```
+
 # License
 
 This BIP39 tool is released under the terms of the MIT license. See LICENSE for

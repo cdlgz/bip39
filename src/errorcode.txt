@@ -19,3 +19,5 @@
 2018=>value is required
 2019=>keyStore is required
 2020=>privateKey is required
+2021=>gas limit is required
+2022=>gas price is required

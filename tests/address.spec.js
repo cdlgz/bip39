@@ -418,7 +418,7 @@ describe('Address', function () {
       let account = ECOINJS.ecoin.decryptKeyStore(keyStoreData);
       console.log(account);
       assert.equal(account.status, true);
-      assert.equal(account.data.address, '0x2c7536E3605D9C16a7a3D7b1898e529396a65c23');
+      assert.equal(account.data.address, '0x2c7536e3605d9c16a7a3d7b1898e529396a65c23');
       assert.equal(account.data.privateKey, '0x4c0883a69102937d6231471b5dbb6204fe5129617082792ae468d01a3f362318');
     });
 
@@ -451,7 +451,7 @@ describe('Address', function () {
       let account = ECOINJS.ecoin.decryptKeyStore(keyStoreData);
       console.log(account);
       assert.equal(account.status, true);
-      assert.equal(account.data.address, '0x97c222a1798084033EC71dA0eE4d367a66D5a68c');
+      assert.equal(account.data.address, '0x97c222a1798084033ec71da0ee4d367a66d5a68c');
       assert.equal(account.data.privateKey, '0x80f5153f0cef08002a11eba35cc87db1fa4eac1f803fcbdaacd8b4dc77adaf16');
     });
 
