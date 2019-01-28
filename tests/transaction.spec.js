@@ -16,7 +16,7 @@ describe('ETH Transaction', function () {
         gas: 21000,
         gasPrice: '1',
         privateKey: '0xf18780d0e2d67cd2c6f04b0e75e643a0d5330ff2d19f51d934b4540835e760ca',
-        nonce: 1
+        nonce: 9
       };
       var txHex = ECOINJS.ecoin.signTransaction(tranData);
       console.log(txHex);
