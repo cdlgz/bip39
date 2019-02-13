@@ -365,7 +365,7 @@ describe('Address', function () {
   });
 
   describe('#validateAddress() ok', function () {
-    it('address should be valid', function () {
+    it('btc address should be valid', function () {
       var data = {
         currency: 'btc',
         address: '1LY3cuDYGuiEpMBELwRoJTQ6exfBu5atBo'
@@ -376,10 +376,32 @@ describe('Address', function () {
       assert.equal(validate.data, true);
     });
 
-    it('address should be invalid', function () {
+    it('btc address should be invalid', function () {
       var data = {
         currency: 'btc',
         address: 'abctest'
+      };
+      var validate = HDWJS.hdWallet.validateAddress(data);
+      console.log(validate);
+      assert.equal(validate.status, true);
+      assert.equal(validate.data, false);
+    });
+
+    it('eth address should be valid', function () {
+      var data = {
+        currency: 'eth',
+        address: '0xb59cd2a91a7ccc2063acb9b139782e0d12d68322'
+      };
+      var validate = HDWJS.hdWallet.validateAddress(data);
+      console.log(validate);
+      assert.equal(validate.status, true);
+      assert.equal(validate.data, true);
+    });
+
+    it('eth address should be invalid', function () {
+      var data = {
+        currency: 'eth',
+        address: '0xb59cd2a91a7ccc2063acb9b139782e0d12d683221'
       };
       var validate = HDWJS.hdWallet.validateAddress(data);
       console.log(validate);
