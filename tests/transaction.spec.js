@@ -12,11 +12,27 @@ describe('ETH Transaction', function () {
       let tranData = {
         currency: 'ethtest',
         to: '0x958649BD0830f2F9f74dFD07b50F05160E21D8B3',
+        value: '0.5994',
+        gas: 21000,
+        gasPrice: '0.000001',
+        privateKey: '0xf18780d0e2d67cd2c6f04b0e75e643a0d5330ff2d19f51d934b4540835e760ca',
+        nonce: 52
+      };
+      var txHex = ECOINJS.ecoin.signTransaction(tranData);
+      console.log(txHex);
+      assert.equal(txHex.status, true);
+      assert.equal(txHex.data, '0xf86b01843b9aca0082520894958649bd0830f2f9f74dfd07b50f05160e21d8b388016345785d8a0000802ba08e738c9376ded6eb76d0951af44932d38335aeb6ed3faf49280bc508f323cecba04fbd430d5b67f0c2b80a9872133804e67346caaa28cdada97cf0444b195d717e');
+    });
+    
+    it('should build transaction ok 2', function () {
+      let tranData = {
+        currency: 'ethtest',
+        to: '0x958649BD0830f2F9f74dFD07b50F05160E21D8B3',
         value: '0.1',
         gas: 21000,
         gasPrice: '1',
         privateKey: '0xf18780d0e2d67cd2c6f04b0e75e643a0d5330ff2d19f51d934b4540835e760ca',
-        nonce: 9
+        nonce: 20
       };
       var txHex = ECOINJS.ecoin.signTransaction(tranData);
       console.log(txHex);
@@ -24,7 +40,7 @@ describe('ETH Transaction', function () {
       assert.equal(txHex.data, '0xf86b01843b9aca0082520894958649bd0830f2f9f74dfd07b50f05160e21d8b388016345785d8a0000802ba08e738c9376ded6eb76d0951af44932d38335aeb6ed3faf49280bc508f323cecba04fbd430d5b67f0c2b80a9872133804e67346caaa28cdada97cf0444b195d717e');
     });
 
-    it('should build transaction ok 2 (TEST)', function () {
+    it('should build transaction ok 3', function () {
       let tranData = {
         currency: 'ethtest',
         to: '0x958649BD0830f2F9f74dFD07b50F05160E21D8B3',
@@ -45,17 +61,17 @@ describe('ETH Transaction', function () {
 
     //FROM:0xC7ddA9aB6A01377e6a6437288BB09db793bD4139
     //TO:0x958649BD0830f2F9f74dFD07b50F05160E21D8B3
-    it('should build transaction ok with', function () {
+    it('should build transaction ok with erc20 LGZ token', function () {
       let tranData = {
         currency: 'ethtest',
-        to: '0x958649BD0830f2F9f74dFD07b50F05160E21D8B3',
-        value: '1',
-        gas: 57586,
-        gasPrice: '1',
+        to: '0xc1bc542aa3e5f2e5c73dd859bd3e7d712452b7d5',
+        value: '11',
+        gas: 67586,
+        gasPrice: '420',
         privateKey: '0xf18780d0e2d67cd2c6f04b0e75e643a0d5330ff2d19f51d934b4540835e760ca',
         tokenContract: '0xf30bd271c4bdd6b1280a8f4882752e7ea05b3d7c',
         tokenDecimals: 18,
-        nonce: 6
+        nonce: 54
       };
       var txHex = ECOINJS.ecoin.signTransaction(tranData);
       console.log(txHex);

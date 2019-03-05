@@ -131,13 +131,18 @@ class ECoin {
       console.log(data);
       */
       let tokenContract = web3.eth.contract(abi.erc20).at(tranData.contract);
-      let value = new BigNumber(tranData.value) * Math.pow(10, tranData.tokenDecimals);
+      let value = new BigNumber(tranData.value).times(Math.pow(10, tranData.tokenDecimals)).toString(10);
+      /*
+      console.log(''.concat(tranData.value,'*',tranData.tokenDecimals));
+      console.log('trace bignumber bug');
+      console.log(value);
+      */
       let data = tokenContract.transfer.getData(tranData.to, value);
       txParams.data = data;
       txParams.value = web3.toHex(0);
       txParams.to = tranData.tokenContract;
     };
-    console.log(txParams);
+    //console.log(txParams);
     const tx = new EthereumTx(txParams);
     if (tranData.privateKey.substr(0, 2) == '0x') {
       tranData.privateKey = tranData.privateKey.substr(2);
