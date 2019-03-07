@@ -155,13 +155,11 @@ class ECoin {
 
 }
 
-class ECoinHolder {
-  constructor(_ecoin) {
-    this.ecoin = _ecoin;
-  }
-}
+function ECoinHolder(_ecoin) {
+  this.ecoin = _ecoin;
+};
 
-let ecoinHolder = new ECoinHolder(new ECoin());
+ecoinHolder = new ECoinHolder(new ECoin());
 if (typeof window !== 'undefined') {
   window.ecoin = ecoinHolder.ecoin;
 }

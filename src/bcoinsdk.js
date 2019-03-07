@@ -101,7 +101,7 @@ class BCoinHolder {
   }
 }
 
-let bcoinHolder = new BCoinHolder(new BCoin());
+bcoinHolder = new BCoinHolder(new BCoin());
 if (typeof window !== 'undefined') {
   window.bcoin = bcoinHolder.bcoin;
 }

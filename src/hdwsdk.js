@@ -226,12 +226,14 @@ HdWallet.prototype.validateAddress = function (addressData) {
   return this.result(true, address, null);
 };
 
-function Holder(_hdWallet) {
+function HdHolder(_hdWallet) {
   this.hdWallet = _hdWallet;
 };
 
-let holder = new Holder(new HdWallet());
+hdHolder = new HdHolder(new HdWallet());
+
 if (typeof window !== 'undefined') {
-  window.hdWallet = holder.hdWallet;
+  window.hdWallet = hdHolder.hdWallet;
 }
-//module.exports = holder;
+
+module.exports = hdHolder;
