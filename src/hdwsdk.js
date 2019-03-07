@@ -1,3 +1,4 @@
+global.crypto = require('crypto')
 let bip39 = require('bip39')
 let hdwext = require('./hdwext')
 
