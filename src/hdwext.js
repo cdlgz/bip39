@@ -1,4 +1,4 @@
-global.crypto = require('crypto')
+const crypto = require('crypto')
 const CoinData = require("./coindata");
 const bitcoinjs = require('./js/bitcoinjs-3.3.2')
 const ethUtil = require("./js/ethereumjs-util")
@@ -210,5 +210,5 @@ module.exports = {
   generateAddressesByXpubKey: generateAddressesByXpubKey,
   generateAddressByWIF: generateAddressByWIF,
   validateAddress: validateAddress,
-  randomBytes: global.crypto.randomBytes
+  randomBytes: crypto.randomBytes
 }
