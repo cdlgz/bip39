@@ -234,4 +234,4 @@ let holder = new Holder(new HdWallet());
 if (typeof window !== 'undefined') {
   window.hdWallet = holder.hdWallet;
 }
-module.exports = holder;
+//module.exports = holder;
