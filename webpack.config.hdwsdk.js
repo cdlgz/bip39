@@ -11,6 +11,7 @@ module.exports = {
     filename: 'hdwsdk.min.js',
   },
   optimization: {
+    minimize: false,
     minimizer: [
       new UglifyJsPlugin({
         uglifyOptions: {
