@@ -1,3 +1,4 @@
+global.crypto = require('crypto')
 const CoinData = require("./coindata");
 const bitcoinjs = require('./js/bitcoinjs-3.3.2')
 const ethUtil = require("./js/ethereumjs-util")
@@ -60,8 +61,8 @@ function convertRippleAdrr(address) {
   )
 }
 
-function convertRipplePriv(priv)   {
-  return basex('123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz').decode(priv).toString("hex").slice(2,66)
+function convertRipplePriv(priv) {
+  return basex('123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz').decode(priv).toString("hex").slice(2, 66)
 }
 
 function isLikeEthereum(currency) {
@@ -73,7 +74,7 @@ function isSegwit(purpose) {
   return purpose == 49 || purpose == 84 || purpose == 141;
 }
 
-function getXpubKeyByMnemonic(seedHex, currency, purpose, account){
+function getXpubKeyByMnemonic(seedHex, currency, purpose, account) {
   let coinData = CoinData[currency];
   let extendedKey = calcBip32RootKeyFromSeed(seedHex, coinData.network);
   let path = `m/${purpose}'/${coinData.coinType}'/${account}'`;
@@ -82,7 +83,7 @@ function getXpubKeyByMnemonic(seedHex, currency, purpose, account){
   return xpubString;
 }
 
-function generateAddressesByXpubKey(xpubKey, currency, change, start, end){
+function generateAddressesByXpubKey(xpubKey, currency, change, start, end) {
   let coinData = CoinData[currency];
   let address0FromXpub = bitcoinjs.bitcoin.HDNode.fromBase58(xpubKey, coinData.network);
   let addresses = [];
@@ -93,7 +94,7 @@ function generateAddressesByXpubKey(xpubKey, currency, change, start, end){
   return addresses;
 }
 
-function calcBip32ExtendedPublicKey(seedHex, purpose, currency, account){
+function calcBip32ExtendedPublicKey(seedHex, purpose, currency, account) {
   let coinData = CoinData[currency];
   let derivationPath = getBIP32DerivationPath(purpose, coinData.coinType, account);
   let bip32ExtendedKey = calcBip32ExtendedKey(seedHex, coinData.network, derivationPath);
@@ -173,7 +174,7 @@ function generateAddresses(seedHex, purpose, currency, account, change, start, e
   return addresses;
 }
 
-function generateAddressByWIF(currency, privateKey){
+function generateAddressByWIF(currency, privateKey) {
   let coinData = CoinData[currency];
   if (isLikeEthereum(currency)) {
     let addressBuffer = ethUtil.privateToAddress(privateKey);
@@ -188,7 +189,7 @@ function generateAddressByWIF(currency, privateKey){
   }
 }
 
-function validateAddress(currency, address){
+function validateAddress(currency, address) {
   try {
     if (isLikeEthereum(currency)) {
       return ethUtil.isValidAddress(address);
@@ -208,5 +209,6 @@ module.exports = {
   getXpubKeyByMnemonic: getXpubKeyByMnemonic,
   generateAddressesByXpubKey: generateAddressesByXpubKey,
   generateAddressByWIF: generateAddressByWIF,
-  validateAddress: validateAddress
+  validateAddress: validateAddress,
+  randomBytes: global.crypto.randomBytes
 }
