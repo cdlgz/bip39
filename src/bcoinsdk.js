@@ -1,5 +1,5 @@
 const CoinData = require("./coindata");
-const bitcoinjs = require('./js/bitcoinjs-3.3.2')
+const bitcoin = require('bitcoinjs-lib')
 let coinSelect = require('coinselect')
 
 class BCoin {
@@ -75,7 +75,7 @@ class BCoin {
     
     if(inputs && inputs.length > 0){
       let coinDataX = CoinData[coinData.currency];
-      let txb = new bitcoinjs.bitcoin.TransactionBuilder(coinDataX.network);
+      let txb = new bitcoin.TransactionBuilder(coinDataX.network);
       inputs.forEach(input => txb.addInput(input.txId, input.vout));
       outputs.forEach(output => {
         if (!output.address) {
@@ -84,7 +84,7 @@ class BCoin {
         txb.addOutput(output.address, output.value)
       });
       inputs.forEach((input, index) => {
-        const keyPair = new bitcoinjs.bitcoin.ECPair.fromWIF(input.key, coinDataX.network);
+        const keyPair = new bitcoin.ECPair.fromWIF(input.key, coinDataX.network);
         txb.sign(index, keyPair);
       });
       let txHex = txb.build().toHex();

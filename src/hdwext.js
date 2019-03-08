@@ -1,8 +1,8 @@
 const crypto = require('crypto')
 const CoinData = require("./coindata");
-const bitcoinjs = require('./js/bitcoinjs-3.3.2')
-const ethUtil = require("./js/ethereumjs-util")
+const bitcoin = require('bitcoinjs-lib')
 const basex = require('base-x')
+const ethUtil = require('ethereumjs-util');
 
 function parseIntNoNaN(val, defaultVal) {
   let v = parseInt(val);
@@ -27,7 +27,7 @@ function getBIP32DerivationPath() {
 }
 
 function calcBip32RootKeyFromSeed(seedHex, network) {
-  let bip32RootKey = bitcoinjs.bitcoin.HDNode.fromSeedHex(seedHex, network);
+  let bip32RootKey = bitcoin.HDNode.fromSeedHex(seedHex, network);
   return bip32RootKey;
 }
 
@@ -85,7 +85,7 @@ function getXpubKeyByMnemonic(seedHex, currency, purpose, account) {
 
 function generateAddressesByXpubKey(xpubKey, currency, change, start, end) {
   let coinData = CoinData[currency];
-  let address0FromXpub = bitcoinjs.bitcoin.HDNode.fromBase58(xpubKey, coinData.network);
+  let address0FromXpub = bitcoin.HDNode.fromBase58(xpubKey, coinData.network);
   let addresses = [];
   for (let index = start; index <= end; index++) {
     let address = address0FromXpub.neutered().derivePath(`${change}/${index}`).keyPair.getAddress();
@@ -152,15 +152,15 @@ function generateAddresses(seedHex, purpose, currency, account, change, start, e
       let isP2wpkh = false;
       let isP2wpkhInP2sh = true;
       if (isP2wpkh) {
-        let keyhash = bitcoinjs.bitcoin.crypto.hash160(key.getPublicKeyBuffer());
-        let scriptpubkey = bitcoinjs.bitcoin.script.witnessPubKeyHash.output.encode(keyhash);
-        address = bitcoinjs.bitcoin.address.fromOutputScript(scriptpubkey, coinData.network)
+        let keyhash = bitcoin.crypto.hash160(key.getPublicKeyBuffer());
+        let scriptpubkey = bitcoin.script.witnessPubKeyHash.output.encode(keyhash);
+        address = bitcoin.address.fromOutputScript(scriptpubkey, coinData.network)
       } else if (isP2wpkhInP2sh) {
-        let keyhash = bitcoinjs.bitcoin.crypto.hash160(key.getPublicKeyBuffer());
-        let scriptsig = bitcoinjs.bitcoin.script.witnessPubKeyHash.output.encode(keyhash);
-        let addressbytes = bitcoinjs.bitcoin.crypto.hash160(scriptsig);
-        let scriptpubkey = bitcoinjs.bitcoin.script.scriptHash.output.encode(addressbytes);
-        address = bitcoinjs.bitcoin.address.fromOutputScript(scriptpubkey, coinData.network)
+        let keyhash = bitcoin.crypto.hash160(key.getPublicKeyBuffer());
+        let scriptsig = bitcoin.script.witnessPubKeyHash.output.encode(keyhash);
+        let addressbytes = bitcoin.crypto.hash160(scriptsig);
+        let scriptpubkey = bitcoin.script.scriptHash.output.encode(addressbytes);
+        address = bitcoin.address.fromOutputScript(scriptpubkey, coinData.network)
       }
     }
     addresses.push({
@@ -183,7 +183,7 @@ function generateAddressByWIF(currency, privateKey) {
     let address = ethUtil.addHexPrefix(checksumAddress);
     return address;
   } else {
-    const keyPair = new bitcoinjs.bitcoin.ECPair.fromWIF(privateKey, coinData.network);
+    const keyPair = new bitcoin.ECPair.fromWIF(privateKey, coinData.network);
     let address = keyPair.getAddress().toString();
     return address;
   }
@@ -195,7 +195,7 @@ function validateAddress(currency, address) {
       return ethUtil.isValidAddress(address);
     } else {
       let coinData = CoinData[currency];
-      let os = bitcoinjs.bitcoin.address.toOutputScript(address, coinData.network);
+      let os = bitcoin.address.toOutputScript(address, coinData.network);
       return true;
     }
   } catch (error) {
