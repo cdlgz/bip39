@@ -23,7 +23,7 @@ HdWallet.prototype.generateMnemonic = function (mnemonicData) {
   if (mnemonicData.numWords < 12)
     return this.result(false, null, 2000);
   let strength = mnemonicData.numWords / 3 * 32;
-  return this.result(true, bip39.generateMnemonic(strength, hdwext.randomBytes).split(' ').join(','), 0);
+  return this.result(true, bip39.generateMnemonic(strength).split(' ').join(','), 0);
 };
 
 HdWallet.prototype.validateMnemonic = function (mnemonicData) {

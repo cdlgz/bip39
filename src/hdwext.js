@@ -1,4 +1,3 @@
-const crypto = require('crypto')
 const CoinData = require("./coindata");
 const bitcoin = require('bitcoinjs-lib')
 const basex = require('base-x')
@@ -209,6 +208,5 @@ module.exports = {
   getXpubKeyByMnemonic: getXpubKeyByMnemonic,
   generateAddressesByXpubKey: generateAddressesByXpubKey,
   generateAddressByWIF: generateAddressByWIF,
-  validateAddress: validateAddress,
-  randomBytes: crypto.randomBytes
+  validateAddress: validateAddress
 }
