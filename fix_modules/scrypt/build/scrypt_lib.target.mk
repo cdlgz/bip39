@@ -32,16 +32,16 @@ CFLAGS_C_Debug :=
 CFLAGS_CC_Debug := \
 	-fno-rtti \
 	-fno-exceptions \
-	-std=gnu++1y
+	-std=gnu++0x
 
 INCS_Debug := \
-	-I/root/.node-gyp/10.10.0/include/node \
-	-I/root/.node-gyp/10.10.0/src \
-	-I/root/.node-gyp/10.10.0/deps/openssl/config \
-	-I/root/.node-gyp/10.10.0/deps/openssl/openssl/include \
-	-I/root/.node-gyp/10.10.0/deps/uv/include \
-	-I/root/.node-gyp/10.10.0/deps/zlib \
-	-I/root/.node-gyp/10.10.0/deps/v8/include \
+	-I/root/.node-gyp/9.11.2/include/node \
+	-I/root/.node-gyp/9.11.2/src \
+	-I/root/.node-gyp/9.11.2/deps/openssl/config \
+	-I/root/.node-gyp/9.11.2/deps/openssl/openssl/include \
+	-I/root/.node-gyp/9.11.2/deps/uv/include \
+	-I/root/.node-gyp/9.11.2/deps/zlib \
+	-I/root/.node-gyp/9.11.2/deps/v8/include \
 	-I$(srcdir)/scrypt/scrypt-1.2.0 \
 	-I$(srcdir)/scrypt/scrypt-1.2.0/libcperciva/cpusupport \
 	-I$(srcdir)/scrypt/scrypt-1.2.0/libcperciva/alg \
@@ -75,16 +75,16 @@ CFLAGS_C_Release :=
 CFLAGS_CC_Release := \
 	-fno-rtti \
 	-fno-exceptions \
-	-std=gnu++1y
+	-std=gnu++0x
 
 INCS_Release := \
-	-I/root/.node-gyp/10.10.0/include/node \
-	-I/root/.node-gyp/10.10.0/src \
-	-I/root/.node-gyp/10.10.0/deps/openssl/config \
-	-I/root/.node-gyp/10.10.0/deps/openssl/openssl/include \
-	-I/root/.node-gyp/10.10.0/deps/uv/include \
-	-I/root/.node-gyp/10.10.0/deps/zlib \
-	-I/root/.node-gyp/10.10.0/deps/v8/include \
+	-I/root/.node-gyp/9.11.2/include/node \
+	-I/root/.node-gyp/9.11.2/src \
+	-I/root/.node-gyp/9.11.2/deps/openssl/config \
+	-I/root/.node-gyp/9.11.2/deps/openssl/openssl/include \
+	-I/root/.node-gyp/9.11.2/deps/uv/include \
+	-I/root/.node-gyp/9.11.2/deps/zlib \
+	-I/root/.node-gyp/9.11.2/deps/v8/include \
 	-I$(srcdir)/scrypt/scrypt-1.2.0 \
 	-I$(srcdir)/scrypt/scrypt-1.2.0/libcperciva/cpusupport \
 	-I$(srcdir)/scrypt/scrypt-1.2.0/libcperciva/alg \

@@ -31,6 +31,17 @@ const Networks = {
     scriptHash: 0x05,
     wif: 0x80
   },
+  vhkd: {
+    messagePrefix: '\x18Bitcoin Signed Message:\n',
+    bech32: 'bc',
+    bip32: {
+      public: 0x0488b21e,
+      private: 0x0488ade4
+    },
+    pubKeyHash: 0x46,
+    scriptHash: 0x49,
+    wif: 0x80
+  },
 }
 
 const CoinData = {
@@ -63,6 +74,14 @@ const CoinData = {
   xrp: {
     coinType: 144,
     network: Networks.btc
+  },
+  vhkd: {
+    coinType: 999991,
+    network: Networks.vhkd
+  },
+  vhkdtest: {
+    coinType: 999991,
+    network: Networks.vhkd
   },
 }
 
