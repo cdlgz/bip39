@@ -127,46 +127,6 @@ describe('Address', function () {
       assert.equal(address.privkey, "2395b60dc1381baa86b2862cd5917300ced63cf1d13f323c395c5bdfd0d694ec");
     });
 
-    it('should generate VHKD mainnet BIP44 address 1', function () {
-      var addressData = {
-        mnemonic: "grocery penalty actual chapter state law mention apple jar any artwork burger leopard dry artist",
-        passphrase: "",
-        currency: "vhkd",
-        purpose: 44,
-        account: 0,
-        change: 0,
-        start: 0,
-        end: 0
-      };
-      var addresses = HDWJS.hdWallet.generateAddresses(addressData);
-      assert.equal(addresses.status, true);
-      var address = addresses.data[0];
-      assert.equal(address.path, "m/44'/999991'/0'/0/0");
-      assert.equal(address.address, "VRzqUHk3dStSrk49DA22tH4bJfkGYR5dHC");
-      assert.equal(address.pubkey, "0234e792e62ac2b3c053cc723fe0e45a24a0068a8bea8a73d43dac42097a4c3c52");
-      assert.equal(address.privkey, "L1ieXUybaxJHZFQXitApWUWc9ZyKCw3aD3N2Ao37zUSTxKFkAomH");
-    });
-
-    it('should generate VHKD testnet BIP44 address 2', function () {
-      var addressData = {
-        mnemonic: "egg,sudden,advance,apple,salmon,mad,crowd,ginger,essence,fork,public,funny",
-        passphrase: "",
-        currency: "vhkd",
-        purpose: 44,
-        account: 0,
-        change: 0,
-        start: 0,
-        end: 0
-      };
-      var addresses = HDWJS.hdWallet.generateAddresses(addressData);
-      console.log(addresses)
-      assert.equal(addresses.status, true);
-      var address = addresses.data[0];
-      assert.equal(address.path, "m/44'/999991'/0'/0/0");
-      assert.equal(address.address, "VTD8CCwwtzMLdVVa7oJdHXgqf1bewbpBh3");
-      assert.equal(address.pubkey, "039409b25aeda4686f8e94c0eacb90bd6c516ca0967f737d2b7b773bc53075e784");
-      assert.equal(address.privkey, "L3qj73DQzaWnBy2RmnvXDUkq3tUjAWJ2mM3XZzPdbN7UXW444fGS");
-    });
   });
 
   describe('#generateAddress() fail', function () {

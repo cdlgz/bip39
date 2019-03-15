@@ -1,9 +1,28 @@
 const CoinData = require("./coindata");
 const bitcoin = require('bitcoinjs-lib')
 let coinSelect = require('coinselect')
+let utils = require('coinselect/utils')
 
 class BCoin {
-  constructor() {}
+  constructor() {
+    this.coinSelectlist = {};
+    this.coinSelectlist['btc'] = coinSelect.coinSelect;
+    this.coinSelectlist['btctest'] = coinSelect.coinSelect;
+    this.coinSelectlist['vhkd'] = coinSelect.percentFeeCoinSelect;
+    this.coinSelectlist['vhkdtest'] = coinSelect.percentFeeCoinSelect;
+  }
+
+  getCoinSelect(currency) {
+    if (!currency) {
+      currency = 'btc';
+    }
+
+    if (this.coinSelectlist[currency]) {
+      return this.coinSelectlist[currency];
+    }
+
+    return coinSelect.coinSelect;
+  }
 
   result(status, data, code) {
     return {
@@ -22,6 +41,7 @@ class BCoin {
       utxos: [],
       targets: [],
       feeRate: 0,
+      currency: 'btc'
     };
 
     coinData = Object.assign(defaultData, coinData || {});
@@ -37,8 +57,7 @@ class BCoin {
 
     let {
       fee
-    } = coinSelect(coinData.utxos, coinData.targets, coinData.feeRate);
-
+    } = this.getCoinSelect(coinData.currency)(coinData.utxos, coinData.targets, coinData.feeRate);
     return this.result(true, fee, 0);
   }
 
@@ -71,9 +90,9 @@ class BCoin {
       inputs,
       outputs,
       fee
-    } = coinSelect(coinData.utxos, coinData.targets, coinData.feeRate);
-    
-    if(inputs && inputs.length > 0){
+    } = this.getCoinSelect(coinData.currency)(coinData.utxos, coinData.targets, coinData.feeRate);
+
+    if (inputs && inputs.length > 0) {
       let coinDataX = CoinData[coinData.currency];
       let txb = new bitcoin.TransactionBuilder(coinDataX.network);
       inputs.forEach(input => txb.addInput(input.txId, input.vout));

@@ -26,7 +26,7 @@
       "bignumber.js": "^8.0.2",
       "bip39": "^2.5.0",
       "bitcoinjs-lib": "^3.3.2",
-      "coinselect": "^3.1.11",
+      "coinselect": "file:fix_modules/coinselect",
       "ethereumjs-tx": "^1.3.7",
       "ethereumjs-wallet": "^0.6.3",
       "express": "^4.16.3",
