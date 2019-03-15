@@ -2,3 +2,4 @@ btc 比特币
 eth 以太币
 xrp 瑞波币
 eos 柚子币
+vhkd VHKD

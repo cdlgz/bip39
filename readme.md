@@ -354,6 +354,7 @@ console.log(transaction);
 
 ```javascript
 var data = {
+  currency: 'btc',
   utxos: [{
     txId: '...',
     vout: 0,
@@ -372,6 +373,8 @@ console.log(fee);
 
 参数说明：
  
+  currency: 币种，btc 比特币, vhkd VHKD。具体将src/currencies.txt
+  
   utxos: utxos list
 
   targets: targets list
