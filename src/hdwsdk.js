@@ -17,13 +17,14 @@ HdWallet.prototype.isEmpty = function (value) {
 
 HdWallet.prototype.generateMnemonic = function (mnemonicData) {
   let defaultData = {
-    numWords: 15
+    numWords: 15,
+    rng: null
   };
   mnemonicData = Object.assign(defaultData, mnemonicData || {});
   if (mnemonicData.numWords < 12)
     return this.result(false, null, 2000);
   let strength = mnemonicData.numWords / 3 * 32;
-  return this.result(true, bip39.generateMnemonic(strength).split(' ').join(','), 0);
+  return this.result(true, bip39.generateMnemonic(strength, mnemonicData.rng).split(' ').join(','), 0);
 };
 
 HdWallet.prototype.validateMnemonic = function (mnemonicData) {
