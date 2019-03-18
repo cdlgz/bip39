@@ -29,17 +29,17 @@ function percentFeeUtxoScore(x, feeRate) {
 }
 
 // for vhkd
-function percentFeeCoinSelect(utxos, outputs, feeRate) {
+function percentFeeCoinSelect(utxos, outputs, feeRate, minFee, maxFee) {
   utxos = utxos.concat().sort(function (a, b) {
     return percentFeeUtxoScore(b, feeRate) - percentFeeUtxoScore(a, feeRate)
   })
 
   // attempt to use the blackjack strategy first (no change output)
-  var base = blackjack.percentFeeBlackjack(utxos, outputs, feeRate)
+  var base = blackjack.percentFeeBlackjack(utxos, outputs, feeRate, minFee, maxFee)
   if (base.inputs) return base
 
   // else, try the accumulative strategy
-  return accumulative.percentFeeAccumulative(utxos, outputs, feeRate)
+  return accumulative.percentFeeAccumulative(utxos, outputs, feeRate, minFee, maxFee)
 }
 
 module.exports = {

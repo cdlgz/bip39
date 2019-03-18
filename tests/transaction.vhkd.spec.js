@@ -65,6 +65,48 @@ describe('VHKD Transaction', function () {
       assert.equal(fee.data, 3000000);
     });
 
+    it('should calculate fee use min fee', function () {
+      var coinData = {
+        utxos: [{
+          txId: '74a4d839f2197587f21285b058ca2aebfaa0b8f0b49a5655652a7a2ec3ab8ed7',
+          vout: 1,
+          value: 1000000000000,
+        }],
+        targets: [{
+          address: 'VTD8CCwwtzMLdVVa7oJdHXgqf1bewbpBh3',
+          value: 100000
+        }],
+        feeRate: 0.0003,
+        currency: 'vhkd',
+        minFee: 30000
+      };
+      var fee = BCOINJS.bcoin.calculateFee(coinData);
+      console.log(fee);
+      assert.equal(fee.status, true);
+      assert.equal(fee.data, 30000);
+    });
+
+    it('should calculate fee use max fee', function () {
+      var coinData = {
+        utxos: [{
+          txId: '74a4d839f2197587f21285b058ca2aebfaa0b8f0b49a5655652a7a2ec3ab8ed7',
+          vout: 1,
+          value: 100000000000000000000,
+        }],
+        targets: [{
+          address: 'VTD8CCwwtzMLdVVa7oJdHXgqf1bewbpBh3',
+          value: 100000000000000000000
+        }],
+        feeRate: 0.0003,
+        currency: 'vhkd',
+        maxFee: 100000000000
+      };
+      var fee = BCOINJS.bcoin.calculateFee(coinData);
+      console.log(fee);
+      assert.equal(fee.status, true);
+      assert.equal(fee.data, 100000000000);
+    });
+
     it('should build transaction ok', function () {
       var coinData = {
         currency: 'vhkd',

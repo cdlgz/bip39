@@ -41,7 +41,9 @@ class BCoin {
       utxos: [],
       targets: [],
       feeRate: 0,
-      currency: 'btc'
+      currency: 'btc',
+      minFee: 0,
+      maxFee: 0
     };
 
     coinData = Object.assign(defaultData, coinData || {});
@@ -57,7 +59,7 @@ class BCoin {
 
     let {
       fee
-    } = this.getCoinSelect(coinData.currency)(coinData.utxos, coinData.targets, coinData.feeRate);
+    } = this.getCoinSelect(coinData.currency)(coinData.utxos, coinData.targets, coinData.feeRate, coinData.minFee, coinData.maxFee);
     return this.result(true, fee, 0);
   }
 
@@ -67,7 +69,9 @@ class BCoin {
       utxos: [],
       targets: [],
       feeRate: 0,
-      changeAddress: ''
+      changeAddress: '',
+      minFee: 0,
+      maxFee: 0
     };
 
     coinData = Object.assign(defaultData, coinData || {});
@@ -90,7 +94,7 @@ class BCoin {
       inputs,
       outputs,
       fee
-    } = this.getCoinSelect(coinData.currency)(coinData.utxos, coinData.targets, coinData.feeRate);
+    } = this.getCoinSelect(coinData.currency)(coinData.utxos, coinData.targets, coinData.feeRate, coinData.minFee, coinData.maxFee);
 
     if (inputs && inputs.length > 0) {
       let coinDataX = CoinData[coinData.currency];

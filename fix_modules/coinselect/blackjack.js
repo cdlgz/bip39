@@ -40,11 +40,12 @@ function blackjack(utxos, outputs, feeRate) {
 // for vhkd coin
 // only add inputs if they don't bust the target value (aka, exact match)
 // worst-case: O(n)
-function percentFeeBlackjack(utxos, outputs, feeRate) {
+function percentFeeBlackjack(utxos, outputs, feeRate, minFee, maxFee) {
   var inAccum = 0
   var inputs = []
   var outAccum = utils.sumOrNaN(outputs)
-  let fee = new BigNumber(outAccum).times(feeRate).integerValue(0).toNumber();
+  let fee = utils.calfee(outAccum, feeRate, minFee, maxFee)
+  //let fee = new BigNumber(outAccum).times(feeRate).integerValue(0).toNumber();
 
   for (var i = 0; i < utxos.length; ++i) {
     var input = utxos[i]

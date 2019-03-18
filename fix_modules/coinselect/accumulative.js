@@ -45,11 +45,12 @@ function accumulative(utxos, outputs, feeRate) {
 // for vhkd
 // add inputs until we reach or surpass the target value (or deplete)
 // worst-case: O(n)
-function percentFeeAccumulative(utxos, outputs, feeRate) {
+function percentFeeAccumulative(utxos, outputs, feeRate, minFee, maxFee) {
   var inAccum = 0
   var inputs = []
   var outAccum = utils.sumOrNaN(outputs)
-  let fee = new BigNumber(outAccum).times(feeRate).integerValue(0).toNumber();
+  let fee = utils.calfee(outAccum, feeRate, minFee, maxFee)
+  //let fee = new BigNumber(outAccum).times(feeRate).integerValue(0).toNumber();
 
   for (var i = 0; i < utxos.length; ++i) {
     var utxo = utxos[i]

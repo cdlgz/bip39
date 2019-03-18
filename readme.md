@@ -322,7 +322,9 @@ var data = {
     value: 5000
   }],
   feeRate: 55,
-  changeAddress: ''
+  changeAddress: '',
+  minFee: 0, //for vhkd
+  maxFee: 0 //for vhkd
 };
 var transaction = bcoin.buildTransaction(data);
 console.log(transaction);
@@ -366,6 +368,8 @@ var data = {
     value: 5000
   }],
   feeRate: 55,
+  minFee: 0, //for vhkd
+  maxFee: 0 //for vhkd
 };
 var fee = bcoin.calculateFee(data);
 console.log(fee);

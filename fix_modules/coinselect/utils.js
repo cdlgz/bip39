@@ -4,6 +4,7 @@ var TX_INPUT_BASE = 32 + 4 + 1 + 4
 var TX_INPUT_PUBKEYHASH = 106
 var TX_OUTPUT_BASE = 8 + 1
 var TX_OUTPUT_PUBKEYHASH = 25
+let BigNumber = require('bignumber.js');
 
 function inputBytes(input) {
   return TX_INPUT_BASE + (input.script ? input.script.length : TX_INPUT_PUBKEYHASH)
@@ -74,6 +75,17 @@ function finalize(inputs, outputs, feeRate) {
   }
 }
 
+function calfee(outAccum, feeRate, minFee, maxFee) {
+  let fee = new BigNumber(outAccum).times(feeRate).integerValue(0).toNumber();
+  if (minFee && fee < minFee) {
+    fee = minFee;
+  };
+  if (maxFee && fee > maxFee) {
+    fee = maxFee;
+  };
+  return fee;
+}
+
 function feefinalize(inputs, outputs, fee) {
   var feeAfterExtraOutput = fee
   var sumOfInputs = sumOrNaN(inputs)
@@ -108,5 +120,6 @@ module.exports = {
   sumForgiving: sumForgiving,
   transactionBytes: transactionBytes,
   uintOrNaN: uintOrNaN,
+  calfee: calfee,
   feefinalize: feefinalize
 }
