@@ -1,3 +1,4 @@
 node_modules
 bip39-standalone.html
 fix_modules/scrypt/build/
+fix_modules/scrypt/scrypt/scrypt-1.2.0/
