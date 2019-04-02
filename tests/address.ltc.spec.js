@@ -26,6 +26,26 @@ describe('LTC Address', function () {
       assert.equal(address.privkey, "TAhYmLd3STdid68HFCMe9aTVtqH4iZEAcGZDPTfjq3Asf6E7VnAp");
     });
 
+    it('should generate ltc mainnet BIP44 address 1', function () {
+      var addressData = {
+        mnemonic: "grocery penalty actual chapter state law mention apple jar any artwork burger leopard dry artist",
+        passphrase: "",
+        currency: "ltctest",
+        purpose: 44,
+        account: 0,
+        change: 0,
+        start: 0,
+        end: 0
+      };
+      var addresses = HDWJS.hdWallet.generateAddresses(addressData);
+      assert.equal(addresses.status, true);
+      var address = addresses.data[0];
+      assert.equal(address.path, "m/44'/2'/0'/0/0");
+      assert.equal(address.address, "n1Nj6y5YCFWncw5bc7UXK5zfvdxxRXh3o5");
+      assert.equal(address.pubkey, "0349daf045ae5134a0bfc3adb3b3c882ce4d94a2c8c6773422ab213980d12312b8");
+      assert.equal(address.privkey, "TAhYmLd3STdid68HFCMe9aTVtqH4iZEAcGZDPTfjq3Asf6E7VnAp");
+    });
+
     it('should generate ltc testnet BIP44 address 2', function () {
       var addressData = {
         mnemonic: "egg,sudden,advance,apple,salmon,mad,crowd,ginger,essence,fork,public,funny",
@@ -51,7 +71,7 @@ describe('LTC Address', function () {
 
   describe('#getXpubKeyByMnemonic() ok ltc', function () {
 
-    it('should generate ltc BIP32 Extended Public Key by mnemonic', function () {
+    it('should generate ltc BIP32 Extended Public Key by mnemonic for mainnet', function () {
       let mnemonic = "grocery penalty actual chapter state law mention apple jar any artwork burger leopard dry artist";
       let currency = 'ltc';
       let xpubKey = 'Ltub2ZBzLR9yAtqMwiVEVBsUeJyA4AJqzKbNhRzoXhNNtdFRHRuaKsSrxkYmb4QNJyGpZEupDF2KZU2TNUKhjDcnbcMhoxfLFiUZKzhbV1gPSGk';
@@ -97,6 +117,54 @@ describe('LTC Address', function () {
       assert.equal(address21, "Lf5j58JPTtKb6dJ94gVSmBr7GrjXhraaqG");
       var address22 = addresses2.data[1];
       assert.equal(address22, "LT33gSpGPUWTzMUBmuqUHeYYz67RrdngPi");
+    });
+
+    it('should generate ltc BIP32 Extended Public Key by mnemonic for testnet', function () {
+      let mnemonic = "grocery penalty actual chapter state law mention apple jar any artwork burger leopard dry artist";
+      let currency = 'ltctest';
+      let xpubKey = 'ttub4e7kLr7wei5MUDfgP2usGrHsY9HiNJrGnwzg6CN3Au4B2x3GL5DXE5Hovo9zjtdNBFfUazC7tt7oSJztTsMw2n2F3sRtwgjyLLsEd6Y6kx6';
+
+      var addressData = {
+        mnemonic: mnemonic,
+        passphrase: "",
+        currency: currency,
+        purpose: 44,
+        account: 0,
+        change: 0,
+        start: 0,
+        end: 0
+      };
+      var addresses1 = HDWJS.hdWallet.generateAddresses(addressData);
+      assert.equal(addresses1.status, true);
+      var address1 = addresses1.data[0];
+      assert.equal(address1.path, "m/44'/2'/0'/0/0");
+      assert.equal(address1.address, "n1Nj6y5YCFWncw5bc7UXK5zfvdxxRXh3o5");
+      assert.equal(address1.pubkey, "0349daf045ae5134a0bfc3adb3b3c882ce4d94a2c8c6773422ab213980d12312b8");
+      assert.equal(address1.privkey, "TAhYmLd3STdid68HFCMe9aTVtqH4iZEAcGZDPTfjq3Asf6E7VnAp");
+
+      var mnemonicData = {
+        mnemonic: mnemonic,
+        currency: currency,
+        purpose: 44,
+        account: 0,
+      };
+      var xpubKeyResult = HDWJS.hdWallet.getXpubKeyByMnemonic(mnemonicData);
+      assert.equal(xpubKeyResult.status, true);
+      assert.equal(xpubKeyResult.data, xpubKey);
+
+      var xpubKeyData = {
+        xpubKey: xpubKey,
+        currency: currency,
+        change: 0,
+        start: 0,
+        end: 1
+      };
+      var addresses2 = HDWJS.hdWallet.generateAddressesByXpubKey(xpubKeyData);
+      assert.equal(addresses2.status, true);
+      var address21 = addresses2.data[0];
+      assert.equal(address21, "n1Nj6y5YCFWncw5bc7UXK5zfvdxxRXh3o5");
+      var address22 = addresses2.data[1];
+      assert.equal(address22, "moL3iHbR7qhfWfFeKLpYqYh7dsLrgFoVe9");
     });
 
   });
