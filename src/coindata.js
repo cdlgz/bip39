@@ -65,6 +65,17 @@ const Networks = {
     scriptHash: 0x3a,
     wif: 0xb0
   },
+  btl: {
+    messagePrefix: '\x18Bitcoin Signed Message:\n',
+    bech32: 'bc',
+    bip32: {
+      public: 0x0488b21e,
+      private: 0x0488ade4
+    },
+    pubKeyHash: 0x30,
+    scriptHash: 0x05,
+    wif: 0x80
+  }
 }
 
 const CoinData = {
@@ -114,6 +125,14 @@ const CoinData = {
     coinType: 2,
     network: Networks.ltctest
   },
+  btl: {
+    coinType: 999994,
+    network: Networks.btl
+  },
+  btltest: {
+    coinType: 999994,
+    network: Networks.btl
+  }
 }
 
 Object.freeze(CoinData);

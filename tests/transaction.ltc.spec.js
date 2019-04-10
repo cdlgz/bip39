@@ -47,6 +47,28 @@ describe('LTC Transaction', function () {
       assert.equal(txHex.data, '010000000129c851781166aa5b14d84b91795698022a93744932f53ba543c46f64c1594c0f000000006a47304402207591cdeb82586c215dfa562ed0be4d98ee63b7346652bc8bc20e71c5790c3e0c02200fa0673178f93c27537f0b555553fb98cd3bd23082b568491f957468573c64d201210349daf045ae5134a0bfc3adb3b3c882ce4d94a2c8c6773422ab213980d12312b8ffffffff0220a10700000000001976a91455b0f408249ed83ae8d4922b753825fb6e0b968188acdc4bf302000000001976a914dcf07f9c494cfd97792707b9724950049210abaf88ac00000000');
     });
 
+    it('should build transaction ok 2', function () {
+      var coinData = {
+        currency: 'ltctest',
+        utxos: [{
+          txId: '67ecae08445cb443050dc5ef097a7b4cb24b4a76958ec2edab3ac591cbccf8cf',
+          vout: 1,
+          value: 49499100,
+          key: 'T7grnLunBCZpi54zTCcYKcEyDyUueD3FNoHc5XA9a2k3cWpZ1QU8'
+        }],
+        targets: [{
+          address: 'msYEzNjZ2t19U2ifPRbeoTi7XjPMf1bY24',
+          value: 40499100
+        }],
+        feeRate: 4,
+        changeAddress: 'n1fB4PDrLZr2WcFf4Kxes9FURFsmFmyQjt'
+      };
+      var txHex = BCOINJS.bcoin.buildTransaction(coinData);
+      console.log(txHex);
+      assert.equal(txHex.status, true);
+      assert.equal(txHex.data, '010000000129c851781166aa5b14d84b91795698022a93744932f53ba543c46f64c1594c0f000000006a47304402207591cdeb82586c215dfa562ed0be4d98ee63b7346652bc8bc20e71c5790c3e0c02200fa0673178f93c27537f0b555553fb98cd3bd23082b568491f957468573c64d201210349daf045ae5134a0bfc3adb3b3c882ce4d94a2c8c6773422ab213980d12312b8ffffffff0220a10700000000001976a91455b0f408249ed83ae8d4922b753825fb6e0b968188acdc4bf302000000001976a914dcf07f9c494cfd97792707b9724950049210abaf88ac00000000');
+    });
+
     it('should build transaction ok with fully transfer', function () {
       var coinData = {
         currency: 'ltctest',

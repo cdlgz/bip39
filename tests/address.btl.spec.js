@@ -2,15 +2,15 @@ var assert = require('assert');
 var HDWJS = require('../src/hdwsdk');
 var ECOINJS = require('../src/ecoinsdk');
 
-describe('LTC Address', function () {
+describe('BTL Address', function () {
 
-  describe('#generateAddress() ltc success', function () {
+  describe('#generateAddress() btl success', function () {
 
-    it('should generate ltc mainnet BIP44 address 1', function () {
+    it('should generate btl mainnet BIP44 address 1', function () {
       var addressData = {
         mnemonic: "grocery penalty actual chapter state law mention apple jar any artwork burger leopard dry artist",
         passphrase: "",
-        currency: "ltc",
+        currency: "btl",
         purpose: 44,
         account: 0,
         change: 0,
@@ -20,18 +20,18 @@ describe('LTC Address', function () {
       var addresses = HDWJS.hdWallet.generateAddresses(addressData);
       assert.equal(addresses.status, true);
       var address = addresses.data[0];
-      assert.equal(address.path, "m/44'/2'/0'/0/0");
-      assert.equal(address.address, "Lf5j58JPTtKb6dJ94gVSmBr7GrjXhraaqG");
-      assert.equal(address.pubkey, "0349daf045ae5134a0bfc3adb3b3c882ce4d94a2c8c6773422ab213980d12312b8");
-      assert.equal(address.privkey, "TAhYmLd3STdid68HFCMe9aTVtqH4iZEAcGZDPTfjq3Asf6E7VnAp");
+      assert.equal(address.path, "m/44'/999994'/0'/0/0");
+      assert.equal(address.address, "Lgt8itxtEK7yNXLtN7ioyVatGNMrSQzXzV");
+      assert.equal(address.pubkey, "0221a40ea5a80ccb1b9f6853d9cb390d2955337c1678da2a3dea9591a87284cd36");
+      assert.equal(address.privkey, "L2e85EDo7cthqfTm8zQD7eLTw755rVcequhsEcYEiRTuvpc6Ys44");
     });
 
-    it('should generate ltc mainnet BIP44 address 1', function () {
+    it('should generate btl mainnet BIP44 address 1', function () {
 
       var addressData = {
         mnemonic: "grocery penalty actual chapter state law mention apple jar any artwork burger leopard dry artist",
         passphrase: "",
-        currency: "ltctest",
+        currency: "btltest",
         purpose: 44,
         account: 0,
         change: 0,
@@ -41,15 +41,15 @@ describe('LTC Address', function () {
       var addresses = HDWJS.hdWallet.generateAddresses(addressData);
       assert.equal(addresses.status, true);
       var address = addresses.data[0];
-      assert.equal(address.path, "m/44'/2'/0'/0/0");
-      assert.equal(address.address, "n1Nj6y5YCFWncw5bc7UXK5zfvdxxRXh3o5");
-      assert.equal(address.pubkey, "0349daf045ae5134a0bfc3adb3b3c882ce4d94a2c8c6773422ab213980d12312b8");
-      assert.equal(address.privkey, "TAhYmLd3STdid68HFCMe9aTVtqH4iZEAcGZDPTfjq3Asf6E7VnAp");
+      assert.equal(address.path, "m/44'/999994'/0'/0/0");
+      assert.equal(address.address, "Lgt8itxtEK7yNXLtN7ioyVatGNMrSQzXzV");
+      assert.equal(address.pubkey, "0221a40ea5a80ccb1b9f6853d9cb390d2955337c1678da2a3dea9591a87284cd36");
+      assert.equal(address.privkey, "L2e85EDo7cthqfTm8zQD7eLTw755rVcequhsEcYEiRTuvpc6Ys44");
 
       var addressData2 = {
         mnemonic: "grocery penalty actual chapter state law mention apple jar any artwork burger leopard dry artist",
         passphrase: "",
-        currency: "ltctest",
+        currency: "btltest",
         purpose: 44,
         account: 0,
         change: 1,
@@ -59,18 +59,18 @@ describe('LTC Address', function () {
       var addresses2 = HDWJS.hdWallet.generateAddresses(addressData2);
       assert.equal(addresses2.status, true);
       var address2 = addresses2.data[0];
-      assert.equal(address2.path, "m/44'/2'/0'/1/0");
-      assert.equal(address2.address, "n1fB4PDrLZr2WcFf4Kxes9FURFsmFmyQjt");
-      assert.equal(address2.pubkey, "03ba5dae0a13e9ce6872ded767c866322a6b71bc4b797996d6156e4f85295cbe71");
-      assert.equal(address2.privkey, "T7grnLunBCZpi54zTCcYKcEyDyUueD3FNoHc5XA9a2k3cWpZ1QU8");
+      assert.equal(address2.path, "m/44'/999994'/0'/1/0");
+      assert.equal(address2.address, "LcvvxiWBbHSCftnZrRZ6S5wbyrw31W7nH8");
+      assert.equal(address2.pubkey, "035239eaeb9314f67152cebd60c6eaec01af872cb2237104a58afdfd6bdbf39490");
+      assert.equal(address2.privkey, "L4r8uFiCe2YyNtAE9iRgnGSe5NP33PjLLW16XxtHZzaLa8p2Dh1V");
 
     });
 
-    it('should generate ltc testnet BIP44 address 2', function () {
+    it('should generate btl testnet BIP44 address 2', function () {
       var addressData = {
         mnemonic: "egg,sudden,advance,apple,salmon,mad,crowd,ginger,essence,fork,public,funny",
         passphrase: "",
-        currency: "ltc",
+        currency: "btl",
         purpose: 44,
         account: 0,
         change: 0,
@@ -81,20 +81,20 @@ describe('LTC Address', function () {
       console.log(addresses)
       assert.equal(addresses.status, true);
       var address = addresses.data[0];
-      assert.equal(address.path, "m/44'/2'/0'/0/0");
-      assert.equal(address.address, "LPmyRMdS8JtDLopPPnxWkD2VZiTwQRaDwP");
-      assert.equal(address.pubkey, "0330188ccdc6b8a37b15ee8b06150aa7761fa598ced353522f73258986c2e90d72");
-      assert.equal(address.privkey, "T7Ddzu684pujHewZ1vRfLmex6Rg6ZE8WSfCYKdHRQooWv5kRFUmA");
+      assert.equal(address.path, "m/44'/999994'/0'/0/0");
+      assert.equal(address.address, "LVkTFsWh9fk1esZ4nk4f7hH47P84NFk8Jn");
+      assert.equal(address.pubkey, "03b75f0e980005f8ace5fb4f43e6eaed5c948be4dcfcf929825c36107062bc2b61");
+      assert.equal(address.privkey, "L28nmxfzMSfAt4b49v15iNa18AwP7cT3eZieiARkcGgNyWGMBMp5");
     });
 
   });
 
-  describe('#getXpubKeyByMnemonic() ok ltc', function () {
+  describe('#getXpubKeyByMnemonic() ok btl', function () {
 
-    it('should generate ltc BIP32 Extended Public Key by mnemonic for mainnet', function () {
+    it('should generate btl BIP32 Extended Public Key by mnemonic for mainnet', function () {
       let mnemonic = "grocery penalty actual chapter state law mention apple jar any artwork burger leopard dry artist";
-      let currency = 'ltc';
-      let xpubKey = 'Ltub2ZBzLR9yAtqMwiVEVBsUeJyA4AJqzKbNhRzoXhNNtdFRHRuaKsSrxkYmb4QNJyGpZEupDF2KZU2TNUKhjDcnbcMhoxfLFiUZKzhbV1gPSGk';
+      let currency = 'btl';
+      let xpubKey = 'xpub6CWcKBKHRkt31fghSvMtf1Ky5bqnA9RuVGzKKcYNockGX24WcEpKS1WWn3ek1ghe8HsS4Y5mer9Hy6cFni9ZQSzYucR9P7HxFGASk1nJfCc';
 
       var addressData = {
         mnemonic: mnemonic,
@@ -109,10 +109,10 @@ describe('LTC Address', function () {
       var addresses1 = HDWJS.hdWallet.generateAddresses(addressData);
       assert.equal(addresses1.status, true);
       var address1 = addresses1.data[0];
-      assert.equal(address1.path, "m/44'/2'/0'/0/0");
-      assert.equal(address1.address, "Lf5j58JPTtKb6dJ94gVSmBr7GrjXhraaqG");
-      assert.equal(address1.pubkey, "0349daf045ae5134a0bfc3adb3b3c882ce4d94a2c8c6773422ab213980d12312b8");
-      assert.equal(address1.privkey, "TAhYmLd3STdid68HFCMe9aTVtqH4iZEAcGZDPTfjq3Asf6E7VnAp");
+      assert.equal(address1.path, "m/44'/999994'/0'/0/0");
+      assert.equal(address1.address, "Lgt8itxtEK7yNXLtN7ioyVatGNMrSQzXzV");
+      assert.equal(address1.pubkey, "0221a40ea5a80ccb1b9f6853d9cb390d2955337c1678da2a3dea9591a87284cd36");
+      assert.equal(address1.privkey, "L2e85EDo7cthqfTm8zQD7eLTw755rVcequhsEcYEiRTuvpc6Ys44");
 
       var mnemonicData = {
         mnemonic: mnemonic,
@@ -134,15 +134,15 @@ describe('LTC Address', function () {
       var addresses2 = HDWJS.hdWallet.generateAddressesByXpubKey(xpubKeyData);
       assert.equal(addresses2.status, true);
       var address21 = addresses2.data[0];
-      assert.equal(address21, "Lf5j58JPTtKb6dJ94gVSmBr7GrjXhraaqG");
+      assert.equal(address21, "Lgt8itxtEK7yNXLtN7ioyVatGNMrSQzXzV");
       var address22 = addresses2.data[1];
-      assert.equal(address22, "LT33gSpGPUWTzMUBmuqUHeYYz67RrdngPi");
+      assert.equal(address22, "LQ2iNxCa1j3v9LA3PMkgsDtQHbNi99Ca4h");
     });
 
-    it('should generate ltc BIP32 Extended Public Key by mnemonic for testnet', function () {
+    it('should generate btl BIP32 Extended Public Key by mnemonic for testnet', function () {
       let mnemonic = "grocery penalty actual chapter state law mention apple jar any artwork burger leopard dry artist";
-      let currency = 'ltctest';
-      let xpubKey = 'ttub4e7kLr7wei5MUDfgP2usGrHsY9HiNJrGnwzg6CN3Au4B2x3GL5DXE5Hovo9zjtdNBFfUazC7tt7oSJztTsMw2n2F3sRtwgjyLLsEd6Y6kx6';
+      let currency = 'btltest';
+      let xpubKey = 'xpub6CWcKBKHRkt31fghSvMtf1Ky5bqnA9RuVGzKKcYNockGX24WcEpKS1WWn3ek1ghe8HsS4Y5mer9Hy6cFni9ZQSzYucR9P7HxFGASk1nJfCc';
 
       var addressData = {
         mnemonic: mnemonic,
@@ -157,10 +157,10 @@ describe('LTC Address', function () {
       var addresses1 = HDWJS.hdWallet.generateAddresses(addressData);
       assert.equal(addresses1.status, true);
       var address1 = addresses1.data[0];
-      assert.equal(address1.path, "m/44'/2'/0'/0/0");
-      assert.equal(address1.address, "n1Nj6y5YCFWncw5bc7UXK5zfvdxxRXh3o5");
-      assert.equal(address1.pubkey, "0349daf045ae5134a0bfc3adb3b3c882ce4d94a2c8c6773422ab213980d12312b8");
-      assert.equal(address1.privkey, "TAhYmLd3STdid68HFCMe9aTVtqH4iZEAcGZDPTfjq3Asf6E7VnAp");
+      assert.equal(address1.path, "m/44'/999994'/0'/0/0");
+      assert.equal(address1.address, "Lgt8itxtEK7yNXLtN7ioyVatGNMrSQzXzV");
+      assert.equal(address1.pubkey, "0221a40ea5a80ccb1b9f6853d9cb390d2955337c1678da2a3dea9591a87284cd36");
+      assert.equal(address1.privkey, "L2e85EDo7cthqfTm8zQD7eLTw755rVcequhsEcYEiRTuvpc6Ys44");
 
       var mnemonicData = {
         mnemonic: mnemonic,
@@ -182,22 +182,22 @@ describe('LTC Address', function () {
       var addresses2 = HDWJS.hdWallet.generateAddressesByXpubKey(xpubKeyData);
       assert.equal(addresses2.status, true);
       var address21 = addresses2.data[0];
-      assert.equal(address21, "n1Nj6y5YCFWncw5bc7UXK5zfvdxxRXh3o5");
+      assert.equal(address21, "Lgt8itxtEK7yNXLtN7ioyVatGNMrSQzXzV");
       var address22 = addresses2.data[1];
-      assert.equal(address22, "moL3iHbR7qhfWfFeKLpYqYh7dsLrgFoVe9");
+      assert.equal(address22, "LQ2iNxCa1j3v9LA3PMkgsDtQHbNi99Ca4h");
     });
 
   });
 
-  describe('#validateAddressByXpubKey() ltc ok', function () {
+  describe('#validateAddressByXpubKey() btl ok', function () {
 
-    it('ltc address should be valid', function () {
+    it('btl address should be valid', function () {
       var data = {
-        xpubKey: "Ltub2ZBzLR9yAtqMwiVEVBsUeJyA4AJqzKbNhRzoXhNNtdFRHRuaKsSrxkYmb4QNJyGpZEupDF2KZU2TNUKhjDcnbcMhoxfLFiUZKzhbV1gPSGk",
-        currency: 'ltc',
+        xpubKey: "xpub6CWcKBKHRkt31fghSvMtf1Ky5bqnA9RuVGzKKcYNockGX24WcEpKS1WWn3ek1ghe8HsS4Y5mer9Hy6cFni9ZQSzYucR9P7HxFGASk1nJfCc",
+        currency: 'btl',
         change: 0,
         index: 0,
-        address: 'Lf5j58JPTtKb6dJ94gVSmBr7GrjXhraaqG'
+        address: 'Lgt8itxtEK7yNXLtN7ioyVatGNMrSQzXzV'
       };
       var validate = HDWJS.hdWallet.validateAddressByXpubKey(data);
       assert.equal(validate.status, true);
@@ -206,26 +206,26 @@ describe('LTC Address', function () {
 
   });
 
-  describe('#generateAddressByWIF() ltc ok', function () {
+  describe('#generateAddressByWIF() btl ok', function () {
 
-    it('can generate ltc address', function () {
+    it('can generate btl address', function () {
       var data = {
-        wif: "TAhYmLd3STdid68HFCMe9aTVtqH4iZEAcGZDPTfjq3Asf6E7VnAp",
-        currency: 'ltc',
+        wif: "L2e85EDo7cthqfTm8zQD7eLTw755rVcequhsEcYEiRTuvpc6Ys44",
+        currency: 'btl',
       };
       var address = HDWJS.hdWallet.generateAddressByWIF(data);
       console.log(address);
       assert.equal(address.status, true);
-      assert.equal(address.data, "Lf5j58JPTtKb6dJ94gVSmBr7GrjXhraaqG");
+      assert.equal(address.data, "Lgt8itxtEK7yNXLtN7ioyVatGNMrSQzXzV");
     });
 
   });
 
-  describe('#validateAddress() ltc ok', function () {
+  describe('#validateAddress() btl ok', function () {
 
-    it('ltc address should be valid', function () {
+    it('btl address should be valid', function () {
       var data = {
-        currency: 'ltc',
+        currency: 'btl',
         address: 'Lf5j58JPTtKb6dJ94gVSmBr7GrjXhraaqG'
       };
       var validate = HDWJS.hdWallet.validateAddress(data);
@@ -236,12 +236,12 @@ describe('LTC Address', function () {
 
   });
 
-  describe('#validateAddress() ltc ok', function () {
+  describe('#validateAddress() btl ok', function () {
 
-    it('ltc address should be valid', function () {
+    it('btl address should be valid', function () {
       let mnemonic = "grocery penalty actual chapter state law mention apple jar any artwork burger leopard dry artist";
-      let currency1 = 'ltc';
-      let xpubKey1 = 'Ltub2ZBzLR9yAtqMwiVEVBsUeJyA4AJqzKbNhRzoXhNNtdFRHRuaKsSrxkYmb4QNJyGpZEupDF2KZU2TNUKhjDcnbcMhoxfLFiUZKzhbV1gPSGk';
+      let currency1 = 'btl';
+      let xpubKey1 = 'xpub6CWcKBKHRkt31fghSvMtf1Ky5bqnA9RuVGzKKcYNockGX24WcEpKS1WWn3ek1ghe8HsS4Y5mer9Hy6cFni9ZQSzYucR9P7HxFGASk1nJfCc';
       var mnemonicData1 = {
         mnemonic: mnemonic,
         currency: currency1,
@@ -251,8 +251,8 @@ describe('LTC Address', function () {
       var xpubKeyResult1 = HDWJS.hdWallet.getXpubKeyByMnemonic(mnemonicData1);
       assert.equal(xpubKeyResult1.status, true);
       assert.equal(xpubKeyResult1.data, xpubKey1);
-      let currency2 = 'ltc';
-      let xpubKey2 = 'Ltub2ZBzLR9yAtqMwiVEVBsUeJyA4AJqzKbNhRzoXhNNtdFRHRuaKsSrxkYmb4QNJyGpZEupDF2KZU2TNUKhjDcnbcMhoxfLFiUZKzhbV1gPSGk';
+      let currency2 = 'btl';
+      let xpubKey2 = 'xpub6CWcKBKHRkt31fghSvMtf1Ky5bqnA9RuVGzKKcYNockGX24WcEpKS1WWn3ek1ghe8HsS4Y5mer9Hy6cFni9ZQSzYucR9P7HxFGASk1nJfCc';
       let mnemonicData2 = {
         mnemonic: mnemonic,
         currency: currency2,
