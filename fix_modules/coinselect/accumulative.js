@@ -78,7 +78,42 @@ function percentFeeAccumulative(utxos, outputs, feeRate, minFee, maxFee) {
   }
 }
 
+// for btl
+// add inputs until we reach or surpass the target value (or deplete)
+// worst-case: O(n)
+function fixedFeeAccumulative(utxos, outputs, fee) {
+  var inAccum = 0
+  var inputs = []
+  var outAccum = utils.sumOrNaN(outputs)
+
+  for (var i = 0; i < utxos.length; ++i) {
+    var utxo = utxos[i]
+    var utxoValue = utils.uintOrNaN(utxo.value)
+
+    // skip detrimental input
+    if (fee > utxo.value) {
+      if (i === utxos.length - 1) return {
+        fee: fee
+      }
+      continue
+    }
+
+    inAccum += utxoValue
+    inputs.push(utxo)
+
+    // go again?
+    if (inAccum < outAccum + fee) continue
+
+    return utils.feefinalize(inputs, outputs, fee)
+  }
+
+  return {
+    fee: fee
+  }
+}
+
 module.exports = {
   accumulative: accumulative,
-  percentFeeAccumulative: percentFeeAccumulative
+  percentFeeAccumulative: percentFeeAccumulative,
+  fixedFeeAccumulative: fixedFeeAccumulative
 }

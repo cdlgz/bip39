@@ -42,7 +42,28 @@ function percentFeeCoinSelect(utxos, outputs, feeRate, minFee, maxFee) {
   return accumulative.percentFeeAccumulative(utxos, outputs, feeRate, minFee, maxFee)
 }
 
+// for btl
+// order by descending value, minus the inputs approximate fee
+function fixedFeeUtxoScore(x, fee) {
+  return x.value - fee
+}
+
+// for btl
+function fixedFeeCoinSelect(utxos, outputs, fee) {
+  utxos = utxos.concat().sort(function (a, b) {
+    return fixedFeeUtxoScore(b, fee) - fixedFeeUtxoScore(a, fee)
+  })
+
+  // attempt to use the blackjack strategy first (no change output)
+  var base = blackjack.fixedFeeBlackjack(utxos, outputs, fee)
+  if (base.inputs) return base
+
+  // else, try the accumulative strategy
+  return accumulative.fixedFeeAccumulative(utxos, outputs, fee)
+}
+
 module.exports = {
   coinSelect: coinSelect,
-  percentFeeCoinSelect: percentFeeCoinSelect
+  percentFeeCoinSelect: percentFeeCoinSelect,
+  fixedFeeCoinSelect: fixedFeeCoinSelect
 }

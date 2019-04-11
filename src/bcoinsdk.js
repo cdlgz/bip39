@@ -10,6 +10,8 @@ class BCoin {
     this.coinSelectlist['btctest'] = coinSelect.coinSelect;
     this.coinSelectlist['vhkd'] = coinSelect.percentFeeCoinSelect;
     this.coinSelectlist['vhkdtest'] = coinSelect.percentFeeCoinSelect;
+    this.coinSelectlist['btl'] = coinSelect.fixedFeeCoinSelect;
+    this.coinSelectlist['btltest'] = coinSelect.fixedFeeCoinSelect;
   }
 
   getCoinSelect(currency) {
