@@ -34,35 +34,23 @@ describe('BTL Address', function () {
         currency: "btltest",
         purpose: 44,
         account: 0,
-        change: 0,
+        change: 1,
         start: 0,
-        end: 0
+        end: 10
       };
       var addresses = HDWJS.hdWallet.generateAddresses(addressData);
       assert.equal(addresses.status, true);
-      var address = addresses.data[0];
-      assert.equal(address.path, "m/44'/999994'/0'/0/0");
-      assert.equal(address.address, "Lgt8itxtEK7yNXLtN7ioyVatGNMrSQzXzV");
-      assert.equal(address.pubkey, "0221a40ea5a80ccb1b9f6853d9cb390d2955337c1678da2a3dea9591a87284cd36");
-      assert.equal(address.privkey, "L2e85EDo7cthqfTm8zQD7eLTw755rVcequhsEcYEiRTuvpc6Ys44");
+      var address1 = addresses.data[0];
+      assert.equal(address1.path, "m/44'/999994'/0'/1/0");
+      assert.equal(address1.address, "LcvvxiWBbHSCftnZrRZ6S5wbyrw31W7nH8");
+      assert.equal(address1.pubkey, "035239eaeb9314f67152cebd60c6eaec01af872cb2237104a58afdfd6bdbf39490");
+      assert.equal(address1.privkey, "L4r8uFiCe2YyNtAE9iRgnGSe5NP33PjLLW16XxtHZzaLa8p2Dh1V");
 
-      var addressData2 = {
-        mnemonic: "grocery penalty actual chapter state law mention apple jar any artwork burger leopard dry artist",
-        passphrase: "",
-        currency: "btltest",
-        purpose: 44,
-        account: 0,
-        change: 1,
-        start: 0,
-        end: 0
-      };
-      var addresses2 = HDWJS.hdWallet.generateAddresses(addressData2);
-      assert.equal(addresses2.status, true);
-      var address2 = addresses2.data[0];
-      assert.equal(address2.path, "m/44'/999994'/0'/1/0");
-      assert.equal(address2.address, "LcvvxiWBbHSCftnZrRZ6S5wbyrw31W7nH8");
-      assert.equal(address2.pubkey, "035239eaeb9314f67152cebd60c6eaec01af872cb2237104a58afdfd6bdbf39490");
-      assert.equal(address2.privkey, "L4r8uFiCe2YyNtAE9iRgnGSe5NP33PjLLW16XxtHZzaLa8p2Dh1V");
+      var address2 = addresses.data[1];
+      assert.equal(address2.path, "m/44'/999994'/0'/1/1");
+      assert.equal(address2.address, "LP9z5jpGeZnpcvZnPto8LAdXYXY3EfrWBu");
+      assert.equal(address2.pubkey, "024ad20b54d4d42f431295a6e1c43cc6e2cc75e0ec4cf9dde7a419396d5d086232");
+      assert.equal(address2.privkey, "KxgNZBjn7VdQxdoPiKL2dRAUynEz1ksLRAtVrdDc5xwsMWU3CvRm");
 
     });
 
