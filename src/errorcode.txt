@@ -21,3 +21,6 @@
 2020=>privateKey is required
 2021=>gas limit is required
 2022=>gas price is required
+2023=>txHex is required
+2024=>key is required
+2025=>redeemScript is required
