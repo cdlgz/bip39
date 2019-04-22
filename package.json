@@ -23,6 +23,7 @@
    },
    "homepage": "https://github.com/eosaction/bip39#readme",
    "dependencies": {
+      "bchaddrjs": "^0.3.2",
       "bignumber.js": "^8.0.2",
       "bip39": "^2.5.0",
       "bitcoinjs-lib": "^3.3.2",

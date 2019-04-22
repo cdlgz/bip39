@@ -2,6 +2,7 @@ const CoinData = require("./coindata");
 const bitcoin = require('bitcoinjs-lib')
 const basex = require('base-x')
 const ethUtil = require('ethereumjs-util');
+const bchaddr = require('bchaddrjs');
 
 function parseIntNoNaN(val, defaultVal) {
   let v = parseInt(val);
@@ -116,6 +117,8 @@ function generateAddresses(seedHex, purpose, currency, account, change, start, e
     // get privkey
     let hasPrivkey = !key.isNeutered();
     let privkey = "NA";
+    let cashAddress = null;
+    let bitpayAddress = null;
     if (hasPrivkey) {
       privkey = keyPair.toWIF();
     }
@@ -132,18 +135,14 @@ function generateAddresses(seedHex, purpose, currency, account, change, start, e
       pubkey = ethUtil.addHexPrefix(pubkey);
     }
     // Ripple values are different
-    if (currency == "xrp") {
+    if (currency == "xrp" || currency == "xrptest") {
       privkey = convertRipplePriv(privkey);
       address = convertRippleAdrr(address);
     }
     // Bitcoin Cash address format may lety
-    if (currency == "bch") {
-      let bchAddrType = "cashaddr";
-      if (bchAddrType == "cashaddr") {
-        address = bchaddr.toCashAddress(address);
-      } else if (bchAddrType == "bitpay") {
-        address = bchaddr.toBitpayAddress(address);
-      }
+    if (currency == "bch" || currency == "bchtest") {
+      cashAddress = bchaddr.toCashAddress(address);
+      bitpayAddress = bchaddr.toBitpayAddress(address);
     }
     // Segwit addresses are different
     if (isSegwit(purpose)) {
@@ -162,12 +161,19 @@ function generateAddresses(seedHex, purpose, currency, account, change, start, e
         address = bitcoin.address.fromOutputScript(scriptpubkey, coinData.network)
       }
     }
-    addresses.push({
+    let item = {
       path,
       address,
       pubkey,
       privkey
-    });
+    }
+    if(cashAddress){
+      item.cashAddress = cashAddress;
+    }
+    if(bitpayAddress){
+      item.bitpayAddress = bitpayAddress;
+    }
+    addresses.push(item);
   }
 
   return addresses;
