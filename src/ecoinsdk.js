@@ -5,6 +5,7 @@ const web3 = new Web3();
 const EthereumTx = require('ethereumjs-tx')
 const Wallet = require('ethereumjs-wallet');
 var BigNumber = require('bignumber.js');
+const ethCrypto = require('eth-crypto');
 
 class ECoin {
   constructor() {}
@@ -151,6 +152,23 @@ class ECoin {
     tx.sign(privateKey);
     const serializedTx = '0x'.concat(tx.serialize().toString('hex'));
     return this.result(true, serializedTx, 0);
+  }
+
+  signMultisigTransaction(txData){
+    let defaultData = {
+      hash: '',
+      key: ''
+    };
+    txData = Object.assign(defaultData, txData || {});
+    
+    if (this.isEmpty(txData.hash))
+      return this.result(false, false, 2023);
+
+    if (this.isEmpty(txData.key))
+      return this.result(false, false, 2024);
+
+    let signature = ethCrypto.sign(txData.key, txData.hash);
+    return this.result(true, signature, 0);
   }
 
 }
