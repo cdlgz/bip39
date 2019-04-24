@@ -626,6 +626,34 @@ console.log(txHex);
 }
 ```
 
+17 signMultisigTransaction - ETH
+
+```javascript
+var txData = {
+  hash: '0x0ef3b7b66d682fe7d50c5b4dc721c89c083b64aced74d1a9857f7443241dd840',
+  key: '2309cdb18048a6c6ddf16028c44441f5949151c5cd5c3b4009297a63c773f415'
+};
+var txHex = ecoin.signMultisigTransaction(txData);
+console.log(txHex);
+```
+
+参数说明：
+
+  currency: 币种，eth/ethtest
+
+  hash: trnasaction hex string.
+
+  key: private key to sign
+
+返回结果：
+
+``` 
+{
+  status: true,
+  data:'0xf897eb80a246902904059eda59cc6e0d725cd0630d51603b203b09f36d76dee7239e63fdecd8efdd30b8fbc554b2424238990ddf3c681d04a348e0a96fb4969f1b',
+  code: 0 
+}
+```
 
 # License
 
