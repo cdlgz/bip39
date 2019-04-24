@@ -21,13 +21,5 @@ module.exports = {
       })
     ]
   },
-  devtool: "source-map",
-  module: {
-    rules: [
-      {
-        test: /\.node$/,
-        use: 'node-loader'
-      }
-    ]
-  }
+  devtool: "source-map"
 }

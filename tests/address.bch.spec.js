@@ -44,11 +44,11 @@ describe('BCH Address', function () {
       var address = addresses.data[0];
       console.log(address);
       assert.equal(address.path, "m/44'/145'/0'/0/0");
-      assert.equal(address.address, "1Aayj5afM1BKvrb6U7rqAuefc2r5wFq5sb");
-      assert.equal(address.cashAddress, "bitcoincash:qp5jvd06n6hra7phet8l3y5wwa7amry2e5e8uca6w0");
-      assert.equal(address.bitpayAddress, "CS3sJ7vjE49rpzVX9sBkkRGhEA4Vu7KBtQ");
+      assert.equal(address.address, "mq6w28feA2cahy4iBgqCzprzU2SnqUixqF");
+      assert.equal(address.cashAddress, "bchtest:qp5jvd06n6hra7phet8l3y5wwa7amry2e5a4clldfn");
+      assert.equal(address.bitpayAddress, "mq6w28feA2cahy4iBgqCzprzU2SnqUixqF");
       assert.equal(address.pubkey, "0296fb88425e1fc06456bddb5db9af0639b46ecea4a7ace655164a7128dd546b26");
-      assert.equal(address.privkey, "L4NSNY5BwWhoCy3FRkqmZRSuZWiKKDkfn5wLEHM7zgAUmicDS5bh");
+      assert.equal(address.privkey, "cUjRqT53NaQ4NQWWpAetvjwyBk1iyfrMr85oLhodVnpV2ThCY8i9");
     });
 
   });
@@ -106,7 +106,7 @@ describe('BCH Address', function () {
     it('should generate bch BIP32 Extended Public Key by mnemonic for testnet', function () {
       let mnemonic = "grocery penalty actual chapter state law mention apple jar any artwork burger leopard dry artist";
       let currency = 'bchtest';
-      let xpubKey = 'xpub6Bm3wFt45Br5ix3FRHZbzg6Ux3MZYyMdCajSwUg3sDEvJo8zCHouuuMCxi4tAerzzmmTFpfi9GA7PbvY8jFhMPpjBTN6wauHiTNWcvowHH6';
+      let xpubKey = 'tpubDC8gTVhjnToXzkE6sUYhCbRrHATDYMrgkDKkJ2jCD7zp45ohGWf14M23Ck9fh9pEngJMsQBagMzA5nR9Xb6wEqH2F47Qd7ZXJQxvNvB7hWC';
 
       var addressData = {
         mnemonic: mnemonic,
@@ -122,9 +122,9 @@ describe('BCH Address', function () {
       assert.equal(addresses1.status, true);
       var address1 = addresses1.data[0];
       assert.equal(address1.path, "m/44'/145'/0'/0/0");
-      assert.equal(address1.address, "1Aayj5afM1BKvrb6U7rqAuefc2r5wFq5sb");
+      assert.equal(address1.address, "mq6w28feA2cahy4iBgqCzprzU2SnqUixqF");
       assert.equal(address1.pubkey, "0296fb88425e1fc06456bddb5db9af0639b46ecea4a7ace655164a7128dd546b26");
-      assert.equal(address1.privkey, "L4NSNY5BwWhoCy3FRkqmZRSuZWiKKDkfn5wLEHM7zgAUmicDS5bh");
+      assert.equal(address1.privkey, "cUjRqT53NaQ4NQWWpAetvjwyBk1iyfrMr85oLhodVnpV2ThCY8i9");
 
       var mnemonicData = {
         mnemonic: mnemonic,
@@ -146,9 +146,9 @@ describe('BCH Address', function () {
       var addresses2 = HDWJS.hdWallet.generateAddressesByXpubKey(xpubKeyData);
       assert.equal(addresses2.status, true);
       var address21 = addresses2.data[0];
-      assert.equal(address21, "1Aayj5afM1BKvrb6U7rqAuefc2r5wFq5sb");
+      assert.equal(address21, "mq6w28feA2cahy4iBgqCzprzU2SnqUixqF");
       var address22 = addresses2.data[1];
-      assert.equal(address22, "1CFaTRnFb5r21S555Juhatc9kJFssNVdcF");
+      assert.equal(address22, "mrmXkUsEQ7HGnYYgnst5QopUcHrakkWgEg");
     });
 
   });
@@ -170,11 +170,11 @@ describe('BCH Address', function () {
 
     it('bch address should be valid', function () {
       var data = {
-        xpubKey: "xpub6Bm3wFt45Br5ix3FRHZbzg6Ux3MZYyMdCajSwUg3sDEvJo8zCHouuuMCxi4tAerzzmmTFpfi9GA7PbvY8jFhMPpjBTN6wauHiTNWcvowHH6",
+        xpubKey: "tpubDC8gTVhjnToXzkE6sUYhCbRrHATDYMrgkDKkJ2jCD7zp45ohGWf14M23Ck9fh9pEngJMsQBagMzA5nR9Xb6wEqH2F47Qd7ZXJQxvNvB7hWC",
         currency: 'bchtest',
         change: 0,
         index: 0,
-        address: '1Aayj5afM1BKvrb6U7rqAuefc2r5wFq5sb'
+        address: 'mq6w28feA2cahy4iBgqCzprzU2SnqUixqF'
       };
       var validate = HDWJS.hdWallet.validateAddressByXpubKey(data);
       assert.equal(validate.status, true);
@@ -198,13 +198,13 @@ describe('BCH Address', function () {
 
     it('can generate bch address', function () {
       var data = {
-        wif: "L4NSNY5BwWhoCy3FRkqmZRSuZWiKKDkfn5wLEHM7zgAUmicDS5bh",
+        wif: "cUjRqT53NaQ4NQWWpAetvjwyBk1iyfrMr85oLhodVnpV2ThCY8i9",
         currency: 'bchtest',
       };
       var address = HDWJS.hdWallet.generateAddressByWIF(data);
       console.log(address);
       assert.equal(address.status, true);
-      assert.equal(address.data, "1Aayj5afM1BKvrb6U7rqAuefc2r5wFq5sb");
+      assert.equal(address.data, "mq6w28feA2cahy4iBgqCzprzU2SnqUixqF");
     });
 
   });
@@ -225,7 +225,7 @@ describe('BCH Address', function () {
     it('bch address should be valid', function () {
       var data = {
         currency: 'bchtest',
-        address: '1Aayj5afM1BKvrb6U7rqAuefc2r5wFq5sb'
+        address: 'mq6w28feA2cahy4iBgqCzprzU2SnqUixqF'
       };
       var validate = HDWJS.hdWallet.validateAddress(data);
       console.log(validate);
