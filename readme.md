@@ -655,6 +655,44 @@ console.log(txHex);
 }
 ```
 
+18 toCashAddressForBCH - BCH
+
+```javascript
+var cashAddress = bcoin.toCashAddressForBCH('mq6w28feA2cahy4iBgqCzprzU2SnqUixqF');
+console.log(cashAddress);
+```
+
+参数说明： 任意格式的BCH地址
+
+返回结果：
+
+``` 
+{
+  status: true,
+  data:'bitcoincash:qp5jvd06n6hra7phet8l3y5wwa7amry2e5e8uca6w0',
+  code: 0 
+}
+```
+
+19 toLegacyAddressForBCH - BCH
+
+```javascript
+var cashAddress = bcoin.toLegacyAddressForBCH('bitcoincash:qp5jvd06n6hra7phet8l3y5wwa7amry2e5e8uca6w0');
+console.log(cashAddress);
+```
+
+参数说明： 任意格式的BCH地址
+
+返回结果：
+
+``` 
+{
+  status: true,
+  data:'mq6w28feA2cahy4iBgqCzprzU2SnqUixqF',
+  code: 0 
+}
+```
+
 # License
 
 This BIP39 tool is released under the terms of the MIT license. See LICENSE for

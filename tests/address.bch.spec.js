@@ -1,5 +1,6 @@
 var assert = require('assert');
 var HDWJS = require('../src/hdwsdk');
+var BCOINJS = require('../src/bcoinsdk');
 
 describe('BCH Address', function () {
 
@@ -49,6 +50,28 @@ describe('BCH Address', function () {
       assert.equal(address.bitpayAddress, "mq6w28feA2cahy4iBgqCzprzU2SnqUixqF");
       assert.equal(address.pubkey, "0296fb88425e1fc06456bddb5db9af0639b46ecea4a7ace655164a7128dd546b26");
       assert.equal(address.privkey, "cUjRqT53NaQ4NQWWpAetvjwyBk1iyfrMr85oLhodVnpV2ThCY8i9");
+    });
+
+    it('should convert bch maintest addresses ', function () {
+      let cashAddress1 = BCOINJS.bcoin.toCashAddressForBCH("1Aayj5afM1BKvrb6U7rqAuefc2r5wFq5sb");
+      assert.equal(cashAddress1.data, "bitcoincash:qp5jvd06n6hra7phet8l3y5wwa7amry2e5e8uca6w0");
+      let cashAddress2 = BCOINJS.bcoin.toCashAddressForBCH("bitcoincash:qp5jvd06n6hra7phet8l3y5wwa7amry2e5e8uca6w0");
+      assert.equal(cashAddress2.data, "bitcoincash:qp5jvd06n6hra7phet8l3y5wwa7amry2e5e8uca6w0");
+      let legacyAddress1 = BCOINJS.bcoin.toLegacyAddressForBCH("bitcoincash:qp5jvd06n6hra7phet8l3y5wwa7amry2e5e8uca6w0");
+      assert.equal(legacyAddress1.data, "1Aayj5afM1BKvrb6U7rqAuefc2r5wFq5sb");
+      let legacyAddress2 = BCOINJS.bcoin.toLegacyAddressForBCH("1Aayj5afM1BKvrb6U7rqAuefc2r5wFq5sb");
+      assert.equal(legacyAddress2.data, "1Aayj5afM1BKvrb6U7rqAuefc2r5wFq5sb");
+    });
+
+    it('should convert bch testnet addresses ', function () {
+      let cashAddress1 = BCOINJS.bcoin.toCashAddressForBCH("mq6w28feA2cahy4iBgqCzprzU2SnqUixqF");
+      assert.equal(cashAddress1.data, "bchtest:qp5jvd06n6hra7phet8l3y5wwa7amry2e5a4clldfn");
+      let cashAddress2 = BCOINJS.bcoin.toCashAddressForBCH("bchtest:qp5jvd06n6hra7phet8l3y5wwa7amry2e5a4clldfn");
+      assert.equal(cashAddress2.data, "bchtest:qp5jvd06n6hra7phet8l3y5wwa7amry2e5a4clldfn");
+      let legacyAddress1 = BCOINJS.bcoin.toLegacyAddressForBCH("bchtest:qp5jvd06n6hra7phet8l3y5wwa7amry2e5a4clldfn");
+      assert.equal(legacyAddress1.data, "mq6w28feA2cahy4iBgqCzprzU2SnqUixqF");
+      let legacyAddress2 = BCOINJS.bcoin.toLegacyAddressForBCH("mq6w28feA2cahy4iBgqCzprzU2SnqUixqF");
+      assert.equal(legacyAddress2.data, "mq6w28feA2cahy4iBgqCzprzU2SnqUixqF");
     });
 
   });

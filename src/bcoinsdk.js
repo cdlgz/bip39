@@ -2,6 +2,7 @@ const CoinData = require("./coindata");
 const bitcoin = require('bitcoinjs-lib')
 let coinSelect = require('coinselect')
 let utils = require('coinselect/utils')
+const bchaddr = require('bchaddrjs');
 
 class BCoin {
   constructor() {
@@ -119,7 +120,7 @@ class BCoin {
     return this.result(false, null, 2015);
   }
 
-  signMultisigTransaction(txData){
+  signMultisigTransaction(txData) {
     let defaultData = {
       currency: '',
       txHex: '',
@@ -127,7 +128,7 @@ class BCoin {
       redeemScript: ''
     };
     txData = Object.assign(defaultData, txData || {});
-    
+
     if (this.isEmpty(txData.currency))
       return this.result(false, null, 2002);
 
@@ -141,14 +142,22 @@ class BCoin {
       return this.result(false, false, 2025);
 
     let coinDataX = CoinData[txData.currency];
-    let tx  = bitcoin.Transaction.fromHex(txData.txHex);
+    let tx = bitcoin.Transaction.fromHex(txData.txHex);
     let txb = bitcoin.TransactionBuilder.fromTransaction(tx, coinDataX.network);
-    txb.tx.ins.forEach(function(input, i) {
+    txb.tx.ins.forEach(function (input, i) {
       const keyPair = new bitcoin.ECPair.fromWIF(txData.key, coinDataX.network);
       txb.sign(i, keyPair, bitcoin.script.compile(new Buffer(txData.redeemScript, "hex")));
     });
     let rawSignedTransaction = txb.build().toHex();
     return this.result(true, rawSignedTransaction, 0);
+  }
+
+  toCashAddressForBCH(address) {
+    return this.result(true, bchaddr.toCashAddress(address), 0);
+  }
+
+  toLegacyAddressForBCH(address) {
+    return this.result(true, bchaddr.toLegacyAddress(address), 0);
   }
 }
 
