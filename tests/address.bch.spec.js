@@ -22,8 +22,8 @@ describe('BCH Address', function () {
       var address = addresses.data[0];
       console.log(address);
       assert.equal(address.path, "m/44'/145'/0'/0/0");
-      assert.equal(address.address, "1Aayj5afM1BKvrb6U7rqAuefc2r5wFq5sb");
-      assert.equal(address.cashAddress, "bitcoincash:qp5jvd06n6hra7phet8l3y5wwa7amry2e5e8uca6w0");
+      assert.equal(address.legacyAddress, "1Aayj5afM1BKvrb6U7rqAuefc2r5wFq5sb");
+      assert.equal(address.address, "bitcoincash:qp5jvd06n6hra7phet8l3y5wwa7amry2e5e8uca6w0");
       assert.equal(address.bitpayAddress, "CS3sJ7vjE49rpzVX9sBkkRGhEA4Vu7KBtQ");
       assert.equal(address.pubkey, "0296fb88425e1fc06456bddb5db9af0639b46ecea4a7ace655164a7128dd546b26");
       assert.equal(address.privkey, "L4NSNY5BwWhoCy3FRkqmZRSuZWiKKDkfn5wLEHM7zgAUmicDS5bh");
@@ -45,8 +45,8 @@ describe('BCH Address', function () {
       var address = addresses.data[0];
       console.log(address);
       assert.equal(address.path, "m/44'/145'/0'/0/0");
-      assert.equal(address.address, "mq6w28feA2cahy4iBgqCzprzU2SnqUixqF");
-      assert.equal(address.cashAddress, "bchtest:qp5jvd06n6hra7phet8l3y5wwa7amry2e5a4clldfn");
+      assert.equal(address.legacyAddress, "mq6w28feA2cahy4iBgqCzprzU2SnqUixqF");
+      assert.equal(address.address, "bchtest:qp5jvd06n6hra7phet8l3y5wwa7amry2e5a4clldfn");
       assert.equal(address.bitpayAddress, "mq6w28feA2cahy4iBgqCzprzU2SnqUixqF");
       assert.equal(address.pubkey, "0296fb88425e1fc06456bddb5db9af0639b46ecea4a7ace655164a7128dd546b26");
       assert.equal(address.privkey, "cUjRqT53NaQ4NQWWpAetvjwyBk1iyfrMr85oLhodVnpV2ThCY8i9");
@@ -97,7 +97,7 @@ describe('BCH Address', function () {
       assert.equal(addresses1.status, true);
       var address1 = addresses1.data[0];
       assert.equal(address1.path, "m/44'/145'/0'/0/0");
-      assert.equal(address1.address, "1Aayj5afM1BKvrb6U7rqAuefc2r5wFq5sb");
+      assert.equal(address1.legacyAddress, "1Aayj5afM1BKvrb6U7rqAuefc2r5wFq5sb");
       assert.equal(address1.pubkey, "0296fb88425e1fc06456bddb5db9af0639b46ecea4a7ace655164a7128dd546b26");
       assert.equal(address1.privkey, "L4NSNY5BwWhoCy3FRkqmZRSuZWiKKDkfn5wLEHM7zgAUmicDS5bh");
 
@@ -145,7 +145,7 @@ describe('BCH Address', function () {
       assert.equal(addresses1.status, true);
       var address1 = addresses1.data[0];
       assert.equal(address1.path, "m/44'/145'/0'/0/0");
-      assert.equal(address1.address, "mq6w28feA2cahy4iBgqCzprzU2SnqUixqF");
+      assert.equal(address1.legacyAddress, "mq6w28feA2cahy4iBgqCzprzU2SnqUixqF");
       assert.equal(address1.pubkey, "0296fb88425e1fc06456bddb5db9af0639b46ecea4a7ace655164a7128dd546b26");
       assert.equal(address1.privkey, "cUjRqT53NaQ4NQWWpAetvjwyBk1iyfrMr85oLhodVnpV2ThCY8i9");
 

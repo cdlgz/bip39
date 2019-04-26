@@ -121,7 +121,7 @@ function generateAddresses(seedHex, purpose, currency, account, change, start, e
     // get privkey
     let hasPrivkey = !key.isNeutered();
     let privkey = "NA";
-    let cashAddress = null;
+    let legacyAddress = null;
     let bitpayAddress = null;
     if (hasPrivkey) {
       privkey = keyPair.toWIF();
@@ -145,7 +145,8 @@ function generateAddresses(seedHex, purpose, currency, account, change, start, e
     }
     // Bitcoin Cash address format may lety
     if (isBCH(currency)) {
-      cashAddress = bchaddr.toCashAddress(address);
+      address = bchaddr.toCashAddress(address);
+      legacyAddress = bchaddr.toLegacyAddress(address);
       bitpayAddress = bchaddr.toBitpayAddress(address);
     }
     // Segwit addresses are different
@@ -171,8 +172,8 @@ function generateAddresses(seedHex, purpose, currency, account, change, start, e
       pubkey,
       privkey
     }
-    if (cashAddress) {
-      item.cashAddress = cashAddress;
+    if (legacyAddress) {
+      item.legacyAddress = legacyAddress;
     }
     if (bitpayAddress) {
       item.bitpayAddress = bitpayAddress;
