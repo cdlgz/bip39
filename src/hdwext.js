@@ -70,6 +70,10 @@ function isLikeEthereum(currency) {
   return list.includes(currency) || list.map(x => x.concat('test')).includes(currency);
 }
 
+function isBCH(currency) {
+  return currency == 'bch' || currency == 'bchtest';
+}
+
 function isSegwit(purpose) {
   return purpose == 49 || purpose == 84 || purpose == 141;
 }
@@ -140,7 +144,7 @@ function generateAddresses(seedHex, purpose, currency, account, change, start, e
       address = convertRippleAdrr(address);
     }
     // Bitcoin Cash address format may lety
-    if (currency == "bch" || currency == "bchtest") {
+    if (isBCH(currency)) {
       cashAddress = bchaddr.toCashAddress(address);
       bitpayAddress = bchaddr.toBitpayAddress(address);
     }
@@ -167,10 +171,10 @@ function generateAddresses(seedHex, purpose, currency, account, change, start, e
       pubkey,
       privkey
     }
-    if(cashAddress){
+    if (cashAddress) {
       item.cashAddress = cashAddress;
     }
-    if(bitpayAddress){
+    if (bitpayAddress) {
       item.bitpayAddress = bitpayAddress;
     }
     addresses.push(item);
@@ -199,6 +203,9 @@ function validateAddress(currency, address) {
     if (isLikeEthereum(currency)) {
       return ethUtil.isValidAddress(address);
     } else {
+      if (isBCH(currency)) {
+        address = bchaddr.toLegacyAddress(address);
+      }
       let coinData = CoinData[currency];
       let os = bitcoin.address.toOutputScript(address, coinData.network);
       return true;

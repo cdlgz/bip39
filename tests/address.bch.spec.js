@@ -174,6 +174,21 @@ describe('BCH Address', function () {
       assert.equal(address22, "mrmXkUsEQ7HGnYYgnst5QopUcHrakkWgEg");
     });
 
+    it('should generate bch BIP32 Extended Public Key by mnemonic for testnet 2', function () {
+      let mnemonic = "bread infant series isolate welcome toilet flip strike wink that taxi country pond crack worth";
+      let currency = 'bchtest';
+      let xpubKey = 'tpubDDPTjV3u2MtNebtPiNNMmHxGoHQYrGXEHeeE3RGT74epSK7ZuVLMDWJCAuUXfvFur32YGQ1bKBovPQSRiC2kjPMbq4p4a27Q6wNCtySqWdC';
+      var mnemonicData = {
+        mnemonic: mnemonic,
+        currency: currency,
+        purpose: 44,
+        account: 0,
+      };
+      var xpubKeyResult = HDWJS.hdWallet.getXpubKeyByMnemonic(mnemonicData);
+      assert.equal(xpubKeyResult.status, true);
+      assert.equal(xpubKeyResult.data, xpubKey);
+    });
+
   });
 
   describe('#validateAddressByXpubKey() bch ok', function () {
@@ -245,10 +260,32 @@ describe('BCH Address', function () {
       assert.equal(validate.data, true);
     });
 
+    it('bch cash address should be valid', function () {
+      var data = {
+        currency: 'bch',
+        address: 'bitcoincash:qp5jvd06n6hra7phet8l3y5wwa7amry2e5e8uca6w0'
+      };
+      var validate = HDWJS.hdWallet.validateAddress(data);
+      console.log(validate);
+      assert.equal(validate.status, true);
+      assert.equal(validate.data, true);
+    });
+
     it('bch address should be valid', function () {
       var data = {
         currency: 'bchtest',
         address: 'mq6w28feA2cahy4iBgqCzprzU2SnqUixqF'
+      };
+      var validate = HDWJS.hdWallet.validateAddress(data);
+      console.log(validate);
+      assert.equal(validate.status, true);
+      assert.equal(validate.data, true);
+    });
+
+    it('bch cash address should be valid', function () {
+      var data = {
+        currency: 'bchtest',
+        address: 'bchtest:qp5jvd06n6hra7phet8l3y5wwa7amry2e5a4clldfn'
       };
       var validate = HDWJS.hdWallet.validateAddress(data);
       console.log(validate);

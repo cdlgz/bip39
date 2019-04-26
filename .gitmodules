@@ -1,0 +1,4 @@
+[submodule "bcash330"]
+	path = bcash330
+	url = https://github.com/dabura667/bitcoinjs-lib.git
+	branch = bcash330
