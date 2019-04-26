@@ -71,7 +71,7 @@ function isLikeEthereum(currency) {
 }
 
 function isBCH(currency) {
-  return currency == 'bch' || currency == 'bchtest';
+  return currency == 'bchabc' || currency == 'bchabctest';
 }
 
 function isSegwit(purpose) {

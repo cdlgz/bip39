@@ -1,7 +1,7 @@
 var assert = require('assert');
 var BCOINJS = require('../src/bcoinsdk');
 
-describe('BCH Transaction', function () {
+describe('BCHABC Transaction', function () {
 
   describe('#createTransaction()', function () {
 
@@ -26,7 +26,7 @@ describe('BCH Transaction', function () {
 
     it('should build transaction ok', function () {
       var coinData = {
-        currency: 'bchtest',
+        currency: 'bchabctest',
         utxos: [{
           txId: 'e1fb56972c0968a9ccddee8c5389b14868ff2e817b7431864142d1a8a9216650',
           vout: 1,

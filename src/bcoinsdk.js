@@ -16,7 +16,7 @@ class BCoin {
   }
 
   isBCH(currency) {
-    return currency == 'bch' || currency == 'bchtest';
+    return currency == 'bchabc' || currency == 'bchabctest';
   }
 
   getCoinSelect(currency) {

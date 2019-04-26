@@ -76,7 +76,7 @@ const Networks = {
     scriptHash: 0x05,
     wif: 0x80
   },
-  bchtest: {
+  bchabctest: {
     messagePrefix: '\x18Bitcoin Signed Message:\n',
     bech32: 'bc',
     bip32: {
@@ -87,7 +87,7 @@ const Networks = {
     scriptHash: 0xc4,
     wif: 0xef
   },
-  bch: {
+  bchabc: {
     messagePrefix: '\x18Bitcoin Signed Message:\n',
     bech32: 'bc',
     bip32: {
@@ -155,13 +155,13 @@ const CoinData = {
     coinType: 999994,
     network: Networks.btl
   },
-  bchtest: {
+  bchabctest: {
     coinType: 145,
-    network: Networks.bchtest
+    network: Networks.bchabctest
   },
-  bch: {
+  bchabc: {
     coinType: 145,
-    network: Networks.bch
+    network: Networks.bchabc
   }
 }
 
