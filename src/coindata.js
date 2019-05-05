@@ -11,16 +11,6 @@ const Networks = {
     scriptHash: 0x05,
     wif: 0x80
   },
-  btg: {
-    messagePrefix: '\x1DBitcoin Gold Signed Message:\n',
-    bip32: {
-      public: 0x0488b21e,
-      private: 0x0488ade4
-    },
-    pubKeyHash: 38,
-    scriptHash: 23,
-    wif: 128
-  },
   btctest: {
     messagePrefix: '\x18Bitcoin Signed Message:\n',
     bech32: 'bc',
@@ -97,6 +87,28 @@ const Networks = {
     pubKeyHash: 0x00,
     scriptHash: 0x05,
     wif: 0x80
+  },
+  btgtest: {
+    messagePrefix: '\x18Bitcoin Signed Message:\n',
+    bech32: 'tbtg',
+    bip32: {
+      public: 0x043587cf,
+      private: 0x04358394
+    },
+    pubKeyHash: 0x6f,
+    scriptHash: 0xc4,
+    wif: 0xef
+  },
+  btg: {
+    messagePrefix: '\x18Bitcoin Signed Message:\n',
+    bech32: 'btg',
+    bip32: {
+      public: 0x0488b21e,
+      private: 0x0488ade4
+    },
+    pubKeyHash: 0x26,
+    scriptHash: 0x17,
+    wif: 0x80
   }
 }
 
@@ -104,10 +116,6 @@ const CoinData = {
   btc: {
     coinType: 0,
     network: Networks.btc
-  },
-  btg: {
-    coinType: 156,
-    network: Networks.btg
   },
   btctest: {
     coinType: 0,
@@ -162,6 +170,14 @@ const CoinData = {
   bchabc: {
     coinType: 145,
     network: Networks.bchabc
+  },
+  btgtest: {
+    coinType: 156,
+    network: Networks.btgtest
+  },
+  btg: {
+    coinType: 156,
+    network: Networks.btg
   }
 }
 
