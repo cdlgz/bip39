@@ -2,6 +2,7 @@ const CoinData = require("./coindata");
 const bitcoin = require('bitcoinforksjs-lib')
 const basex = require('base-x')
 const ethUtil = require('ethereumjs-util');
+const ethCrypto = require('eth-crypto');
 const bchaddr = require('bchaddrjs');
 
 function parseIntNoNaN(val, defaultVal) {
@@ -202,11 +203,9 @@ function generateAddressByWIF(currency, privateKey) {
 function generatePubkeyByWIF(currency, privateKey) {
   let coinData = CoinData[currency];
   if (isLikeEthereum(currency)) {
-    let pubkeyBuffer = ethUtil.privateToPublic(privateKey);
-    return ethUtil.bufferToHex(pubkeyBuffer);
-    let hexPubkey = pubkeyBuffer.toString('hex');
-    let checksumPubkey = ethUtil.toChecksumAddress(hexPubkey);
-    let pubkey = ethUtil.addHexPrefix(checksumPubkey);
+    let pubkey = ethCrypto.publicKeyByPrivateKey(privateKey);
+    pubkey = ethCrypto.publicKey.compress(pubkey);
+    pubkey = ethUtil.addHexPrefix(pubkey);
     return pubkey;
   } else {
     const keyPair = new bitcoin.ECPair.fromWIF(privateKey, coinData.network);
