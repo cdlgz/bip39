@@ -199,6 +199,22 @@ function generateAddressByWIF(currency, privateKey) {
   }
 }
 
+function generatePubkeyByWIF(currency, privateKey) {
+  let coinData = CoinData[currency];
+  if (isLikeEthereum(currency)) {
+    let pubkeyBuffer = ethUtil.privateToPublic(privateKey);
+    return ethUtil.bufferToHex(pubkeyBuffer);
+    let hexPubkey = pubkeyBuffer.toString('hex');
+    let checksumPubkey = ethUtil.toChecksumAddress(hexPubkey);
+    let pubkey = ethUtil.addHexPrefix(checksumPubkey);
+    return pubkey;
+  } else {
+    const keyPair = new bitcoin.ECPair.fromWIF(privateKey, coinData.network);
+    let pubkey = keyPair.getPublicKeyBuffer().toString('hex');
+    return pubkey;
+  }
+}
+
 function validateAddress(currency, address) {
   try {
     if (isLikeEthereum(currency)) {
@@ -222,5 +238,6 @@ module.exports = {
   getXpubKeyByMnemonic: getXpubKeyByMnemonic,
   generateAddressesByXpubKey: generateAddressesByXpubKey,
   generateAddressByWIF: generateAddressByWIF,
+  generatePubkeyByWIF: generatePubkeyByWIF,
   validateAddress: validateAddress
 }

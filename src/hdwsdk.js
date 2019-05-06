@@ -212,6 +212,21 @@ HdWallet.prototype.generateAddressByWIF = function (wifData) {
   return this.result(true, address, null);
 };
 
+HdWallet.prototype.generatePubkeyByWIF = function (wifData) {
+  let defaultData = {
+    wif: '',
+    currency: '',
+  };
+  wifData = Object.assign(defaultData, wifData || {});
+  if (this.isEmpty(wifData.wif))
+    return this.result(false, null, 2010);
+  if (this.isEmpty(wifData.currency))
+    return this.result(false, null, 2002);
+
+  let pubkey = hdwext.generatePubkeyByWIF(wifData.currency, wifData.wif);
+  return this.result(true, pubkey, null);
+};
+
 HdWallet.prototype.validateAddress = function (addressData) {
   let defaultData = {
     address: '',

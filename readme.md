@@ -598,7 +598,12 @@ console.log(txHex);
 ```javascript
 let tranData = {
   currency: 'btctest',
-  redeemScript: '522102ba7d8066bce9a34e1263a1deb8af98993928f85784f45ee75fd1b8eca2929cb4210246eeeef5ef11b29f9f36d77d61732e5fc9b2eda189f592c5eb373463ef83a50c21039154d52152b6e88e46310ebaf71a9dcb53899a46c7fd24c4d804e3dd370e5c1853ae',
+  utxos: [
+    {
+      redeemScript: '522102ba7d8066bce9a34e1263a1deb8af98993928f85784f45ee75fd1b8eca2929cb4210246eeeef5ef11b29f9f36d77d61732e5fc9b2eda189f592c5eb373463ef83a50c21039154d52152b6e88e46310ebaf71a9dcb53899a46c7fd24c4d804e3dd370e5c1853ae',
+      vout: 0
+    }
+  ],
   txHex: '0200000001e00be8ec14f5fdf3c12494600b92be1e172c096f55eb4118343bc8ca85a550a801000000b500483045022100c131983b60bd47be9f3bda098e1b63390023fb520ac3cd4b6dce9940ea3266f8022009f3050fac5c15fa03ce2bb5b8b6961c2e58d3a3b74bda02972234d674c04ab4014c69522102ba7d8066bce9a34e1263a1deb8af98993928f85784f45ee75fd1b8eca2929cb4210246eeeef5ef11b29f9f36d77d61732e5fc9b2eda189f592c5eb373463ef83a50c21039154d52152b6e88e46310ebaf71a9dcb53899a46c7fd24c4d804e3dd370e5c1853aeffffffff0280969800000000001976a9143e4c2ffde7afe2834013c082a77562c2863d5c7988ac000b6b1b0000000017a91443be3386d48bc67b6b56c0ac0edc8eeb9a68ebcb8700000000',
   key: 'KxLd81HhAAMzFTPtrYQKXfhBXZWkhenTK8JxkAMnsGZKgqmWDk2z'
 };
@@ -610,7 +615,9 @@ console.log(txHex);
 
   currency: 币种，btc/btctest btc
 
-  redeemScript: script of multiSig address
+  utxos.vout: index of utxo
+  
+  utxos.redeemScript: script of utxo address
 
   txHex: trnasaction hex string.
 

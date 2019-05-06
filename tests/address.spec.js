@@ -365,6 +365,32 @@ describe('Address', function () {
     });
   });
 
+  describe('#generatePubkeyByWIF() btc ok', function () {
+    it('can generate pubkey', function () {
+      var data = {
+        wif: "KxLd81HhAAMzFTPtrYQKXfhBXZWkhenTK8JxkAMnsGZKgqmWDk2z",
+        currency: 'btc',
+      };
+      var pubkey = HDWJS.hdWallet.generatePubkeyByWIF(data);
+      console.log(pubkey);
+      assert.equal(pubkey.status, true);
+      assert.equal(pubkey.data, "02ba7d8066bce9a34e1263a1deb8af98993928f85784f45ee75fd1b8eca2929cb4");
+    });
+  });
+
+  describe('#generatePubkeyByWIF() eth ok', function () {
+    it('can generate pubkey', function () {
+      var data = {
+        wif: "0xe5d1e3e7236c5d158485d296df140ce69f145fb8730398cb7f739c42e7dcd4ad",
+        currency: 'eth',
+      };
+      var pubkey = HDWJS.hdWallet.generatePubkeyByWIF(data);
+      console.log(pubkey);
+      assert.equal(pubkey.status, true);
+      assert.equal(pubkey.data, "0x020dc93dc5a8d2d781992203be4c220e220ce58967b287611728c02f363f941555");
+    });
+  });
+
   describe('#validateAddress() ok', function () {
     it('btc address should be valid', function () {
       var data = {

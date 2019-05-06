@@ -215,16 +215,22 @@ class BCoin {
     if (this.isEmpty(txData.key))
       return this.result(false, false, 2024);
 
-    if (this.isEmpty(txData.redeemScript))
+    if (this.isEmpty(txData.redeemScript) && (txData.utxos && txData.utxos.length == 0))
       return this.result(false, false, 2025);
-
+    
     let coinDataX = CoinData[txData.currency];
     let tx = bitcoin.Transaction.fromHex(txData.txHex);
     let txb = bitcoin.TransactionBuilder.fromTransaction(tx, coinDataX.network);
-    txb.tx.ins.forEach(function (input, i) {
-      const keyPair = new bitcoin.ECPair.fromWIF(txData.key, coinDataX.network);
-      txb.sign(i, keyPair, bitcoin.script.compile(new Buffer(txData.redeemScript, "hex")));
-    });
+    const keyPair = new bitcoin.ECPair.fromWIF(txData.key, coinDataX.network);
+    if(txData.utxos && txData.utxos.length > 0){
+      txData.utxos.forEach(function (utxo, i) {
+        txb.sign(utxo.vout, keyPair, bitcoin.script.compile(new Buffer(utxo.redeemScript, "hex")));
+      });
+    } else {
+      txb.tx.ins.forEach(function (input, i) {
+        txb.sign(i, keyPair, bitcoin.script.compile(new Buffer(txData.redeemScript, "hex")));
+      });
+    };
     let rawSignedTransaction = txb.build().toHex();
     return this.result(true, rawSignedTransaction, 0);
   }
