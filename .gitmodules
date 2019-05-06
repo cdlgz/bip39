@@ -1,7 +1,3 @@
-[submodule "bcash330"]
-	path = bcash330
-	url = https://github.com/BitGo/bitcoinforksjs-lib.git
-	branch = master
 [submodule "bitcoinforksjs-lib"]
 	path = bitcoinforksjs-lib
 	url = https://github.com/BitGo/bitcoinforksjs-lib.git
