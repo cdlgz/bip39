@@ -89,7 +89,7 @@ const Networks = {
     wif: 0x80
   },
   btgtest: {
-    messagePrefix: '\x18Bitcoin Signed Message:\n',
+    messagePrefix: '\x18Bitcoin Gold Signed Message:\n',
     bech32: 'tbtg',
     bip32: {
       public: 0x043587cf,
@@ -100,7 +100,7 @@ const Networks = {
     wif: 0xef
   },
   btg: {
-    messagePrefix: '\x18Bitcoin Signed Message:\n',
+    messagePrefix: '\x18Bitcoin Gold Signed Message:\n',
     bech32: 'btg',
     bip32: {
       public: 0x0488b21e,

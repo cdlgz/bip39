@@ -1,5 +1,5 @@
 const CoinData = require("./coindata");
-const bitcoin = require('bitcoinjs-lib')
+const bitcoin = require('bitcoinforksjs-lib')
 const basex = require('base-x')
 const ethUtil = require('ethereumjs-util');
 const bchaddr = require('bchaddrjs');

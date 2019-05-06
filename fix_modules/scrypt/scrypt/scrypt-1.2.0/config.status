@@ -437,7 +437,7 @@ Copyright (C) 2012 Free Software Foundation, Inc.
 This config.status script is free software; the Free Software Foundation
 gives unlimited permission to copy, distribute and modify it."
 
-ac_pwd='/data/eosaction/bip39/fix_modules/scrypt/scrypt/scrypt-1.2.0'
+ac_pwd='/home/zhizhong/data/bip39/fix_modules/scrypt/scrypt/scrypt-1.2.0'
 srcdir='.'
 INSTALL='/usr/bin/install -c'
 MKDIR_P='/bin/mkdir -p'
@@ -656,12 +656,12 @@ S["mkdir_p"]="$(MKDIR_P)"
 S["MKDIR_P"]="/bin/mkdir -p"
 S["INSTALL_STRIP_PROGRAM"]="$(install_sh) -c -s"
 S["STRIP"]=""
-S["install_sh"]="${SHELL} /data/eosaction/bip39/fix_modules/scrypt/scrypt/scrypt-1.2.0/config.aux/install-sh"
-S["MAKEINFO"]="${SHELL} /data/eosaction/bip39/fix_modules/scrypt/scrypt/scrypt-1.2.0/config.aux/missing makeinfo"
-S["AUTOHEADER"]="${SHELL} /data/eosaction/bip39/fix_modules/scrypt/scrypt/scrypt-1.2.0/config.aux/missing autoheader"
-S["AUTOMAKE"]="${SHELL} /data/eosaction/bip39/fix_modules/scrypt/scrypt/scrypt-1.2.0/config.aux/missing automake-1.15"
-S["AUTOCONF"]="${SHELL} /data/eosaction/bip39/fix_modules/scrypt/scrypt/scrypt-1.2.0/config.aux/missing autoconf"
-S["ACLOCAL"]="${SHELL} /data/eosaction/bip39/fix_modules/scrypt/scrypt/scrypt-1.2.0/config.aux/missing aclocal-1.15"
+S["install_sh"]="${SHELL} /home/zhizhong/data/bip39/fix_modules/scrypt/scrypt/scrypt-1.2.0/config.aux/install-sh"
+S["MAKEINFO"]="${SHELL} /home/zhizhong/data/bip39/fix_modules/scrypt/scrypt/scrypt-1.2.0/config.aux/missing makeinfo"
+S["AUTOHEADER"]="${SHELL} /home/zhizhong/data/bip39/fix_modules/scrypt/scrypt/scrypt-1.2.0/config.aux/missing autoheader"
+S["AUTOMAKE"]="${SHELL} /home/zhizhong/data/bip39/fix_modules/scrypt/scrypt/scrypt-1.2.0/config.aux/missing automake-1.15"
+S["AUTOCONF"]="${SHELL} /home/zhizhong/data/bip39/fix_modules/scrypt/scrypt/scrypt-1.2.0/config.aux/missing autoconf"
+S["ACLOCAL"]="${SHELL} /home/zhizhong/data/bip39/fix_modules/scrypt/scrypt/scrypt-1.2.0/config.aux/missing aclocal-1.15"
 S["VERSION"]="1.2.0"
 S["PACKAGE"]="scrypt"
 S["CYGPATH_W"]="echo"
@@ -748,6 +748,14 @@ fi # test -n "$CONFIG_FILES"
 if test -n "$CONFIG_HEADERS"; then
 cat >"$ac_tmp/defines.awk" <<\_ACAWK ||
 BEGIN {
+D["PACKAGE_NAME"]=" \"scrypt\""
+D["PACKAGE_TARNAME"]=" \"scrypt\""
+D["PACKAGE_VERSION"]=" \"1.2.0\""
+D["PACKAGE_STRING"]=" \"scrypt 1.2.0\""
+D["PACKAGE_BUGREPORT"]=" \"\""
+D["PACKAGE_URL"]=" \"\""
+D["PACKAGE"]=" \"scrypt\""
+D["VERSION"]=" \"1.2.0\""
 D["HAVE_LIBRT"]=" 1"
 D["HAVE_CLOCK_GETTIME"]=" 1"
 D["STDC_HEADERS"]=" 1"

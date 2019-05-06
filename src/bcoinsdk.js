@@ -1,5 +1,5 @@
 const CoinData = require("./coindata");
-const bitcoin = require('bitcoinjs-lib')
+const bitcoin = require('bitcoinforksjs-lib')
 let coinSelect = require('coinselect')
 let utils = require('coinselect/utils')
 const bchaddr = require('bchaddrjs');
@@ -17,6 +17,10 @@ class BCoin {
 
   isBCH(currency) {
     return currency == 'bchabc' || currency == 'bchabctest';
+  }
+
+  isBTG(currency) {
+    return currency == 'btg' || currency == 'btgtest';
   }
 
   getCoinSelect(currency) {
@@ -124,6 +128,38 @@ class BCoin {
           txb.addOutput(output.address, output.value)
         });
         txb.enableBitcoinCash(true);
+        txb.setVersion(2)
+        const hashType = bitcoin.Transaction.SIGHASH_ALL | bitcoin.Transaction.SIGHASH_BITCOINCASHBIP143;
+        inputs.forEach((input, index) => {
+          const keyPair = new bitcoin.ECPair.fromWIF(input.key, coinDataX.network);
+          txb.sign(index, keyPair, null, hashType, input.value);
+        });
+        let txHex = txb.build().toHex();
+        return this.result(true, txHex, 0);
+      }
+    } else if (this.isBTG(coinData.currency)) {
+      let {
+        inputs,
+        outputs,
+        fee
+      } = this.getCoinSelect(coinData.currency)(coinData.utxos, coinData.targets, coinData.feeRate, coinData.minFee, coinData.maxFee);
+      if (inputs && inputs.length > 0) {
+        let coinDataX = CoinData[coinData.currency];
+        let txb = new bitcoin.TransactionBuilder(coinDataX.network);
+        inputs.forEach(input => {
+          const keyPair = new bitcoin.ECPair.fromWIF(input.key, coinDataX.network);
+          const pk = keyPair.getPublicKeyBuffer();
+          const pkh = bitcoin.crypto.hash160(pk);
+          const spk = bitcoin.script.pubKeyHash.output.encode(pkh);
+          txb.addInput(input.txId, input.vout, bitcoin.Transaction.DEFAULT_SEQUENCE, spk);
+        });
+        outputs.forEach(output => {
+          if (!output.address) {
+            output.address = coinData.changeAddress;
+          };
+          txb.addOutput(output.address, output.value)
+        });
+        txb.enableBitcoinGold(true)
         txb.setVersion(2)
         const hashType = bitcoin.Transaction.SIGHASH_ALL | bitcoin.Transaction.SIGHASH_BITCOINCASHBIP143;
         inputs.forEach((input, index) => {
