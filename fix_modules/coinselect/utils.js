@@ -75,6 +75,10 @@ function finalize(inputs, outputs, feeRate) {
   }
 }
 
+function calFeeRate(fee, bytes) {
+  return new BigNumber(fee).dividedToIntegerBy(bytes).toNumber();
+}
+
 function calfee(outAccum, feeRate, minFee, maxFee) {
   let fee = new BigNumber(outAccum).times(feeRate).integerValue(0).toNumber();
   if (minFee && fee < minFee) {
@@ -121,5 +125,6 @@ module.exports = {
   transactionBytes: transactionBytes,
   uintOrNaN: uintOrNaN,
   calfee: calfee,
-  feefinalize: feefinalize
+  feefinalize: feefinalize,
+  calFeeRate: calFeeRate
 }

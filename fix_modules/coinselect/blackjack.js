@@ -3,8 +3,8 @@ let BigNumber = require('bignumber.js');
 
 // only add inputs if they don't bust the target value (aka, exact match)
 // worst-case: O(n)
-function blackjack(utxos, outputs, feeRate) {
-  if (!isFinite(utils.uintOrNaN(feeRate))) return {}
+function blackjack(utxos, outputs, feeRate, minFee, maxFee) {
+  if (!isFinite(utils.uintOrNaN(feeRate)) && !minFee) return {}
 
   var bytesAccum = utils.transactionBytes([], outputs)
 
@@ -16,7 +16,21 @@ function blackjack(utxos, outputs, feeRate) {
   for (var i = 0; i < utxos.length; ++i) {
     var input = utxos[i]
     var inputBytes = utils.inputBytes(input)
+
+    if (feeRate == 0) {
+      feeRate = utils.calFeeRate(minFee, bytesAccum + inputBytes);
+    }
+
     var fee = feeRate * (bytesAccum + inputBytes)
+
+    if (maxFee && maxFee > 0 && fee > maxFee) {
+      feeRate = utils.calFeeRate(maxFee, bytesAccum + inputBytes);
+      fee = maxFee;
+    } else if (minFee && minFee > 0 && fee < minFee) {
+      feeRate = utils.calFeeRate(minFee, bytesAccum + inputBytes);
+      fee = minFee;
+    }
+
     var inputValue = utils.uintOrNaN(input.value)
 
     // would it waste value?

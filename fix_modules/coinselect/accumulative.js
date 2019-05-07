@@ -3,8 +3,8 @@ let BigNumber = require('bignumber.js');
 
 // add inputs until we reach or surpass the target value (or deplete)
 // worst-case: O(n)
-function accumulative(utxos, outputs, feeRate) {
-  if (!isFinite(utils.uintOrNaN(feeRate))) return {}
+function accumulative(utxos, outputs, feeRate, minFee, maxFee) {
+  if (!isFinite(utils.uintOrNaN(feeRate)) && !minFee) return {}
   var bytesAccum = utils.transactionBytes([], outputs)
 
   var inAccum = 0
@@ -14,7 +14,21 @@ function accumulative(utxos, outputs, feeRate) {
   for (var i = 0; i < utxos.length; ++i) {
     var utxo = utxos[i]
     var utxoBytes = utils.inputBytes(utxo)
+
+    if (feeRate == 0) {
+      feeRate = utils.calFeeRate(minFee, utxoBytes);
+    }
+
     var utxoFee = feeRate * utxoBytes
+
+    if (maxFee && maxFee > 0 && utxoFee > maxFee) {
+      feeRate = utils.calFeeRate(maxFee, utxoBytes);
+      utxoFee = maxFee;
+    } else if (minFee && minFee > 0 && utxoFee < minFee) {
+      feeRate = utils.calFeeRate(minFee, utxoBytes);
+      utxoFee = minFee;
+    }
+
     var utxoValue = utils.uintOrNaN(utxo.value)
 
     // skip detrimental input
@@ -30,6 +44,14 @@ function accumulative(utxos, outputs, feeRate) {
     inputs.push(utxo)
 
     var fee = feeRate * bytesAccum
+
+    if (maxFee && maxFee > 0 && fee > maxFee) {
+      feeRate = utils.calFeeRate(maxFee, bytesAccum);
+      fee = maxFee;
+    } else if (minFee && minFee > 0 && fee < minFee) {
+      feeRate = utils.calFeeRate(minFee, bytesAccum);
+      fee = minFee;
+    }
 
     // go again?
     if (inAccum < outAccum + fee) continue

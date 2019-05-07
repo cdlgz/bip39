@@ -65,7 +65,7 @@ class BCoin {
     if (coinData.targets.length == 0)
       return this.result(false, false, 2012);
 
-    if (coinData.feeRate == 0)
+    if (coinData.feeRate == 0 && coinData.minFee == 0)
       return this.result(false, false, 2013);
 
     let {
@@ -222,15 +222,25 @@ class BCoin {
     let tx = bitcoin.Transaction.fromHex(txData.txHex);
     let txb = bitcoin.TransactionBuilder.fromTransaction(tx, coinDataX.network);
     const keyPair = new bitcoin.ECPair.fromWIF(txData.key, coinDataX.network);
+    
     if(txData.utxos && txData.utxos.length > 0){
+      txb.tx.ins.forEach(function (input, i) {
+        //let utxo = txData.utxos.filter(u => input.index == u.vout);
+        //if(utxo.length > 0){
+          txb.sign(i, keyPair, bitcoin.script.compile(new Buffer(txData.utxos[0].redeemScript, "hex")));
+        //};
+      });
+      /*
       txData.utxos.forEach(function (utxo, i) {
         txb.sign(utxo.vout, keyPair, bitcoin.script.compile(new Buffer(utxo.redeemScript, "hex")));
       });
+      */
     } else {
       txb.tx.ins.forEach(function (input, i) {
         txb.sign(i, keyPair, bitcoin.script.compile(new Buffer(txData.redeemScript, "hex")));
       });
     };
+    
     let rawSignedTransaction = txb.build().toHex();
     return this.result(true, rawSignedTransaction, 0);
   }
