@@ -225,16 +225,8 @@ class BCoin {
     
     if(txData.utxos && txData.utxos.length > 0){
       txb.tx.ins.forEach(function (input, i) {
-        //let utxo = txData.utxos.filter(u => input.index == u.vout);
-        //if(utxo.length > 0){
-          txb.sign(i, keyPair, bitcoin.script.compile(new Buffer(txData.utxos[0].redeemScript, "hex")));
-        //};
+        txb.sign(i, keyPair, bitcoin.script.compile(new Buffer(txData.utxos[0].redeemScript, "hex")));
       });
-      /*
-      txData.utxos.forEach(function (utxo, i) {
-        txb.sign(utxo.vout, keyPair, bitcoin.script.compile(new Buffer(utxo.redeemScript, "hex")));
-      });
-      */
     } else {
       txb.tx.ins.forEach(function (input, i) {
         txb.sign(i, keyPair, bitcoin.script.compile(new Buffer(txData.redeemScript, "hex")));
