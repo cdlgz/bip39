@@ -41,10 +41,10 @@ describe('Address', function () {
       console.log(addresses)
       assert.equal(addresses.status, true);
       var address = addresses.data[0];
-      assert.equal(address.path, "m/44'/0'/0'/0/0");
-      assert.equal(address.address, "1EfQ9a5FA1a8TLSFQL1p3cZ3w1rU2K3NsZ");
-      assert.equal(address.pubkey, "02d699fac01c130d2b46c0dd6265f6abf369b6042e35415bc9f1c115ddcf04278c");
-      assert.equal(address.privkey, "L2LfzCSr7ExCX93XZn9fAbiGJDsZ2TjgKo9yBWXapa9gPmd5DP8Y");
+      assert.equal(address.path, "m/44'/1'/0'/0/0");
+      assert.equal(address.address, "my5s79mpJFnbZDp2erLJpTuUPrU3o5xL6N");
+      assert.equal(address.pubkey, "03f957ce50b4bc2b7ae5313a0aa77d2cc95a9625f8dd5ae73ab869c0267a6dcb05");
+      assert.equal(address.privkey, "cNTyY1iUTNW8qYwHvCKkUDbh1hpJRC9CDQUVz7bP2AxPMYrnDYvr");
     });
 
     it('should generate btc mainnet BIP49 address', function () {
@@ -277,7 +277,7 @@ describe('Address', function () {
     it('should generate BIP32 Extended Public Key by mnemonic', function () {
       let mnemonic = "egg,sudden,advance,apple,salmon,mad,crowd,ginger,essence,fork,public,funny";
       let currency = 'btctest';
-      let xpubKey = 'xpub6BpoY5GQ4gYFowZBqXeAEp5GLGA7Cf1LDcngrjjCQKL858cvxEZAHwVMudGDZfmR4UjpfV4YXrFckD4KdBBedEBJppbBgjRKq9TSdmRtuLu';
+      let xpubKey = 'tpubDCciJ8Wj6uMrXUFkHCYFvpxxh8cVebg9ec8uScFUgjo9SgnMZ13RRVPpCYBuonz1uQNEhw9YGUuuQ9bWyNrb9m6wYngqiUEhWQidPXkq8o5';
 
       var addressData = {
         mnemonic: mnemonic,
@@ -292,10 +292,10 @@ describe('Address', function () {
       var addresses1 = HDWJS.hdWallet.generateAddresses(addressData);
       assert.equal(addresses1.status, true);
       var address1 = addresses1.data[0];
-      assert.equal(address1.path, "m/44'/0'/0'/0/0");
-      assert.equal(address1.address, "1EfQ9a5FA1a8TLSFQL1p3cZ3w1rU2K3NsZ");
-      assert.equal(address1.pubkey, "02d699fac01c130d2b46c0dd6265f6abf369b6042e35415bc9f1c115ddcf04278c");
-      assert.equal(address1.privkey, "L2LfzCSr7ExCX93XZn9fAbiGJDsZ2TjgKo9yBWXapa9gPmd5DP8Y");
+      assert.equal(address1.path, "m/44'/1'/0'/0/0");
+      assert.equal(address1.address, "my5s79mpJFnbZDp2erLJpTuUPrU3o5xL6N");
+      assert.equal(address1.pubkey, "03f957ce50b4bc2b7ae5313a0aa77d2cc95a9625f8dd5ae73ab869c0267a6dcb05");
+      assert.equal(address1.privkey, "cNTyY1iUTNW8qYwHvCKkUDbh1hpJRC9CDQUVz7bP2AxPMYrnDYvr");
 
       var mnemonicData = {
         mnemonic: mnemonic,
@@ -317,9 +317,9 @@ describe('Address', function () {
       var addresses2 = HDWJS.hdWallet.generateAddressesByXpubKey(xpubKeyData);
       assert.equal(addresses2.status, true);
       var address21 = addresses2.data[0];
-      assert.equal(address21, "1EfQ9a5FA1a8TLSFQL1p3cZ3w1rU2K3NsZ");
+      assert.equal(address21, "my5s79mpJFnbZDp2erLJpTuUPrU3o5xL6N");
       var address22 = addresses2.data[1];
-      assert.equal(address22, "1BndYBYqaWkyTrKJXEWXWnAgStDT2MgXcx");
+      assert.equal(address22, "mixFcmK86eJCbhyvMfeX32ZCRTXCnwM13w");
     });
 
   });

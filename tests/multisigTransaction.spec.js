@@ -8,7 +8,7 @@ describe('BTC MultiSig Transaction', function () {
 
     it('should sign multisig transaction ok 2/3 the second sign 1', function () {
       var txData = {
-        currency: 'btctest',
+        currency: 'btc',
         redeemScript: '522102ba7d8066bce9a34e1263a1deb8af98993928f85784f45ee75fd1b8eca2929cb4210246eeeef5ef11b29f9f36d77d61732e5fc9b2eda189f592c5eb373463ef83a50c21039154d52152b6e88e46310ebaf71a9dcb53899a46c7fd24c4d804e3dd370e5c1853ae',
         txHex: '0200000001e00be8ec14f5fdf3c12494600b92be1e172c096f55eb4118343bc8ca85a550a801000000b500483045022100c131983b60bd47be9f3bda098e1b63390023fb520ac3cd4b6dce9940ea3266f8022009f3050fac5c15fa03ce2bb5b8b6961c2e58d3a3b74bda02972234d674c04ab4014c69522102ba7d8066bce9a34e1263a1deb8af98993928f85784f45ee75fd1b8eca2929cb4210246eeeef5ef11b29f9f36d77d61732e5fc9b2eda189f592c5eb373463ef83a50c21039154d52152b6e88e46310ebaf71a9dcb53899a46c7fd24c4d804e3dd370e5c1853aeffffffff0280969800000000001976a9143e4c2ffde7afe2834013c082a77562c2863d5c7988ac000b6b1b0000000017a91443be3386d48bc67b6b56c0ac0edc8eeb9a68ebcb8700000000',
         key: 'KxLd81HhAAMzFTPtrYQKXfhBXZWkhenTK8JxkAMnsGZKgqmWDk2z'
@@ -22,7 +22,7 @@ describe('BTC MultiSig Transaction', function () {
 
     it('should sign multisig transaction ok 2/3 the second sign 2', function () {
       var txData = {
-        currency: 'btctest',
+        currency: 'btc',
         utxos: [
           {
             vout: 0,
@@ -41,7 +41,7 @@ describe('BTC MultiSig Transaction', function () {
     
     it('should sign multisig transaction ok 2/3 the second sign 3', function () {
       var txData = {
-        currency: 'btctest',
+        currency: 'btc',
         utxos: [
           {
             vout: 0,
@@ -60,7 +60,7 @@ describe('BTC MultiSig Transaction', function () {
 
     it('should sign multisig transaction ok 2/2 the first sign 1', function () {
       var txData = {
-        currency: 'btctest',
+        currency: 'btc',
         redeemScript: '522102ba7d8066bce9a34e1263a1deb8af98993928f85784f45ee75fd1b8eca2929cb4210246eeeef5ef11b29f9f36d77d61732e5fc9b2eda189f592c5eb373463ef83a50c21039154d52152b6e88e46310ebaf71a9dcb53899a46c7fd24c4d804e3dd370e5c1853ae',
         txHex: '0200000001bbf1c6dd9a9c0afc9e969d200dbed9e815d6b7cda446bfb31f86cd631983cf5c0100000000ffffffff0280969800000000001976a9143e4c2ffde7afe2834013c082a77562c2863d5c7988ac000237580000000017a91443be3386d48bc67b6b56c0ac0edc8eeb9a68ebcb8700000000',
         key: 'KxLd81HhAAMzFTPtrYQKXfhBXZWkhenTK8JxkAMnsGZKgqmWDk2z'
@@ -73,7 +73,7 @@ describe('BTC MultiSig Transaction', function () {
 
     it('should sign multisig transaction ok 2/2 the first sign 2', function () {
       var txData = {
-        currency: 'btctest',
+        currency: 'btc',
         utxos: [
           {
             vout: 0,
@@ -82,6 +82,24 @@ describe('BTC MultiSig Transaction', function () {
         ],
         txHex: '0200000001bbf1c6dd9a9c0afc9e969d200dbed9e815d6b7cda446bfb31f86cd631983cf5c0100000000ffffffff0280969800000000001976a9143e4c2ffde7afe2834013c082a77562c2863d5c7988ac000237580000000017a91443be3386d48bc67b6b56c0ac0edc8eeb9a68ebcb8700000000',
         key: 'KxLd81HhAAMzFTPtrYQKXfhBXZWkhenTK8JxkAMnsGZKgqmWDk2z'
+      };
+      var txHex = BCOINJS.bcoin.signMultisigTransaction(txData);
+      console.log(txHex);
+      assert.equal(txHex.status, true);
+      assert.equal(txHex.data, '0200000001bbf1c6dd9a9c0afc9e969d200dbed9e815d6b7cda446bfb31f86cd631983cf5c01000000b500483045022100dda13a6d1be18b122f6e5a76020ee7ef7fa3f71e42b9ddec471af729dbe663f4022031b55fa32c8343ece1fd3e61fbabd16375c0aa565a4a4d8dc3a615807bbce05d014c69522102ba7d8066bce9a34e1263a1deb8af98993928f85784f45ee75fd1b8eca2929cb4210246eeeef5ef11b29f9f36d77d61732e5fc9b2eda189f592c5eb373463ef83a50c21039154d52152b6e88e46310ebaf71a9dcb53899a46c7fd24c4d804e3dd370e5c1853aeffffffff0280969800000000001976a9143e4c2ffde7afe2834013c082a77562c2863d5c7988ac000237580000000017a91443be3386d48bc67b6b56c0ac0edc8eeb9a68ebcb8700000000');
+    });
+
+    it('should sign multisig transaction ok from app', function () {
+      var txData = {
+        currency: 'btc',
+        utxos: [
+          {
+            vout: 0,
+            redeemScript: '0020ecd80d0149c94f8dea0a967022e756073683b97ecc5d4b2845081223037bbefb',
+          }
+        ],
+        txHex: '0200000001ae1fd2f8cbc6819dc202042a7322cc9740b87c642e46c580a665f074c28f0c370100000000ffffffff02d67f4b000000000017a9143e92f63bd007ab395177c6828af0b37701076d4987503403000000000017a9142c28c3db3fc7076deee78da5e6a6d5be0cbf0fac8700000000',
+        key: 'KygyM6NTyEnV9gYF9mx7zmESiS1E8mLfpZiqPoxPkLiYzm5xp2my'
       };
       var txHex = BCOINJS.bcoin.signMultisigTransaction(txData);
       console.log(txHex);

@@ -276,7 +276,7 @@ describe('BTC Transaction', function () {
 
     it('should build transaction ok', function () {
       var coinData = {
-        currency: 'btctest',
+        currency: 'btc',
         utxos: [{
           txId: 'ec132026f941f51e445387bd40a6ab3c05e5fd1fb517081cb18de80ca67fba90',
           vout: 1,
@@ -300,7 +300,7 @@ describe('BTC Transaction', function () {
 
     it('should build transaction ok with fully transfer', function () {
       var coinData = {
-        currency: 'btctest',
+        currency: 'btc',
         utxos: [{
           txId: 'aca2cea1c802892130677f1fa6a5137623dcde119f54abfb1f73563fbcf68b40',
           vout: 0,
