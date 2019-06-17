@@ -4,6 +4,7 @@ const basex = require('base-x')
 const ethUtil = require('ethereumjs-util');
 const ethCrypto = require('eth-crypto');
 const bchaddr = require('bchaddrjs');
+const ecc = require('eosjs-ecc');
 
 function parseIntNoNaN(val, defaultVal) {
   let v = parseInt(val);
@@ -75,6 +76,10 @@ function isBCH(currency) {
   return currency == 'bchabc' || currency == 'bchabctest';
 }
 
+function isVHKDIO(currency) {
+  return currency == 'vhkdio' || currency == 'vhkdiotest';
+}
+
 function isSegwit(purpose) {
   return purpose == 49 || purpose == 84 || purpose == 141;
 }
@@ -138,6 +143,13 @@ function generateAddresses(seedHex, purpose, currency, account, change, start, e
       address = ethUtil.addHexPrefix(checksumAddress);
       privkey = ethUtil.addHexPrefix(privkey);
       pubkey = ethUtil.addHexPrefix(pubkey);
+    }
+    if (isVHKDIO(currency)) {
+      let privKeyBuffer = keyPair.d.toBuffer(32);
+      let privateKeyObj = ecc.PrivateKey(privKeyBuffer);
+      address = '';
+      privkey = privateKeyObj.toWif();
+      pubkey = privateKeyObj.toPublic().toString('VHKD');
     }
     // Ripple values are different
     if (currency == "xrp" || currency == "xrptest") {
@@ -206,6 +218,10 @@ function generatePubkeyByWIF(currency, privateKey) {
     let pubkey = ethCrypto.publicKeyByPrivateKey(privateKey);
     pubkey = ethCrypto.publicKey.compress(pubkey);
     pubkey = ethUtil.addHexPrefix(pubkey);
+    return pubkey;
+  } else if (isVHKDIO(currency)) {
+    let privateKeyObj = ecc.PrivateKey(privateKey);
+    let pubkey = privateKeyObj.toPublic().toString('VHKD');
     return pubkey;
   } else {
     const keyPair = new bitcoin.ECPair.fromWIF(privateKey, coinData.network);

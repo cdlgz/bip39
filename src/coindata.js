@@ -178,6 +178,14 @@ const CoinData = {
   btg: {
     coinType: 156,
     network: Networks.btg
+  },
+  vhkdio: {
+    coinType: 194,
+    network: Networks.btc
+  },
+  vhkdiotest: {
+    coinType: 194,
+    network: Networks.btc
   }
 }
 

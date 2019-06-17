@@ -24,3 +24,5 @@
 2023=>txHex is required
 2024=>key is required
 2025=>redeemScript is required
+2026=>quantity is required
+2027=>fee is required
