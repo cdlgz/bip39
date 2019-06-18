@@ -19,10 +19,10 @@ describe('VHKDIO Address', function () {
       var addresses = HDWJS.hdWallet.generateAddresses(addressData);
       assert.equal(addresses.status, true);
       var address = addresses.data[0];
-      assert.equal(address.path, "m/44'/194'/0'/0/0");
+      assert.equal(address.path, "m/44'/999991'/0'/0/0");
       assert.equal(address.address, "");
-      assert.equal(address.pubkey, "VHKD5KyMNCZEK4MoK5iiLNh2n48qKBsKZWzBfgGUmtxGkEXxhdPjhe");
-      assert.equal(address.privkey, "5KgGBDicAMdGxK6JuDgki7hRdwDWZHjxSTDfeXCj5ibiNuRmQMj");
+      assert.equal(address.pubkey, "VHKD5HnjJs5oYhxfT6Vy5sd1PmUXQQvxTjjZjaVE65EGZnEWgDhG4D");
+      assert.equal(address.privkey, "5JqQTPekBQrgYmxB8gEZ4WLrCTW58Ec2BS1EQWv3VRo6ewtrmfp");
     });
 
     it('should generate VHKD testnet BIP44 address 2', function () {
@@ -40,10 +40,10 @@ describe('VHKDIO Address', function () {
       console.log(addresses)
       assert.equal(addresses.status, true);
       var address = addresses.data[0];
-      assert.equal(address.path, "m/44'/194'/0'/0/0");
+      assert.equal(address.path, "m/44'/999991'/0'/0/0");
       assert.equal(address.address, "");
-      assert.equal(address.pubkey, "VHKD7gFA7DuXe6SiQuX5zsipciTmQsXa2ZJmNxcHgcJHRzhfVqzZxM");
-      assert.equal(address.privkey, "5K1qM9htPT6Z7EgHFcceUxPU7wswSQtDw9DAT9tW1rbMNkCWKFT");
+      assert.equal(address.pubkey, "VHKD7xRxaAQx9Ns7cKq1GvYhh2XGQoFu1DpsHqXxR83dAusLNmqCaY");
+      assert.equal(address.privkey, "5KKHnmuf4XhjQnKT1BQTL96rQK1PhDXbPHKhTWKGYMByzDgAWTC");
     });
 
   });

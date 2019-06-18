@@ -142,7 +142,7 @@ console.log(addresses);
 
     path: 地址对应的路径值。
 
-    address: 地址，wif格式。
+    address: 地址，wif格式。如果vhkdio，该字段为空。
     
     pubkey: 地址对应的公钥。
     
@@ -725,6 +725,25 @@ console.log(address);
   data: '02ba7d8066bce9a34e1263a1deb8af98993928f85784f45ee75fd1b8eca2929cb4',
   code: null 
 }
+```
+
+21 randomAccountName
+
+```javascript
+var accountName = vhkdiocoin.randomAccountName({'prefix': 'vgpay', 't': 7});
+console.log(accountName);
+```
+
+参数说明：
+
+  prefix: 账号前缀
+
+  t: 账户名主体长度
+
+返回结果：
+
+```
+{ status: true, data: 'vgpaybxi3pxy', code: 0 }
 ```
 
 # License
