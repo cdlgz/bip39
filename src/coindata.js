@@ -181,11 +181,13 @@ const CoinData = {
   },
   vhkdio: {
     coinType: 999991,
-    network: Networks.btc
+    network: Networks.btc,
+    chainId: 'afe97f023511453c09c64f5bb655e7f4dc6694685aff7231219964e9cc521585'
   },
   vhkdiotest: {
     coinType: 999991,
-    network: Networks.btc
+    network: Networks.btc,
+    chainId: 'afe97f023511453c09c64f5bb655e7f4dc6694685aff7231219964e9cc521585'
   }
 }
 

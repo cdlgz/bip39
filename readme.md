@@ -746,6 +746,111 @@ console.log(accountName);
 { status: true, data: 'vgpaybxi3pxy', code: 0 }
 ```
 
+22 calculateFee vhkdio
+
+```javascript
+var fee = vhkdiocoin.calculateFee({
+  currency: 'vhkdiotest',
+  quantity: 1.0000,
+  feeRate: 0.0100,
+  minFee: 0.01,
+  maxFee: 100
+});
+console.log(fee);
+```
+
+参数说明：
+
+  currency: 币种，vhkdio/vhkdiotest
+
+  quantity: 转账数目
+
+  feeRate: 费率
+
+  minFee: 最小手续费
+
+  maxFee: 最大手续费
+
+返回结果：
+
+```
+{ status: true, data: 0.01, code: 0 }
+```
+
+23 createTransfer vhkdio 
+
+```javascript
+var transfer = vhkdiocoin.createTransfer({
+  currency: 'vhkdiotest',
+  from: "fromuser",
+  to: "touser",
+  quantity: 0.0001,
+  fee: 0.0100,
+  memo: "transfer from jssdk!"
+});
+console.log(transfer);
+```
+
+参数说明：
+
+  currency: 币种，vhkdio/vhkdiotest
+
+  from: 发送人账号
+
+  to: 收款人账号
+
+  quantity: 转账数目
+
+  fee: 手续费
+
+  memo: 备注
+
+返回结果：
+
+```
+{
+  "account":"eosio.token",
+  "authorization":[{"actor":"fromuser","permission":"active"}],
+  "name":"transferex",
+  "data":{
+    "from":"fromuser",
+    "to":"touser",
+    "quantity":"0.0001 VHKD",
+    "fee":"0.0100 VHKD",
+    "memo":"transfer from jssdk!"
+  }
+}
+```
+
+24 signTransaction vhkdio 
+
+```javascript
+var signTransaction = vhkdiocoin.signTransaction({
+  currency: 'vhkdiotest',
+  key: 'abc',
+  serializedTransaction: '70ed095df6ffb8b69b06000000000100a6823403ea3055004057572d3ccdcd01604c2143046f2adb00000000a8ed323245604c2143046f2adb000000000000fe4f01000000000000000456484b4400000064000000000000000456484b44000000147472616e736665722066726f6d206a7373646b2100'
+});
+console.log(transfer);
+```
+
+参数说明：
+
+  currency: 币种，vhkdio/vhkdiotest
+
+  key: 私钥
+
+  serializedTransaction: 预打包好的交易串
+
+返回结果：
+
+```
+{
+  "signatures":["SIG_K1_K6zsSfcrgNnSY4hxDffbaF7gjL9y979fbEx16b7FG637SG5qVRkmhHmkWrNi48UFHrJzTS9AVU82X63Gdifw41X4YAf2mb"],
+  "compression":0,
+  "packed_context_free_data":"","packed_trx":"70ed095df6ffb8b69b06000000000100a6823403ea3055004057572d3ccdcd01604c2143046f2adb00000000a8ed323245604c2143046f2adb000000000000fe4f01000000000000000456484b4400000064000000000000000456484b44000000147472616e736665722066726f6d206a7373646b2100"
+}
+```
+
 # License
 
 This BIP39 tool is released under the terms of the MIT license. See LICENSE for

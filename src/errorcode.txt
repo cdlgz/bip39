@@ -26,3 +26,4 @@
 2025=>redeemScript is required
 2026=>quantity is required
 2027=>fee is required
+2028=>serializedTransaction is required
