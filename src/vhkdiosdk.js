@@ -65,7 +65,7 @@ class VHKDIOCoin {
     if (this.isEmpty(data.currency))
       return this.result(false, null, 2002);
 
-    if (data.quantity <= 0)
+    if (data.quantity < 0)
       return this.result(false, null, 2026);
 
     if (data.feeRate == 0 && data.minFee == 0)
@@ -73,7 +73,7 @@ class VHKDIOCoin {
 
     let fee = new BigNumber(data.quantity).times(data.feeRate).toNumber();
 
-    if (data.minFee > 0 && fee < data.minFee) {
+    if (data.minFee > 0 && fee > 0 && fee < data.minFee) {
       fee = data.minFee;
     };
 
