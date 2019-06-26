@@ -1,5 +1,6 @@
 const CoinData = require("./coindata");
 const ecc = require('eosjs-ecc');
+const BigNumber = require('bignumber.js');
 
 class VHKDIOCoin {
   constructor() {}
@@ -70,7 +71,7 @@ class VHKDIOCoin {
     if (data.feeRate == 0 && data.minFee == 0)
       return this.result(false, false, 2013);
 
-    let fee = data.quantity * data.feeRate;
+    let fee = new BigNumber(data.quantity).times(data.feeRate).toNumber();
 
     if (data.minFee > 0 && fee < data.minFee) {
       fee = data.minFee;

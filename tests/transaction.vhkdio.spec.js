@@ -47,6 +47,20 @@ describe('VHKDIO Transaction', function () {
       assert.equal(transferHex.data, 100);
     });
 
+    it('should calculateFee ok 4', function () {
+      var tranData = {
+        currency: 'vhkdiotest',
+        quantity: 10000.0000,
+        feeRate: 0.0003,
+        minFee: 0.01,
+        maxFee: 100
+      };
+      var transferHex = VHKDIOCOINJS.vhkdiocoin.calculateFee(tranData);
+      console.log(transferHex);
+      assert.equal(transferHex.status, true);
+      assert.equal(transferHex.data, 3);
+    });
+
   });
 
   describe('#createTransfer()', function () {
